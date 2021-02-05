@@ -4,7 +4,7 @@ Refer to https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1 fo
 
 Refer to https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ for the data format.
 
-MPH prefers Plink bim/fam/bed files.
+MPH prefers Plink bim/fam/bed files for genotypes. Other input files are mostly CSV.
 
 ## SNP info file
 This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example data, there are five columns for five chromosomes.
