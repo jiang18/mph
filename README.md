@@ -1,15 +1,15 @@
 # MPH: MINQUE for Partitioning Heritability
-## A demo with the QTL-MAS 2012 data
+## Example: the QTL-MAS 2012 data
 Refer to https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1 for how the data set was simulated.
 
 Refer to https://sites.google.com/view/ssgp/documentation/manual?authuser=0#h.p_N7uOc8mcMRYd for the data format.
 
-MPH can work with Plink bim/fam/bed files.
+MPH prefers Plink bim/fam/bed files.
 
 ## SNP info file
-This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example, there are five columns for five chromosomes.
+This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example data, there are five columns for five chromosomes.
 
-If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP is equal to 1.
+If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP should be equal to 1.
 
 ## Building GRMs
 ```sh
