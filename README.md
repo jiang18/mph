@@ -9,13 +9,13 @@ MPH can work with Plink bim/fam/bed files.
 ## SNP info file
 This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example, there are five columns for five chromosomes.
 
-If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to *n* GRMs, put 1/*n* in the *n* cells. The row sum of any SNP is equal to 1.
+If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP is equal to 1.
 
 ## Building GRMs
 ```sh
 for chr in {1..5}
 do
-  mph --compute_grm --binary_genotype geno --min_maf 0.01 --snp_info chrs.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+  mph --compute_grm --binary_genotype geno --min_maf 0 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
 Create a GRM list, like the example one, **chr.grms.txt**.
@@ -43,7 +43,7 @@ mph --minque --binary_grm allSNPs --grm_list chr.grms.txt --phenotype phen.csv -
 ```
 --error_weight_name milk_wt
 ```
-The error weight is equal to 1/r^2-1.
+The error weights can be set to 1/r^2-1.
 
 ### Other optional arguments
 ```--heritability 0.5```
@@ -56,5 +56,5 @@ Max number of MINQUE iterations. The default it 20.
 Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-5.
 
 ```--num_rademacher 100```
-Number of Rademacher samples. 100 is generally sufficient. A larger value (500 or 1000) may work better for small samples (<1000).
+Number of Rademacher samples. The default (100) is generally sufficient. A larger value (500 or 1000) may work better for small samples (<1000).
 
