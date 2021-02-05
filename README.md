@@ -11,6 +11,8 @@ This CSV file is critical for building genomic relationship matrices (GRM). Each
 
 If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP should be equal to 1.
 
+To partition SNP heritability by functional annotations, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap. If a SNP belongs to ***n*** functional annotation categories, put **1/*n*** in those ***n*** cells.
+
 ## Building GRMs
 ```sh
 for chr in {1..5}
@@ -56,5 +58,5 @@ Max number of MINQUE iterations. The default it 20.
 Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-5.
 
 ```--num_rademacher 100```
-Number of Rademacher samples. The default (100) is generally sufficient. A larger value (500 or 1000) may work better for small samples (<1000).
+Number of Rademacher samples. The default (100) is generally sufficient. A larger value (500 or 1000) can work better for small samples (<1000).
 
