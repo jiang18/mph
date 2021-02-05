@@ -6,4 +6,55 @@ Refer to https://sites.google.com/view/ssgp/documentation/manual?authuser=0#h.p_
 
 MPH can work with Plink bim/fam/bed files.
 
+## SNP info file
+This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example, there are five columns for five chromosomes.
+
+If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to *n* GRMs, put 1/*n* in the *n* cells. The row sum of any SNP is equal to 1.
+
+## Building GRMs
+```sh
+for chr in {1..5}
+do
+  mph --compute_grm --binary_genotype geno --min_maf 0.01 --snp_info chrs.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+done
+```
+Create a GRM list, like the example one, **chr.grms.txt**.
+
+## Combining GRMs into one
+```
+mph --combine_grms --grm_list chr.grms.txt --output allSnps
+```
+The all-SNPs GRM will be used as the initial value in MINQUE iterations.
+
+## Partitioning SNP heritability
+```
+mph --minque --binary_grm allSNPs --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
+```
+
+### To include covariates, add *--covariate_file* and *--covariate_names*.
+```
+--covariate_file covar.csv --covariate_names all
+```
+```
+--covariate_file covar.csv --covariate_names g1,g2,g3
+```
+
+### For DYD or similar data, MPH has an argument (*--error_weight_name*) to specify individual accuracies.
+```
+--error_weight_name milk_wt
+```
+The error weight is equal to 1/r^2-1.
+
+### Other optional arguments
+```--heritability 0.5```
+The SNP heritability value for initializing MINQUE iterations. An accurate value may speed up convergence. The default is 0.5.
+
+```--num_iterations 20```
+Max number of MINQUE iterations. The default it 20.
+
+```--rel_tol 1e-5```
+Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-5.
+
+```--num_rademacher 100```
+Number of Rademacher samples. 100 is generally sufficient. A larger value (500 or 1000) may work better for small samples (<1000).
 
