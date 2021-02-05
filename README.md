@@ -11,7 +11,7 @@ This CSV file is critical for building genomic relationship matrices (GRM). Each
 
 If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP should be equal to 1.
 
-To partition SNP heritability by functional annotations, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap. If a SNP belongs to ***n*** functional annotation categories, put **1/*n*** in those ***n*** cells.
+To partition SNP heritability by **functional annotations**, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap. If a SNP belongs to ***n*** functional annotation categories, put **1/*n*** in those ***n*** cells.
 
 ## Building GRMs
 ```sh
