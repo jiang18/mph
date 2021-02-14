@@ -75,7 +75,7 @@ y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
 
 id = read.table(paste(folder,"plink.0.rel.id",sep="/"))
 out = matrix(nrow=np,ncol=(nrep+2))
-out[,1:2] = id
+out[,1:2] = as.matrix(id)
 out[,3:(2+nrep)] = y
 colnames(out) = c("FID","IID",1:nrep)
 
