@@ -81,6 +81,7 @@ colnames(out) = c("FID","IID",1:nrep)
 
 write.table(out,file=paste(folder,"bolt.pheno.txt",sep="/"),quote=F,col.names=T,row.names=F,sep=" ")
 write.table(out,file=paste(folder,"gcta.pheno.txt",sep="/"),quote=F,col.names=F,row.names=F,sep=" ")
+out = out[,-1]
 write.table(out,file=paste(folder,"mph.pheno.csv",sep="/"),quote=F,col.names=T,row.names=F,sep=",")
 ```
 
