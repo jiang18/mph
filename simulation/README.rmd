@@ -49,5 +49,10 @@ for(i in 1:20)
 # Two VCs
 ```sh
 perl ../split_snps_to_2vcs.pl
+perl ../make_grms.pl
+```
+# Simulate phenotypes
+```{r }
+
 ```
 
