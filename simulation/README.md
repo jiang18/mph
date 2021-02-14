@@ -23,6 +23,7 @@ plink --file 10k --make-bed --out 10k
 plink --bfile 10k --make-rel square --out grm
 ```
 ```{r}
+# Check relatedness
 library(data.table)
 G = fread("grm.rel")
 G = as.matrix(G)
@@ -33,6 +34,7 @@ summary(G[lower.tri(G)])
 plink --bfile 10k --r2 square --out r2
 ```
 ```{r}
+# Check inter-chromosome LD r2
 bim = read.table("10k.bim")
 library(data.table)
 ld = fread("r2.ld")
