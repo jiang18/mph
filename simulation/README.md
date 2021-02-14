@@ -16,4 +16,10 @@ plink --file 10k --make-bed --out 10k
 ```sh
 plink --bfile 10k --make-rel square --out grm
 ```
+```{r}
+library(data.table)
+G = fread("grm.rel")
+G = as.matrix(G)
+summary(G[lower.tri(G)])
 
+```
