@@ -62,11 +62,13 @@ library(data.table)
 
 G = fread(paste(folder,"plink.0.rel",sep="/"))
 G = as.matrix(G)
+diag(G) = diag(G) + 1e-6
 np = nrow(G)
 y = t(chol(G)) * matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq0)
 
 G = fread(paste(folder,"plink.1.rel",sep="/"))
 G = as.matrix(G)
+diag(G) = diag(G) + 1e-6
 y = y + t(chol(G)) * matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
 
 y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
