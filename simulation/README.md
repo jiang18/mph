@@ -53,6 +53,32 @@ perl ../make_grms.pl
 ```
 # Simulate phenotypes
 ```{r }
+hsq0 = 0.1
+hsq1 = 0.4
+nrep = 10
+folder = "close"
 
+library(data.table)
+
+G = fread(paste(folder,"plink.0.rel",sep="/"))
+G = as.matrix(G)
+np = nrow(G)
+y = t(chol(G)) * matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq0)
+
+G = fread(paste(folder,"plink.1.rel",sep="/"))
+G = as.matrix(G)
+y = y + t(chol(G)) * matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
+
+y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
+
+id = read.table(paste(folder,"plink.0.rel.id",sep="/"))
+out = matrix(nrow=np,ncol=(nrep+2))
+out[,1:2] = id
+out[,3:(2+nrep)] = y
+colnames(out) = c("FID","IID",1:nrep)
+
+write.table(out,file=paste(folder,"bolt.pheno.txt",sep="/"),quote=F,col.names=T,row.names=F,sep=" ")
+write.table(out,file=paste(folder,"gcta.pheno.txt",sep="/"),quote=F,col.names=F,row.names=F,sep=" ")
+write.table(out,file=paste(folder,"mph.pheno.csv",sep="/"),quote=F,col.names=F,row.names=F,sep=",")
 ```
 
