@@ -48,8 +48,6 @@ for(i in 1:20)
 ```
 # Two VCs
 ```sh
-mkdir close
-mkdir half
-mkdir chr
+perl ../split_snps_to_2vcs.pl
 ```
 
