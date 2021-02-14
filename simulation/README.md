@@ -46,3 +46,10 @@ for(i in 1:20)
   print(c(i, m_ld))
 }
 ```
+# Two VCs
+```sh
+mkdir close
+mkdir half
+mkdir chr
+```
+
