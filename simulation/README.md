@@ -13,5 +13,7 @@ cd 1
 perl ../aipl2plink.pl 10k
 plink --file 10k --make-bed --out 10k
 ```
-
+```sh
+plink --bfile 10k --make-rel square --out grm
+```
 
