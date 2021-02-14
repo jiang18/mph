@@ -13,6 +13,9 @@ perl subset_ped.pl 1
 # Simulate genotypes based on the extracted pedigree
 ```sh
 cd 1
+cp ../chips.txt ./
+cp ../markersim.options ./
+cp ../genosim.options. ./
 ../markersim
 ../genosim
 perl ../aipl2plink.pl 10k
