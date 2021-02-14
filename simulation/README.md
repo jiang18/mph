@@ -84,4 +84,7 @@ write.table(out,file=paste(folder,"gcta.pheno.txt",sep="/"),quote=F,col.names=F,
 out = out[,-1]
 write.table(out,file=paste(folder,"mph.pheno.csv",sep="/"),quote=F,col.names=T,row.names=F,sep=",")
 ```
-
+# Estimate VCs
+```sh
+perl ../estimate_vcs.pl
+```
