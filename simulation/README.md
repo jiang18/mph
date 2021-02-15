@@ -90,4 +90,6 @@ write.table(out,file=paste(folder,"mph.pheno.csv",sep="/"),quote=F,col.names=T,r
 # Estimate VCs
 ```sh
 perl ../estimate_vcs.pl
+Rscript --no-save ../cal_scores.R
+perl ../run_ldsc.pl
 ```
