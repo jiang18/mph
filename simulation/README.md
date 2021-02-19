@@ -96,7 +96,7 @@ bin = ReadGRMBin(paste(folder,"gcta.1",sep="/"))
 G[,] = 0
 G[upper.tri(G)] = bin$off
 G = G + t(G)
-diag(G) = diag(G) + 1e-6
+diag(G) = bin$diag + 1e-6
 y = y + t(chol(G)) %*% matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
 
 y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
