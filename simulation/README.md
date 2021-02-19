@@ -74,6 +74,7 @@ ReadGRMBin=function(prefix, AllN=F, size=4){
     N=readBin(NFile, n=n*(n+1)/2, what=numeric(0), size=size)
   }
   else N=readBin(NFile, n=1, what=numeric(0), size=size)
+  closeAllConnections()
   i=sapply(1:n, sum_i)
   return(list(diag=grm[i], off=grm[-i], id=id, N=N))
 }
@@ -100,8 +101,6 @@ diag(G) = bin$diag + 1e-6
 y = y + t(chol(G)) %*% matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
 
 y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
-
-closeAllConnections()
 
 out = matrix(nrow=np,ncol=(nrep+2))
 out[,1:2] = as.matrix(bin$id)
