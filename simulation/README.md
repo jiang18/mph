@@ -56,29 +56,53 @@ perl ../make_grms.pl
 ```
 # Simulate phenotypes
 ```{r }
+# Copied from https://cnsgenomics.com/software/gcta/#MakingaGRM
+# R script to read the GRM binary file
+ReadGRMBin=function(prefix, AllN=F, size=4){
+  sum_i=function(i){
+    return(sum(1:i))
+  }
+  BinFileName=paste(prefix,".grm.bin",sep="")
+  NFileName=paste(prefix,".grm.N.bin",sep="")
+  IDFileName=paste(prefix,".grm.id",sep="")
+  id = read.table(IDFileName)
+  n=dim(id)[1]
+  BinFile=file(BinFileName, "rb");
+  grm=readBin(BinFile, n=n*(n+1)/2, what=numeric(0), size=size)
+  NFile=file(NFileName, "rb");
+  if(AllN==T){
+    N=readBin(NFile, n=n*(n+1)/2, what=numeric(0), size=size)
+  }
+  else N=readBin(NFile, n=1, what=numeric(0), size=size)
+  i=sapply(1:n, sum_i)
+  return(list(diag=grm[i], off=grm[-i], id=id, N=N))
+}
+##########################################################
+
 hsq0 = 0.1
 hsq1 = 0.4
 nrep = 10
 folder = "close"
 
-library(data.table)
-
-G = fread(paste(folder,"plink.0.rel",sep="/"))
-G = as.matrix(G)
-diag(G) = diag(G) + 1e-6
-np = nrow(G)
+bin = ReadGRMBin(paste(folder,"gcta.0",sep="/"))
+np = length(bin$diag)
+G = matrix(0, nrow=np, ncol=np)
+G[upper.tri(G)] = bin$off
+G = G + t(G)
+diag(G) = bin$diag + 1e-6
 y = t(chol(G)) %*% matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq0)
 
-G = fread(paste(folder,"plink.1.rel",sep="/"))
-G = as.matrix(G)
+bin = ReadGRMBin(paste(folder,"gcta.1",sep="/"))
+G[,] = 0
+G[upper.tri(G)] = bin$off
+G = G + t(G)
 diag(G) = diag(G) + 1e-6
 y = y + t(chol(G)) %*% matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
 
 y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
 
-id = read.table(paste(folder,"plink.0.rel.id",sep="/"))
 out = matrix(nrow=np,ncol=(nrep+2))
-out[,1:2] = as.matrix(id)
+out[,1:2] = as.matrix(bin$id)
 out[,3:(2+nrep)] = y
 colnames(out) = c("FID","IID",1:nrep)
 
