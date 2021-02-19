@@ -101,6 +101,8 @@ y = y + t(chol(G)) %*% matrix(rnorm(np*nrep),np, nrep) * sqrt(hsq1)
 
 y = y + matrix(rnorm(np*nrep),np, nrep) * sqrt(1-hsq0-hsq1)
 
+closeAllConnections()
+
 out = matrix(nrow=np,ncol=(nrep+2))
 out[,1:2] = as.matrix(bin$id)
 out[,3:(2+nrep)] = y
