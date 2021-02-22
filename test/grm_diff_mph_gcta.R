@@ -29,11 +29,11 @@ G[upper.tri(G)] = bin$off
 diag(G) = bin$diag
 
 mph_file = file(paste(folder,"mph.0.grm.bin",sep="/"), "rb")
-readBin(mph_file, n=1, what=integer(), size=4)
-readBin(mph_file, n=1, what=numeric(), size=4)
+np = readBin(mph_file, n=1, what=integer(), size=4)
+nm = readBin(mph_file, n=1, what=numeric(), size=4)
 mph_G = matrix(0, nrow=np, ncol=np)
 mph_G[lower.tri(G, diag=TRUE)] = readBin(mph_file, n=np*(np+1)/2, what=numeric(), size=4)
-mph_G = t(mph_G)
+mph_G = t(mph_G)/nm
 closeAllConnections()
 max(abs(mph_G - G))
 
