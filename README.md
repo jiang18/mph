@@ -5,7 +5,7 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 3. It works for many overlapping functional annotations.
 
 ## Software download
-https://github.com/jiang18/mph/releases/tag/20210209
+https://github.com/jiang18/mph/releases/tag/20210222
 
 ## Example: the QTL-MAS 2012 data
 Refer to https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1 for how the data set was simulated.
@@ -65,6 +65,6 @@ Max number of MINQUE iterations. The default it 20.
 ```--rel_tol 1e-5```
 Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-5.
 
-```--num_rademacher 100```
-Number of Rademacher samples. The default (100) is generally sufficient. A larger value (500 or 1000) can work better for small samples (<1000).
+```--num_random_vectors 100```
+Number of random vectors. The default (100) is generally sufficient. A larger value (such as 500) can work better for small samples (<1000).
 
