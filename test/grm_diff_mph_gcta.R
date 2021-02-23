@@ -32,7 +32,7 @@ mph_file = file(paste(folder,"mph.0.grm.bin",sep="/"), "rb")
 np = readBin(mph_file, n=1, what=integer(), size=4)
 nm = readBin(mph_file, n=1, what=numeric(), size=4)
 mph_G = matrix(0, nrow=np, ncol=np)
-mph_G[lower.tri(G, diag=TRUE)] = readBin(mph_file, n=np*(np+1)/2, what=numeric(), size=4)
+mph_G[lower.tri(mph_G, diag=TRUE)] = readBin(mph_file, n=np*(np+1)/2, what=numeric(), size=4)
 mph_G = t(mph_G)/nm
 closeAllConnections()
 max(abs(mph_G - G))
