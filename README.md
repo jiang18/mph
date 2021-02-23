@@ -68,7 +68,7 @@ Relative tolerence. MINQUE iterations stop when all variance component estimates
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is generally sufficient. A larger value (such as 500) can work better for small samples (<1000).
 
-## Zero out GRM off-diagonal elements
+## Zeroing out GRM off-diagonal elements
 ```
 mph --zero_grm 0.05 --binary_grm allSnps --output zeroOuted
 ```
