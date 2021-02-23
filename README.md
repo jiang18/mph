@@ -53,7 +53,7 @@ mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv -
 ```
 --error_weight_name milk_wt
 ```
-The error weights can be set to 1/r^2^-1.
+The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ### Other optional arguments
 ```--heritability 0.5```
