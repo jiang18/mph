@@ -5,7 +5,7 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 3. It works for many overlapping functional annotations.
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20210222](https://github.com/jiang18/mph/releases/tag/20210222)
+[https://github.com/jiang18/mph/releases/tag/20210223](https://github.com/jiang18/mph/releases/tag/20210223)
 
 ## Example: the QTL-MAS 2012 data
 Refer to [https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) for how the data set was simulated.
