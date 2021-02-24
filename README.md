@@ -1,5 +1,4 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<!--
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4MRX3DSPN"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -7,7 +6,6 @@
   gtag('js', new Date());
   gtag('config', 'G-K4MRX3DSPN');
 </script>
--->
 
 # MPH: MINQUE for Partitioning Heritability
 MPH is designed to partition SNP heritability with genotypes of related samples or with long-span LDs. For such data, LDSC, HE, or MQS do not work well.
