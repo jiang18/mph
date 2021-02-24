@@ -74,6 +74,7 @@ mph --zero_grm 0.05 --binary_grm allSnps --output zeroOuted
 ```
 All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.
 
+<head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4MRX3DSPN"></script>
 <script>
@@ -83,3 +84,4 @@ All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting ma
 
   gtag('config', 'G-K4MRX3DSPN');
 </script>
+</head>
