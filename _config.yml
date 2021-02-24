@@ -1,2 +1,4 @@
 theme: jekyll-theme-cayman
-google_analytics: [G-K4MRX3DSPN]
+plugins:
+  - jekyll-seo-tag
+google_analytics: G-K4MRX3DSPN
