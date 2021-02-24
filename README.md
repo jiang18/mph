@@ -15,7 +15,7 @@ Refer to [https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQ
 MPH prefers Plink bim/fam/bed files for genotypes. Other input files are mostly CSV.
 
 ## SNP info file
-This CSV file is critical for building genomic relationship matrices (GRM). Each column corresponds to one GRM. In the example data, there are five columns for five chromosomes.
+This CSV file is critical for building genomic relationship matrices (GRMs). Each column corresponds to one GRM. In the example data, there are five columns for five chromosomes.
 
 If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put **1/*n*** in the ***n*** cells. The row sum of any SNP should be equal to 1.
 
