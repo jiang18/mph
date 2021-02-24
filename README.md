@@ -1,3 +1,13 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K4MRX3DSPN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K4MRX3DSPN');
+</script>
+
 # MPH: MINQUE for Partitioning Heritability
 MPH is designed to partition SNP heritability with genotypes of related samples or with long-span LDs. For such data, LDSC, HE, or MQS do not work well.
 1. MPH is comparable to GREML in terms of accuracy, while being a lot faster.
@@ -73,15 +83,3 @@ Number of random vectors. The default (100) is generally sufficient. A larger va
 mph --zero_grm 0.05 --binary_grm allSnps --output zeroOuted
 ```
 All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.
-
-<head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K4MRX3DSPN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K4MRX3DSPN');
-</script>
-</head>
