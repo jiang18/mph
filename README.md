@@ -73,3 +73,6 @@ Number of random vectors. The default (100) is generally sufficient. A larger va
 mph --zero_grm 0.05 --binary_grm allSnps --output zeroOuted
 ```
 All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.
+
+---
+![Visitor Count](https://profile-counter.glitch.me/mph/count.svg)
