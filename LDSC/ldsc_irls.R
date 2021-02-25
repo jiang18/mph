@@ -17,7 +17,6 @@ assoc = read.table(assoc_file, head=T)
 ldsc = as.matrix(ldsc)
 
 idx_na = which(is.na(assoc$T))
-assoc = assoc[-idx_na,]
 
 output = matrix(nrow=3, ncol=ncol(ldsc)+1)
 colnames(output) = c(colnames(ldsc), "C")
@@ -25,7 +24,10 @@ rownames(output) = c("m","unitC","varC")
 
 m = ldsc[1,]
 ldsc = ldsc[-1,]
-ldsc = ldsc[-idx_na,]
+if(length(idx_na) > 0) {
+	ldsc = ldsc[-idx_na,]
+	assoc = assoc[-idx_na,]
+}
 
 output[1,] = c(m,sum(m))
 
