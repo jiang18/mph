@@ -32,7 +32,7 @@ Create a GRM list, like the example one, **chr.grms.txt**.
 
 ## Combining GRMs into one
 ```
-mph --combine_grms --grm_list chr.grms.txt --output allSnps
+mph --merge_grms --grm_list chr.grms.txt --output allSnps
 ```
 The all-SNPs GRM will be used as the initial value in MINQUE iterations.
 
