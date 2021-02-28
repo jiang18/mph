@@ -27,7 +27,7 @@ abline(a=0,b=1,col="blue")
 
 summary(lm(y$seV~x$SE))
 cor(y$seV, x$SE)
-plot(sx$SE, y$seV)
+plot(x$SE, y$seV)
 abline(a=0,b=1,col="blue")
 
 tstat.y = y$var/y$seV
