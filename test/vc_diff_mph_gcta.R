@@ -2,8 +2,8 @@ mph_out = "10.k.30.mq.csv"
 gcta_out = "10.k.30.hsq"
 nchr = 30
 
-y = read.csv(paste( mph_out )
-x = read.table(paste(gcta_out,head=T,nrow=nchr+1)
+y = read.csv( mph_out )
+x = read.table(gcta_out,head=T,nrow=nchr+1)
 y = y[-nrow(y),]
 x = x[-nrow(x),]
 
