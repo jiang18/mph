@@ -1,5 +1,5 @@
-mph_out = "10.k.30.mq.csv"
-gcta_out = "10.k.30.hsq"
+mph_out = "./mph/40.k.30.mq.csv"
+gcta_out = "./gcta/40.k.30.hsq"
 nchr = 30
 
 y = read.csv( mph_out )
