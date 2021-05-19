@@ -1,4 +1,5 @@
 theme: jekyll-theme-cayman
 title: MPH
 description: MINQUE for Partitioning Heritability
-{% last_modified_at %}
+plugins:
+  - jekyll-last-modified-at
