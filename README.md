@@ -1,3 +1,4 @@
+{% last_modified_at %}
 # MPH: MINQUE for Partitioning Heritability
 MPH is designed to partition SNP heritability with genotypes of related samples or with long-span LDs. For such data, LDSC, HE, or MQS do not work well.
 1. MPH is comparable to GREML in terms of accuracy, while being much faster and more memory-efficient.
