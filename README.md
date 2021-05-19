@@ -39,7 +39,7 @@ The all-SNPs GRM will be used as the initial value in MINQUE iterations.
 mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
-### To include covariates, add *--covariate_file* and *--covariate_names*.
+### To include covariates, add --*covariate_file* and --*covariate_names*.
 ```
 --covariate_file covar.csv --covariate_names all
 ```
@@ -47,7 +47,7 @@ mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv -
 --covariate_file covar.csv --covariate_names g1,g2,g3
 ```
 
-### For DYD-like data, add *--error_weight_name* to specify individual reliabilies.
+### For DYD-like data, add --*error_weight_name* to specify individual reliabilies.
 ```
 --error_weight_name milk_wt
 ```
