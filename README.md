@@ -1,7 +1,7 @@
 # MPH: MINQUE for Partitioning Heritability
 MPH is designed to partition SNP heritability with genotypes of related samples or with long-span LDs. For such data, LDSC, HE, or MQS do not work well.
 1. MPH is comparable to GREML in terms of accuracy, while being much faster and more memory-efficient.
-2. It can do weighted analyses if residual variances are unequal (such as DYD).
+2. It can do weighted analyses if residual variances are unequal (such as daughter yield deviation [DYD]).
 3. It works for many overlapping functional annotations.
 
 ## Software download
@@ -47,7 +47,7 @@ mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv -
 --covariate_file covar.csv --covariate_names g1,g2,g3
 ```
 
-### For DYD-like data, add *--error_weight_name* to specify individual accuracies.
+### For DYD-like data, add *--error_weight_name* to specify individual reliabilies.
 ```
 --error_weight_name milk_wt
 ```
