@@ -17,9 +17,9 @@ MPH prefers Plink bim/fam/bed files for genotypes. Other input files are mostly 
 ## SNP info file
 This CSV file is critical for building genomic relationship matrices (GRMs). Each column corresponds to one GRM and each row corresponds to a SNP. In the example data, there are five columns for five chromosomes.
 
-If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put a **decimal** number equal to **1/*n*** in the ***n*** cells. The row sum of any SNP should be equal to 1.
+If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP belongs to ***n*** GRMs, put 1 in the ***n*** cells. The row sum of any SNP will be equal to ***n***.
 
-To partition SNP heritability by **functional annotations**, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to **6** functional annotation categories, put **0.1666667** in those **6** cells.
+To partition SNP heritability by **functional annotations**, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to **6** functional annotation categories, put **1** in those **6** cells.
 
 ## Building GRMs
 ```sh
