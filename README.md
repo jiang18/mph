@@ -51,7 +51,7 @@ The all-SNPs GRM will be used as the initial value in MINQUE iterations.
 mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
-### To include covariates, add --*covariate_file* and --*covariate_names*.
+### To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
 ```
 --covariate_file covar.csv --covariate_names all
 ```
