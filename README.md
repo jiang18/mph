@@ -56,8 +56,7 @@ The error weights can be set to 1/*r*<sup>2</sup>-1.
 ### Other optional arguments
 ```
 --constrain
-```
-If enabled, variance component estimates will be constrained to be positive.
+``` If enabled, variance component estimates will be constrained to be positive.
 
 ```--heritability 0.5```
 The SNP heritability value for initializing MINQUE iterations. An accurate value may speed up convergence. The default is 0.5.
