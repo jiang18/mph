@@ -54,14 +54,17 @@ mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv -
 The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ### Other optional arguments
+```--constrain```
+If enabled, variance component estimates will be constrained to be positive.
+
 ```--heritability 0.5```
 The SNP heritability value for initializing MINQUE iterations. An accurate value may speed up convergence. The default is 0.5.
 
 ```--num_iterations 20```
 Max number of MINQUE iterations. The default it 20.
 
-```--rel_tol 1e-5```
-Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-5.
+```--rel_tol 1e-4```
+Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-4.
 
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is generally sufficient. A larger value (such as 500) can work better for small samples (<1000).
