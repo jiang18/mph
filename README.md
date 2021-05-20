@@ -54,8 +54,8 @@ mph --minque --binary_grm allSnps --grm_list chr.grms.txt --phenotype phen.csv -
 The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ### Other optional arguments
-
-```--constrain ```
+```--constrain
+```
 If enabled, variance component estimates will be constrained to be positive.
 
 ```--heritability 0.5```
