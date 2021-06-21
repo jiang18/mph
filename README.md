@@ -42,7 +42,7 @@ Create a GRM list, like the example one, **chr.grms.txt**.
 ```
 mph --merge_grms --grm_list chr.grms.txt --output all_snps
 ```
-The all-SNPs GRM will be used as the initial value in MINQUE iterations.
+If there are two columns in the GRM list file, the second one will be ignored in this procedure. The all-SNPs GRM will be used as the initial value in MINQUE iterations. 
 
 ---
 
