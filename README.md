@@ -95,4 +95,4 @@ All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting ma
 ```
 mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
 ```
-In the *i*th row of the GRM list file are GRM(i) and VC(i). MPH simulates total genetic values (**g**) by sampling from a multivariate normal distribution with variance of Sum[GRM(i) * VC(i)]. MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
+In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V**=Sum[GRM(i) * VC(i)]. MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
