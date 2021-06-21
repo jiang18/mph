@@ -87,3 +87,11 @@ Number of random vectors. The default (100) is generally sufficient. A larger va
 mph --zero_grm 0.05 --binary_grm allSnps --output zeroOuted
 ```
 All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.
+
+---
+
+## Simulating phenotypes based on a list of GRMs
+```
+mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output simPheno
+```
+
