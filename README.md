@@ -79,7 +79,7 @@ Max number of MINQUE iterations. The default it 20.
 Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-4.
 
 ```--num_random_vectors 100```
-Number of random vectors. The default (100) is generally sufficient. A larger value (such as 500) can work better for small samples (<1000).
+Number of random vectors. The default (100) is usually sufficient. A larger value (such as 500 or 1000) may be needed when convergence issues arise.
 
 ---
 
@@ -95,4 +95,4 @@ All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting ma
 ```
 mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
 ```
-In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V**=Sum[GRM(i) * VC(i)]. MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
+In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V** is equal to the sum of all GRM(*i*)\*VC(*i*). MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
