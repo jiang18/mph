@@ -1,5 +1,5 @@
 ## Make SNP info file
-Run the script without any information to show its usage.
+Run the script without any argument to show its usage.
 ```
 perl make_snp_info.pl
 ```
