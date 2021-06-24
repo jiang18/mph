@@ -79,7 +79,7 @@ for my $chrom (keys %snp)
   }
 }
 
-my @categories = uniq(values %snp2gf);
+my @categories = &uniq(values %snp2gf);
 my %cat2line;
 for (0..$#categories) {
   my @cc = ("") x scalar(@categories);
