@@ -18,7 +18,7 @@ while(<IN>)
 {
 	chomp;
 	my @c = split /\s+/;
-  push @snp_arr, $c[1];
+	push @snp_arr, $c[1];
 	push @{$snp{$c[0]}},[@c[2,1]];
 }
 close IN;
@@ -50,11 +50,11 @@ for (keys %gf)
 my %snp2gf;
 for my $chrom (keys %snp)
 {
-  next unless (defined $gf{$chrom});
-  my @snp_chr_loc = @{$snp{$chrom}};
+	next unless (defined $gf{$chrom});
+	my @snp_chr_loc = @{$snp{$chrom}};
 	my @gf_chr_loc = @{$gf{$chrom}};
   
-  for (@snp_chr_loc)
+	for (@snp_chr_loc)
 	{
 		my ($snp_pos,$snp_id) = @$_;
 		
@@ -77,25 +77,27 @@ for my $chrom (keys %snp)
 				last;
 			}
 		}
-  }
+	}
 }
 
+# step 4
+# generate output file
 my @categories = &uniq(values %snp2gf);
 my %cat2line;
 for (0..$#categories) {
-  my @cc = ("") x scalar(@categories);
-  $cc[$_] = 1;
-  $cat2line{$categories[$_]} = join ",", @cc;
+	my @cc = ("") x scalar(@categories);
+	$cc[$_] = 1;
+	$cat2line{$categories[$_]} = join ",", @cc;
 }
 my $null_str = "," x $#categories;
 open OUT, ">$output_prefix.snp_info.csv";
 print OUT join(",", "SNP", "intercept", @categories), "\n";
 for (@snp_arr) {
-  if(defined $snp2gf{$_}) {
-    print OUT join(",", $_, 1, $cat2line{$snp2gf{$_}}), "\n";
-   } else {
-    print OUT join(",", $_, 1, $null_str), "\n";
-   }
+	if(defined $snp2gf{$_}) {
+		print OUT join(",", $_, 1, $cat2line{$snp2gf{$_}}), "\n";
+	} else {
+		print OUT join(",", $_, 1, $null_str), "\n";
+	}
 }
 
 sub print_usage()
@@ -109,10 +111,10 @@ sub print_usage()
 
 sub uniq
 {
-  my %h;
-  for(@_) {
-    $h{$_} = 0;
-  }
-  return (sort keys %h);
+	my %h;
+	for(@_) {
+		$h{$_} = 0;
+	}
+	return (sort keys %h);
 }
 
