@@ -84,6 +84,11 @@ for my $chrom (keys %snp)
 	}
 }
 
+if(scalar(keys %snp2gf) == 0) {
+	print "Something went wrong: no SNPs are within genomic features.\n";
+	print "No snp info file generated.\n";
+	exit(1);
+}
 print scalar(keys %snp2gf), " SNPs are assigned within genomic features.\n";
 
 # step 4
