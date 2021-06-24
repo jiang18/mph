@@ -45,8 +45,9 @@ for (keys %gf)
 	@{$gf{$_}} = sort {$a->[0] <=> $b->[0]} @{$gf{$_}};
 }
 
-my %snp2gf;
 # step 3
+# assign SNPs to genomic features with single pass
+my %snp2gf;
 for my $chrom (keys %snp)
 {
   next unless (defined $gf{$chrom});
