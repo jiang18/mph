@@ -19,7 +19,7 @@ while(<IN>)
 	chomp;
 	my @c = split /\s+/;
 	push @snp_arr, $c[1];
-	push @{$snp{$c[0]}},[@c[2,1]];
+	push @{$snp{$c[0]}},[@c[3,1]];
 }
 close IN;
 
@@ -28,7 +28,7 @@ for (keys %snp)
 	@{$snp{$_}} = sort {$a->[0] <=> $b->[0]} @{$snp{$_}};
 }
 
-print "There are ", scalar(@snp_arr), " SNPs in the bim file\n";
+print "There are ", scalar(@snp_arr), " SNPs in $snp_pos_file.\n";
 
 # step 2
 # get genomic feature
