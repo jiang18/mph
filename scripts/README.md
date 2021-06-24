@@ -8,4 +8,4 @@ Example command:
 ```
 perl make_snp_info.pl test.bim test.annot.txt test
 ```
-An output file named test.snp_info.csv will be generated. 
+An output file named **test.snp_info.csv** will be generated. 
