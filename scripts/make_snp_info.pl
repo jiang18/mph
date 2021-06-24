@@ -28,6 +28,8 @@ for (keys %snp)
 	@{$snp{$_}} = sort {$a->[0] <=> $b->[0]} @{$snp{$_}};
 }
 
+print "There are ", scalar(@snp_arr), " SNPs in the bim file\n";
+
 # step 2
 # get genomic feature
 open IN,$gf_file or die "Cannot open file $gf_file: $!\n";
@@ -44,6 +46,8 @@ for (keys %gf)
 {
 	@{$gf{$_}} = sort {$a->[0] <=> $b->[0]} @{$gf{$_}};
 }
+
+print "Completed reading $gf_file\n";
 
 # step 3
 # assign SNPs to genomic features with single pass
@@ -80,6 +84,8 @@ for my $chrom (keys %snp)
 	}
 }
 
+print scalar(keys %snp2gf), " SNPs are assigned within genomic features.\n";
+
 # step 4
 # generate output file
 my @categories = &uniq(values %snp2gf);
@@ -99,6 +105,8 @@ for (@snp_arr) {
 		print OUT join(",", $_, 1, $null_str), "\n";
 	}
 }
+
+print "$output_prefix.snp_info.csv generated\n";
 
 sub print_usage()
 {
