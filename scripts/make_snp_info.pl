@@ -106,7 +106,7 @@ sub print_usage()
 	exit(1);
 }
 
-sub uniq()
+sub uniq
 {
   my %h;
   for(@_) {
