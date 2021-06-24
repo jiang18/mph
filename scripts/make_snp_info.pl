@@ -112,6 +112,6 @@ sub uniq()
   for(@_) {
     $h{$_} = 0;
   }
-  return (sort %keys %h);
+  return (sort keys %h);
 }
 
