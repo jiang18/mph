@@ -11,7 +11,8 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 
 ---
 
-## Example: the QTL-MAS 2012 data
+## Example data
+[The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)
 Refer to [https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) for how the data set was simulated.
 
 Refer to [https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for the data format.
