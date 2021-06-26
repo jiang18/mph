@@ -14,8 +14,6 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 ## Software download
 [https://github.com/jiang18/mph/releases/tag/20210621](https://github.com/jiang18/mph/releases/tag/20210621)
 
----
-
 ## Example data
 [**The QTL-MAS 2012 data**](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
 Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih.gov/25519515/) for how the data set was simulated.
@@ -24,8 +22,6 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 
 ## Input file formats
 MPH uses the same file formats as [SSGP](https://sites.google.com/view/ssgp), another program that the same author developed. Refer to [this page](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for details. In short, MPH prefers PLINK bim/fam/bed files for genotypes, and other input files are mostly CSV.
-
----
 
 ## SNP info file
 This CSV file is critical for building genomic relationship matrices (GRMs). Each column corresponds to one GRM and each row corresponds to a SNP. In the example data, there are five columns for five chromosomes.
