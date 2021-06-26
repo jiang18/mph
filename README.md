@@ -18,9 +18,9 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Input file formats
-Refer to [https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for the data format.
+Refer to [https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for input file formats.
 
-MPH prefers Plink bim/fam/bed files for genotypes. Other input files are mostly CSV.
+MPH prefers PLINK bim/fam/bed files for genotypes. Other input files are mostly CSV.
 
 ---
 
