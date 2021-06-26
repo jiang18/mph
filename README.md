@@ -59,7 +59,7 @@ mph --minque --binary_grm all_snps --grm_list chr.grms.txt --phenotype phen.csv 
 ```
 --covariate_file covar.csv --covariate_names all
 ```
-If *all* is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.  
+If *all* is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.
 ```
 --covariate_file covar.csv --covariate_names g1,g2,g3
 ```
