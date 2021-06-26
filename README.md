@@ -12,9 +12,11 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 ---
 
 ## Example data
-[The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)
-Refer to [https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) for how the data set was simulated.
+[The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip). Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih.gov/25519515/) for how the data set was simulated.
 
+---
+
+## Input file formats
 Refer to [https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for the data format.
 
 MPH prefers Plink bim/fam/bed files for genotypes. Other input files are mostly CSV.
