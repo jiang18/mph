@@ -6,7 +6,7 @@ my ($log, $out) = @ARGV;
 
 my @info;
 my ($trt, $chol, $lu, $diff, $iter);
-my @keys = qw(trt, chol, lu, diff, iter);
+my @keys = qw(trt chol lu diff iter);
 open IN,$log or die "Could not find $log: $!\n";
 while(<IN>) {
   if(/trait_name with ARG (.*)/) {
