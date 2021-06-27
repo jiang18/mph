@@ -5,7 +5,7 @@ use warnings;
 my ($log, $out) = @ARGV;
 
 my @info;
-my ($trt, $chol, $lu, $diff, $iter);
+my ($trt, $chol, $lu, $diff, $iter) = (0) x 5;
 my @keys = qw(trt chol lu diff iter);
 open IN,$log or die "Could not find $log: $!\n";
 while(<IN>) {
