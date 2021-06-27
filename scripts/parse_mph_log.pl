@@ -5,8 +5,10 @@ use warnings;
 my ($log, $out) = @ARGV;
 
 my @info;
-my ($trt, $chol, $lu, $diff, $iter) = (0) x 5;
-my @keys = qw(trt chol lu diff iter);
+my @keys = qw(trt chol lu iter diff);
+my ($trt, $chol, $lu, $iter, $diff);
+$chol = 1;
+$lu = 0;
 open IN,$log or die "Could not find $log: $!\n";
 while(<IN>) {
   if(/trait_name with ARG (.*)/) {
