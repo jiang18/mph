@@ -18,7 +18,7 @@ while(<IN>) {
   if(/Switched to LU/) {
     $lu ++;
   }
-  if(/diff for all VCs = (|\d\.|+)/) {
+  if(/diff for all VCs = ([\d\.]+)/) {
     $diff = $1;
   }
   if(/Completed MINQUE iteration (\d+)/) {
