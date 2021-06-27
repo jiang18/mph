@@ -28,7 +28,7 @@ while(<IN>) {
   }
   if(/Analysis finished/) {
     push @info, {trt=>$trt, chol=>$chol, lu=>$lu, diff=>$diff, iter=>$iter};
-    $chol = 0;
+    $chol = 1;
     $lu = 0;
     $iter = 0;
   }
