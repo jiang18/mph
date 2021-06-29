@@ -28,7 +28,7 @@ while(<IN>) {
     $iter ++;
   }
   if(/Analysis finished/) {
-    if($last_col == $iter) {
+    if($last_chol == $iter) {
       $last_is_chol = "TRUE"
     } else {
       $last_is_chol = "FALSE";
