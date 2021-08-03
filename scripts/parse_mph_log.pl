@@ -21,7 +21,7 @@ while(<IN>) {
   if(/Started MINQUE iteration (\d+)/) {
     $iter ++;
   }
-  if(/delta logLL = ([\d\.]+)/) {
+  if(/delta logLL \= ([\d\.]+)/) {
     $diff = $1;
   }
   
