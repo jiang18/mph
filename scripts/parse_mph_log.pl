@@ -32,7 +32,7 @@ while(<IN>) {
   }
   
   if(/Analysis finished/) {
-    push @info, {trt=>$trt, rcond=>$rcond, grad_norm=>$grad_norm, iter=>$iter, diff=>$diff, newton=>$newton};
+    push @info, {trt=>$trt, rcond=>$rcond, grad_norm=>$grad_norm, iter=>$iter, diff=>$diff, newton=>$newton, reject=>$reject};
     $iter = 0;
     $reject = 0;
   }
