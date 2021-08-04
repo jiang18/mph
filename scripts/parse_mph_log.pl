@@ -7,6 +7,7 @@ my ($log, $out) = @ARGV;
 my @info;
 my @keys = qw(trt rcond grad_norm iter diff newton reject);
 my ($trt, $rcond, $grad_norm, $iter, $diff, $newton, $reject);
+$reject = 0;
 open IN,$log or die "Could not find $log: $!\n";
 while(<IN>) {
   if(/trait_name with ARG (.*)/) {
