@@ -8,7 +8,7 @@ grm = grm + t(grm)
 # IDs
 id = c(1:5)
 # sample size
-np = 5
+np = length(id)
 # number of markers set to 1 for pseudo GRMs
 nm = 1
 
