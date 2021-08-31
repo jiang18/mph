@@ -1,7 +1,7 @@
 ---
-title: Overview
+title: Scripts
 layout: template
-filename: index.md
+filename: scripts.md
 ---
 
 ## auxiliary scripts
