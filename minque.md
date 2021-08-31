@@ -18,7 +18,7 @@ If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP 
 ```sh
 for chr in {1..5}
 do
-  mph --compute_grm --binary_genotype geno --min_maf 0 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+  mph --compute_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
 Create a GRM list, like the example one, **chr.grms.txt**.
@@ -29,13 +29,13 @@ Create a GRM list, like the example one, **chr.grms.txt**.
 ```
 mph --merge_grms --grm_list chr.grms.txt --output all_snps
 ```
-If there are two columns in the GRM list file, the second one will be ignored in this procedure. The all-SNPs GRM will be used as the initial value in MINQUE iterations. 
+If there are two columns in the GRM list file, the second one will be ignored in this procedure. 
 
 ---
 
 ## Partitioning SNP heritability
 ```
-mph --minque --binary_grm all_snps --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
+mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
 ### To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
@@ -54,19 +54,17 @@ If *all* is specified, MPH will use as covariates all columns from the 2nd to th
 The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ### Other optional arguments
-```--constrain``` If enabled, variance component estimates will be constrained to be positive.
-
 ```--heritability 0.5```
-The SNP heritability value for initializing MINQUE iterations. An accurate value may speed up convergence. The default is 0.5.
+The SNP heritability value for initializing MINQUE iterations. An accurate value may improve convergence. The default is 0.5.
 
 ```--num_iterations 20```
 Max number of MINQUE iterations. The default it 20.
 
-```--rel_tol 1e-4```
-Relative tolerence. MINQUE iterations stop when all variance component estimates have a change smaller than that. The default it 1e-4.
+```--tol 1e-4```
+Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 1e-4.
 
 ```--num_random_vectors 100```
-Number of random vectors. The default (100) is usually sufficient. A larger value (such as 500 or 1000) may be needed when convergence issues arise.
+Number of random vectors. The default (100) is usually sufficient.
 
 ---
 
