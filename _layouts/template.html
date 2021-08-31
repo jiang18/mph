@@ -44,16 +44,17 @@
     <header class="page-header" role="banner">
       <h1 class="project-name">MINQUE for Partitioning Heritability</h1>
       <h2 class="project-tagline">Updated June 26, 2021</h2>
-      {% for page in site.pages %}
-          <a href={{ page.filename }}>{{ page.title }}</a>
-      {% endfor %}
+      
+        <a href=index.md>HOME</a>
+        <a href=test1.md>TEST1</a>
         <a href="https://github.com/jiang18/mph" class="btn">View on GitHub</a>
       
-      
     </header>
-
-    {{ content }}
-
+    
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+      
+      
       <footer class="site-footer">
         
           <span class="site-footer-owner"><a href="https://github.com/jiang18/mph">mph</a> is maintained by <a href="https://github.com/jiang18">jiang18</a>.</span>
