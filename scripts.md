@@ -4,4 +4,4 @@ layout: template
 filename: scripts.md
 ---
 
-## auxiliary scripts
+## Auxiliary scripts
