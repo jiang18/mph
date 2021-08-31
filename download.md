@@ -1,3 +1,9 @@
+---
+title: Download
+layout: template
+filename: download.md
+---
+
 ## Software download
 [https://github.com/jiang18/mph/releases/tag/20210821](https://github.com/jiang18/mph/releases/tag/20210821)
 
