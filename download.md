@@ -14,6 +14,9 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### September 6, 2021
+- Fixed a bug in reading CSV files.
+
 ### September 2, 2021
 - Added an output file to keep key information of --minque iterations.
 
