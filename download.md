@@ -5,7 +5,7 @@ filename: download.md
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20210902](https://github.com/jiang18/mph/releases/tag/20210902)
+[https://github.com/jiang18/mph/releases/tag/20210906](https://github.com/jiang18/mph/releases/tag/20210906)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
