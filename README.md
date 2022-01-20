@@ -14,7 +14,7 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20210906](https://github.com/jiang18/mph/releases/tag/20210906)
+[https://github.com/jiang18/mph/releases/tag/20220120](https://github.com/jiang18/mph/releases/tag/20220120)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
