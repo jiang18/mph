@@ -78,8 +78,8 @@ The SNP heritability value for initializing MINQUE iterations. An accurate value
 ```--num_iterations 20```
 Max number of MINQUE iterations. The default it 20.
 
-```--tol 1e-4```
-Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 1e-4.
+```--tol 1e-2```
+Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 1e-3.
 
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is usually sufficient.
