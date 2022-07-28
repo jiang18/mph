@@ -116,7 +116,7 @@ print "$output_prefix.snp_info.csv generated\n";
 sub print_usage()
 {
 	print "Run the program:\n";
-	print "  perl enrichment.pl plink-bim-file genomic-feature-file output-filename-prefix \n";
+	print "  perl make_snp_info.pl plink-bim-file genomic-feature-file output-filename-prefix \n";
 	print "  Both input files are plain text and have NO header line.\n";
 	print "  genomic-feature-file: the first four (4) columns are chrom, start, end, and category\n";
 	exit(1);
