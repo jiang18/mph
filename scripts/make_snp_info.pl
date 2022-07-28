@@ -52,6 +52,7 @@ print "Completed reading $gf_file\n";
 # step 3
 # assign SNPs to genomic features with single pass
 my %snp2gf;
+my %useful_gf;
 for my $chrom (keys %snp)
 {
 	next unless (defined $gf{$chrom});
@@ -77,38 +78,39 @@ for my $chrom (keys %snp)
 			}
 			else
 			{
-				$snp2gf{$snp_id} = $gf_c;
-				last;
+				push @{$snp2gf{$snp_id}}, $gf_c;
+				$useful_gf{$gf_c} = 0;
 			}
 		}
 	}
 }
+my @categories = sort keys %useful_gf;
 
 if(scalar(keys %snp2gf) == 0) {
 	print "Something went wrong: no SNPs are within genomic features.\n";
 	print "No snp info file generated\n";
 	exit(1);
 }
-print scalar(keys %snp2gf), " SNPs are assigned into genomic features.\n";
+print scalar(keys %snp2gf), " SNPs are assigned into ", scalar(@categories), " genomic features.\n";
 
 # step 4
 # generate output file
-my @categories = &uniq(values %snp2gf);
-my %cat2line;
-for (0..$#categories) {
-	my @cc = ("") x scalar(@categories);
-	$cc[$_] = 1;
-	$cat2line{$categories[$_]} = join ",", @cc;
+my %cat2idx;
+for(0..$#categories) {
+	$cat2idx{$categories[$_]} = $_;
 }
-my $null_str = "," x $#categories;
+my @null = ('') x scalar(@categories);
 open OUT, ">$output_prefix.snp_info.csv";
 print OUT join(",", "SNP", "intercept", @categories), "\n";
 for (@snp_arr) {
+	my @out = @null;
 	if(defined $snp2gf{$_}) {
-		print OUT join(",", $_, 1, $cat2line{$snp2gf{$_}}), "\n";
-	} else {
-		print OUT join(",", $_, 1, $null_str), "\n";
+		my @cur_cats = &uniq(@{$snp2gf{$_}});
+		for my $c (@cur_cats) {
+			$out[ $cat2idx{$c} ] = 1;
+		}
 	}
+	print OUT join(",", $_, 1, @out), "\n";
 }
 
 print "$output_prefix.snp_info.csv generated\n";
