@@ -15,8 +15,10 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 
 ## Update log
 ### July 15, 2022
-- Added the computation of dominance GRM.
-- Added the computation of covariance between random effects (CORE) and first-order interaction between random effects (FORE).
+- Added --dominance for computing dominance GRM.
+- Added --make_core for computing covariance between random effects (CORE).
+- Added --make_fore for computing first-order interaction between random effects (FORE).
+- Improved the output of --prediction by including EBLUPs for each variance component.
 
 ### January 20, 2022
 - Scaled logLL relative to null model.
