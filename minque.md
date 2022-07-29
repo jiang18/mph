@@ -14,22 +14,34 @@ If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP 
 
 ---
 
-## Building GRMs
+## Making additive GRMs
 ```sh
 for chr in {1..5}
 do
-  mph --compute_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+  mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
+## Making dominance GRMs
+To construct a dominance GRM, add --dominance.
+```sh
+for chr in {1..5}
+do
+  mph --make_grm --dominance --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr.dom
+done
+```
+## GRM list
 Create a GRM list, like the example one, **chr.grms.txt**.
 
 ---
 
 ## Combining GRMs into one
+If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.
 ```
 mph --merge_grms --grm_list chr.grms.txt --output all_snps
 ```
 If there are two columns in the GRM list file, the second one will be ignored in this procedure. 
+
+## Deducting GRMs
 
 ---
 
@@ -60,8 +72,8 @@ The SNP heritability value for initializing MINQUE iterations. An accurate value
 ```--num_iterations 20```
 Max number of MINQUE iterations. The default it 20.
 
-```--tol 1e-2```
-Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 1e-3.
+```--tol 0.01```
+Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 0.01.
 
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is usually sufficient.
