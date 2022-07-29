@@ -33,4 +33,4 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 - Added an output file to keep key information of --minque iterations.
 
 ### August 21, 2021
-- Added an option --predict to predict total genetic values.
+- Added an option '--'predict to predict total genetic values.
