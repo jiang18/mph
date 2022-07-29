@@ -1,3 +1,6 @@
 theme: jekyll-theme-cayman
 title: MPH
-description: Updated January 20, 2021
+description: Updated July 29, 2021
+markdown: redcarpet
+    redcarpet:
+      extensions: ['smart']
