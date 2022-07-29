@@ -19,7 +19,8 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 - Added --dominance for computing dominance GRM.
 - Added --make_core for computing covariance between random effects (CORE).
 - Added --make_fore for computing first-order interaction between random effects (FORE).
-- Improved the output of --prediction by including EBLUPs for each variance component.
+- Improved --predict by outputting EBLUPs for each variance component.
+- Improved --simulate by outputting the last 10% individuals' BLUPs.
 
 ### January 20, 2022
 - Scaled logLL relative to null model.
@@ -32,4 +33,4 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 - Added an output file to keep key information of --minque iterations.
 
 ### August 21, 2021
-- Added an option --prediction to predict total genetic values.
+- Added an option --predict to predict total genetic values.
