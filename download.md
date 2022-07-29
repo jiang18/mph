@@ -15,6 +15,7 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 
 ## Update log
 ### July 15, 2022
+- Added --deduct_grms for deducting GRMs.
 - Added --dominance for computing dominance GRM.
 - Added --make_core for computing covariance between random effects (CORE).
 - Added --make_fore for computing first-order interaction between random effects (FORE).
