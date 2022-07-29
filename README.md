@@ -14,7 +14,7 @@ MPH is designed to partition SNP heritability with genotypes of related samples 
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220120](https://github.com/jiang18/mph/releases/tag/20220120)
+[https://github.com/jiang18/mph/releases/tag/20220715](https://github.com/jiang18/mph/releases/tag/20220715)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
@@ -33,21 +33,34 @@ If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP 
 ---
 
 ## Building GRMs
+### Additive GRM
 ```sh
 for chr in {1..5}
 do
-  mph --compute_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+  mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
+### Dominance GRM
+To construct a dominance GRM, add --dominance.
+```sh
+for chr in {1..5}
+do
+  mph --make_grm --dominance --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr.dom
+done
+```
+### GRM list
 Create a GRM list, like the example one, **chr.grms.txt**.
 
 ---
 
 ## Combining GRMs into one
+If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.
 ```
 mph --merge_grms --grm_list chr.grms.txt --output all_snps
 ```
 If there are two columns in the GRM list file, the second one will be ignored in this procedure. 
+
+## Deducting GRMs
 
 ---
 
