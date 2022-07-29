@@ -32,15 +32,14 @@ If a SNP does not belong to a GRM, leave the corresponding cell blank. If a SNP 
 
 ---
 
-## Building GRMs
-### Additive GRM
+## Making additive GRMs
 ```sh
 for chr in {1..5}
 do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
-### Dominance GRM
+## Making Dominance GRMs
 To construct a dominance GRM, add --dominance.
 ```sh
 for chr in {1..5}
@@ -48,7 +47,7 @@ do
   mph --make_grm --dominance --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr.dom
 done
 ```
-### GRM list
+## GRM list
 Create a GRM list, like the example one, **chr.grms.txt**.
 
 ---
@@ -91,8 +90,8 @@ The SNP heritability value for initializing MINQUE iterations. An accurate value
 ```--num_iterations 20```
 Max number of MINQUE iterations. The default it 20.
 
-```--tol 1e-2```
-Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 1e-3.
+```--tol 0.01```
+Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default it 0.01.
 
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is usually sufficient.
@@ -113,8 +112,8 @@ mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 -
 ```
 In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V** is equal to the sum of all GRM(*i*)\*VC(*i*). MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
 
-## Predicting total genetic values
+## Empirical best linear unbiased predictions (EBLUPs)
 ```
 mph --pred --mq_file milk.chr --output milk.chr
 ```
-MPH computes total genetic values using the output of --minque and outputs them to a file with a suffix of .mq.gv.csv.
+MPH computes EBLUPs using the output of --minque and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
