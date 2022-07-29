@@ -39,7 +39,7 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
-## Making Dominance GRMs
+## Making dominance GRMs
 To construct a dominance GRM, add --dominance.
 ```sh
 for chr in {1..5}
