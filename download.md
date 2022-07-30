@@ -5,7 +5,7 @@ filename: download.md
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220715](https://github.com/jiang18/mph/releases/tag/20220715)
+[https://github.com/jiang18/mph/releases/tag/20220729](https://github.com/jiang18/mph/releases/tag/20220729)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
@@ -14,6 +14,9 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### July 29, 2022
+- Improved the computation of MAFs and HWE p-values by multi-threading.
+
 ### July 15, 2022
 - Added \-\-deduct_grms for deducting GRMs.
 - Added \-\-dominance for computing dominance GRM.
