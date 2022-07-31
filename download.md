@@ -14,10 +14,10 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
-### July 29, 2022
+### Jul 29, 2022
 - Improved the computation of MAFs and HWE p-values by multi-threading.
 
-### July 15, 2022
+### Jul 15, 2022
 - Added \-\-deduct_grms for deducting GRMs.
 - Added \-\-dominance for computing dominance GRM.
 - Added \-\-make_core for computing COvariance between Random Effects (CORE).
@@ -25,15 +25,15 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 - Improved \-\-predict by outputting EBLUPs for each variance component.
 - Improved \-\-simulate by outputting the last 10% individuals' BLUPs.
 
-### January 20, 2022
+### Jan 20, 2022
 - Scaled logLL relative to null model.
 - Added the sampling variance-covariance matrix of all VC estimates in the VC output file.
 
-### September 6, 2021
+### Sep 06, 2021
 - Fixed a bug in reading CSV files.
 
-### September 2, 2021
+### Sep 02, 2021
 - Added an output file to keep key information of \-\-minque iterations.
 
-### August 21, 2021
+### Aug 21, 2021
 - Added an option \-\-predict to predict total genetic values.
