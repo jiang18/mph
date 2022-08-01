@@ -26,9 +26,8 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 
 ---
 
-## Additional options
-
-### To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
+## Covariates
+To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
 ```
 --covariate_file covar.csv --covariate_names all
 ```
@@ -37,13 +36,16 @@ If *all* is specified, MPH will use as covariates all columns from the 2nd to th
 --covariate_file covar.csv --covariate_names g1,g2,g3
 ```
 
-### For DYD-like data, add \-\-*error_weight_name* to specify individual reliabilies.
+## Deregressed estimated breeding values
+For DYD-like data, add \-\-*error_weight_name* to specify individual reliabilies.
 ```
 --error_weight_name milk_wt
 ```
 The error weights can be set to 1/*r*<sup>2</sup>-1.
 
-### Other optional arguments
+---
+
+## Additional options
 ```--heritability 0.5```
 The SNP heritability value for initializing MINQUE iterations. An accurate value may improve convergence. The default is 0.5.
 
