@@ -26,6 +26,8 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 
 ---
 
+## Additional options
+
 ### To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
 ```
 --covariate_file covar.csv --covariate_names all
