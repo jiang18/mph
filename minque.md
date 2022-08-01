@@ -5,14 +5,26 @@ filename: minque.md
 ---
 
 ## Input files
-MPH uses the same file formats as [SSGP](https://sites.google.com/view/ssgp), another program that the same author developed. Refer to [this page](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for details. In short, MPH prefers PLINK bim/fam/bed files for genotypes, and other input files are mostly CSV.
+- \-\-grm_list: a space-delimited text file listing all precomputed GRMs
+- \-\-phenotype: a CSV file with a header line. The first column must be the individual ID.
+- \-\-covariate_file: a CSV file with a header line. The first column must be the individual ID. The covariate file is optional. 
+
+Missing values of phenotypes or covariates should be left blank. Do not use -9, NA, or NaN. 
 
 ---
 
-## Partitioning SNP heritability
+## REML or iterative MINQUE
 ```
 mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
+
+## MINQUE(0) or MINQUE(1)
+To force MINQUE(0) or MINQUE(1), add --num_iterations 1. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
+```
+mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
+```
+
+---
 
 ### To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
 ```
