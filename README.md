@@ -22,16 +22,16 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 
 ---
 
-## [Genomic Relationship Matrix (GRM)](./grm.md)
+## [Genomic relationship matrix](./grm.md)
 
 ---
 
-## [Genomic Partitioning (MINQUE/REML)](./minque.md)
+## [Genomic partitioning (MINQUE/REML)](./minque.md)
 
 ---
 
-## [Simulation of Phenotypes](./simulation.md)
+## [Simulation of phenotypes](./simulation.md)
 
 ---
 
-## [Empirical Best Linear Unbiased Predictions](./prediction.md)
+## [Empirical best linear unbiased predictions](./prediction.md)
