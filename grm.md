@@ -51,4 +51,4 @@ All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting ma
 ---
 
 ## GRM list
-Create a GRM list, like the example one, **chr.grms.txt**.
+The GRM list file is a text file listing all GRMs , like the example one, **chr.grms.txt**.
