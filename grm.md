@@ -34,9 +34,9 @@ done
 ---
 
 ## GRM list
-The GRM list file is a text file listing GRMs, like the example one, **chr.grms.txt**. It has no header and one or two columns. The first column must be the file path prefix for each GRM. The second column is optional and can be a number or a short GRM identifier. 
+The GRM list file is a text file listing GRMs, like the example one, **chr.grms.txt**. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
 
-It is needed for --merge_grms, --deduct_grms, --make_core, --make_fore, and --minque. 
+The GRM list is needed for --merge_grms, --deduct_grms, --make_core, --make_fore, and --minque.
 
 ---
 
