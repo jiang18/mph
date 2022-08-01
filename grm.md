@@ -5,7 +5,7 @@ filename: grm.md
 ---
 
 ## Input file formats
-MPH uses the same file formats as [SSGP](https://sites.google.com/view/ssgp), another program that the same author developed. Refer to [this page](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for details. In short, MPH prefers PLINK bim/fam/bed files for genotypes, and other input files are mostly CSV.
+MPH uses the same file formats as [SSGP](https://sites.google.com/view/ssgp), another program that the same author developed. Refer to [this page](https://sites.google.com/view/ssgp/documentation/manual#h.p_QS3vj5saXQJZ) for details. In short, MPH prefers PLINK bim/fam/bed files for genotypes, and other input files are mostly comma-separated values (CSV).
 
 ## SNP info file
 This CSV file is critical for making genomic relationship matrices (GRMs). Each column corresponds to one GRM and each row corresponds to a SNP. In the example data, there are five columns for five chromosomes.
@@ -34,7 +34,7 @@ done
 ---
 
 ## GRM list
-The GRM list file is a text file listing GRMs, like the example one, **chr.grms.txt**. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
+The GRM list file is a space-delimited text file listing GRMs, like the example one, **chr.grms.txt**. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
 
 The GRM list is needed for \-\-merge_grms, \-\-deduct_grms, \-\-make_core, \-\-make_fore, and \-\-minque.
 
