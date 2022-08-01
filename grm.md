@@ -33,6 +33,13 @@ done
 
 ---
 
+## GRM list
+The GRM list file is a text file listing GRMs, like the example one, **chr.grms.txt**. It has no header and one or two columns. The first column must be the file path prefix for each GRM. The second column is optional and can be a number or a short GRM identifier. 
+
+It is needed for --merge_grms, --deduct_grms, --make_core, --make_fore, and --minque. 
+
+---
+
 ## Combining GRMs into one
 If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.
 ```
@@ -47,8 +54,3 @@ If there are two columns in the GRM list file, the second one will be ignored in
 mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
 ```
 All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.
-
----
-
-## GRM list
-The GRM list file is a text file listing all GRMs , like the example one, **chr.grms.txt**.
