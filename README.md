@@ -22,7 +22,7 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 
 ---
 
-## [GRM](./grm)
+## [GRM](./grm.md)
 
 ---
 
