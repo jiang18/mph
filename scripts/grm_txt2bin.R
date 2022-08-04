@@ -12,8 +12,8 @@ txtfile = args[1]
 prefix = args[2]
 print(paste("Input filename prefix:", prefix))
 
-idfile = paste0(prefix, ".indi")
-binfile = paste0(prefix, ".bin")
+idfile = paste0(prefix, ".grm.indi")
+binfile = paste0(prefix, ".grm.bin")
 
 grm = as.matrix(fread(txtfile, head=F, check.names=F), rownames=1)
 print("Completed reading the input file.")
