@@ -45,6 +45,11 @@ The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ---
 
+## General relationship matrix
+The \-\-grm_list file can include any **general** relationship matrix, not just **genomic** relationship matrices.
+
+---
+
 ## Additional options
 ```--heritability 0.5```
 The SNP heritability value for initializing MINQUE iterations. An accurate value may improve convergence. The default is 0.5.
