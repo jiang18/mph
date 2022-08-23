@@ -5,7 +5,7 @@ filename: download.md
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220729](https://github.com/jiang18/mph/releases/tag/20220729)
+[https://github.com/jiang18/mph/releases/tag/20220822](https://github.com/jiang18/mph/releases/tag/20220822)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
@@ -14,6 +14,9 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### Aug 22, 2022
+- Enabled on-the-fly genotype reading for making GRM.
+
 ### Jul 29, 2022
 - Improved the computation of MAFs and HWE p-values by multi-threading.
 
