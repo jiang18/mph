@@ -14,11 +14,15 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### Sep 08, 2022
+- Added a memory-saving mode (\-\-save_ram).
+- Improved GRM reading by multithreading.
+
 ### Aug 22, 2022
 - Enabled on-the-fly genotype reading for making GRM.
 
 ### Jul 29, 2022
-- Improved the computation of MAFs and HWE p-values by multi-threading.
+- Improved the computation of MAFs and HWE p-values by multithreading.
 
 ### Jul 15, 2022
 - Added \-\-deduct_grms for deducting GRMs.
