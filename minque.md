@@ -22,7 +22,7 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 ```
 --minque
 ```
-This flag makes MPH run iterative MINQUE (equivalent to the Fisher Scoring algorithm for REML).
+This flag turns on iterative MINQUE (equivalent to the Fisher Scoring algorithm for REML).
 
 ```
 mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
