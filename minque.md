@@ -24,6 +24,9 @@ To force MINQUE(0) or MINQUE(1), add *\-\-num_iterations 1*. The second column o
 mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
+## Memory-saving mode
+```--save_memory```
+
 ---
 
 ## Covariates
