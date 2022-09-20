@@ -19,7 +19,9 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 ---
 
 ## REML or iterative MINQUE
-```--minque```
+```
+--minque
+```
 This flag makes MPH run iterative MINQUE (equivalent to the Fisher Scoring algorithm for REML).
 
 ```
@@ -33,7 +35,9 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 ```
 
 ## Memory-saving mode
-```--save_memory```
+```
+--save_memory
+```
 This flag enables the memory-saving mode.
 
 ---
