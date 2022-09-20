@@ -7,7 +7,7 @@ filename: minque.md
 ## Input files
 - \-\-grm_list: a space-delimited text file without header.
   - The first column lists GRM file path. 
-  - The second column is optional and can list a label or an initial VC value for each GRM.
+  * The second column is optional and can list a label or an initial VC value for each GRM.
 - \-\-phenotype: a CSV file with a header line. 
   - The first column must be the individual ID.
 - \-\-covariate_file: a CSV file with a header line.
