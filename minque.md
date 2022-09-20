@@ -22,9 +22,9 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_thr
 ## MINQUE(0) or MINQUE(1)
 To force MINQUE(0) or MINQUE(1), add *\-\-num_iterations 1*. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
 ```
-
 mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
+
 ## Memory-saving mode
 ```--save_memory```
 
