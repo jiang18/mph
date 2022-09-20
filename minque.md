@@ -19,9 +19,7 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 ---
 
 ## REML or iterative MINQUE
-```
---minque
-```
+```--minque```
 This flag makes MPH run iterative MINQUE (equivalent to the Fisher Scoring algorithm for REML).
 
 ```
