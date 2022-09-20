@@ -33,7 +33,8 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 ```
 
 ## Memory-saving mode
-```--save_memory``` This flag enables the memory-saving mode.
+```--save_memory```
+This flag enables the memory-saving mode.
 
 ---
 
