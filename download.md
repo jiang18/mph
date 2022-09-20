@@ -5,7 +5,7 @@ filename: download.md
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220908](https://github.com/jiang18/mph/releases/tag/20220908)
+[https://github.com/jiang18/mph/releases/tag/20220919](https://github.com/jiang18/mph/releases/tag/20220919)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
@@ -14,8 +14,11 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### Sep 19, 2022
+- Improved performance by reducing overhead.
+
 ### Sep 08, 2022
-- Added a memory-saving mode (\-\-save_ram).
+- Added a memory-saving mode (\-\-save_memory).
 - Improved GRM reading by multithreading.
 
 ### Aug 22, 2022
