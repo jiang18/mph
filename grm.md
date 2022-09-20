@@ -25,7 +25,7 @@ done
 ```
 
 ## Making dominance GRMs
-To construct a dominance GRM, add --dominance.
+To construct a dominance GRM, add \-\-dominance.
 ```sh
 for chr in {1..5}
 do
