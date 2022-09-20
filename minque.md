@@ -20,6 +20,7 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 
 ## REML or iterative MINQUE
 ```--minque```
+
 ```
 mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
