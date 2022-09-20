@@ -5,7 +5,7 @@ filename: minque.md
 ---
 
 ## Input files
-- \-\-grm_list: a space-delimited text file listing all precomputed GRMs.
+- \-\-grm_list: a space-delimited text file without header. The first column lists the filename prefix of precomputed GRMs.
 - \-\-phenotype: a CSV file with a header line. The first column must be the individual ID.
 - \-\-covariate_file: a CSV file with a header line. The first column must be the individual ID. The covariate file is optional. 
 
