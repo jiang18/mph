@@ -12,7 +12,7 @@ filename: minque.md
   - The first column must be the individual ID.
 - \-\-covariate_file: a CSV file with a header line.
   - The first column must be the individual ID.
-  - The covariate file is optional. 
+  * The covariate file is optional. 
 
 Missing values of phenotypes or covariates should be left blank. Do not use -9, NA, or NaN. 
 
