@@ -38,7 +38,7 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 ```
 --save_memory
 ```
-This flag enables the memory-saving mode. This mode does not necessarily reduce speed, particularly on a solid-state drive.
+This flag enables the memory-saving mode. This mode is not necessarily slower, particularly on a solid-state drive.
 
 ---
 
@@ -77,7 +77,7 @@ Max number of MINQUE iterations. The default is 20.
 Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default is 0.01.
 
 ```--num_random_vectors 100```
-Number of random probing vectors in stochastic trace estimation. The default (100) is usually sufficient.
+Number of random probing vectors for stochastic trace estimation. The default (100) is usually sufficient.
 
 ```--seed 0```
 Random seed in stochastic trace estimation. The default is 0.
