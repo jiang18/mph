@@ -22,7 +22,7 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 ```
 --minque
 ```
-This flag turns on iterative MINQUE (equivalent to the Fisher Scoring algorithm for REML).
+This flag turns on iterative MINQUE (equivalent to the Fisher scoring algorithm for REML).
 
 ```
 mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
@@ -38,7 +38,7 @@ mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --t
 ```
 --save_memory
 ```
-This flag enables the memory-saving mode.
+This flag enables the memory-saving mode. This mode does not necessarily reduce speed, particularly on a solid-state drive.
 
 ---
 
@@ -77,10 +77,7 @@ Max number of MINQUE iterations. The default is 20.
 Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The default is 0.01.
 
 ```--num_random_vectors 100```
-Number of random vectors. The default (100) is usually sufficient.
-
-```--distribution rademacher```
-Distribution of random probing vectors used in stochastic trace estimation. The default is **rademacher**, and the alternative is **normal**.
+Number of random probing vectors in stochastic trace estimation. The default (100) is usually sufficient.
 
 ```--seed 0```
 Random seed in stochastic trace estimation. The default is 0.
