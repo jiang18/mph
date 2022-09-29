@@ -20,7 +20,7 @@ print("Completed reading the input file.")
 
 id = rownames(grm)
 write.table(id, file=idfile, quote=F, row.names=F, col.names=F)
-print("Completed writing the indi file.")
+print("Completed writing the iid file.")
 
 # sample size
 np = length(id)
