@@ -83,4 +83,4 @@ Number of random vectors. The default (100) is usually sufficient.
 Distribution of random probing vectors used in stochastic trace estimation. The default is **rademacher**, and the alternative is **normal**.
 
 ```--seed 0```
-Random seed. The default is 0.
+Random seed in stochastic trace estimation. The default is 0.
