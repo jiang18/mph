@@ -78,3 +78,9 @@ Tolerance. MINQUE iterations stop when logLL has a change smaller than that. The
 
 ```--num_random_vectors 100```
 Number of random vectors. The default (100) is usually sufficient.
+
+```--distribution rademacher```
+Distribution of random probing vectors used in stochastic trace estimation. The default is **rademacher**, and the alternative is **normal**.
+
+```--seed 0```
+Random seed. The default is 0.
