@@ -10,7 +10,7 @@ if (length(args) != 2) {
 
 txtfile = args[1]
 prefix = args[2]
-print(paste("Input filename prefix:", prefix))
+print(paste("Output filename prefix:", prefix))
 
 idfile = paste0(prefix, ".grm.iid")
 binfile = paste0(prefix, ".grm.bin")
