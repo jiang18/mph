@@ -24,6 +24,8 @@ if (pedmat == "A") {
 } else {
   grm = Amatrix(ped, ploidy=2, dominance=TRUE)
 }
+print("First few elements:")
+print(grm[1:5,1:5])
 
 idfile = paste0(prefix, ".grm.iid")
 binfile = paste0(prefix, ".grm.bin")
