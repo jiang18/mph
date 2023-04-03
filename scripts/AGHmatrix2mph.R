@@ -27,19 +27,6 @@ if (pedmat == "A") {
 print("First few elements:")
 print(grm[1:5,1:5])
 
-idfile = paste0(prefix, ".grm.iid")
-binfile = paste0(prefix, ".grm.bin")
-
-id = colnames(grm)
-write.table(id, file=idfile, quote=F, row.names=F, col.names=F)
-print("Completed writing the iid file.")
-
-# sample size
-np = length(id)
-# number of markers set to 1 for pseudo GRMs
-nm = 1
-con = file(binfile, "wb")
-writeBin(as.integer(np), con, size=4)
-writeBin(as.numeric( c(nm,grm[lower.tri(grm, diag=TRUE)]) ), con, size=4)
-close(con)
-print("Completed writing the bin file.")
+iid = colnames(grm)
+source("grm_io.R")
+write_grm(prefix, iid, grm)
