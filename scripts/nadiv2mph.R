@@ -11,4 +11,4 @@ mat = makeD(goodped, parallel = TRUE, ncores = getOption("mc.cores", 10L), inver
 
 grm = as.matrix(mat$D)
 iid = colnames(grm)
-write_grm("dom.d", iid, grm)
+write_grm("ped.d", iid, grm)
