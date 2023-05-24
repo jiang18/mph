@@ -14,7 +14,7 @@
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220919](https://github.com/jiang18/mph/releases/tag/20220919)
+[https://github.com/jiang18/mph/releases/latest](https://github.com/jiang18/mph/releases/latest)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
