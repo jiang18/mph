@@ -5,7 +5,7 @@ filename: download.md
 ---
 
 ## Software download
-[https://github.com/jiang18/mph/releases/tag/20220919](https://github.com/jiang18/mph/releases/tag/20220919)
+[https://github.com/jiang18/mph/releases/latest](https://github.com/jiang18/mph/releases/latest)
 
 ## Example data
 [The QTL-MAS 2012 data](https://github.com/jiang18/mph/raw/main/QTL-MAS-2012.zip)  
@@ -14,6 +14,9 @@ Refer to [https://pubmed.ncbi.nlm.nih.gov/25519515/](https://pubmed.ncbi.nlm.nih
 ---
 
 ## Update log
+### Apr 10, 2023
+- Enabled user-specified SNP weighting for dominance GRM.
+
 ### Sep 19, 2022
 - Improved performance by reducing overhead.
 
