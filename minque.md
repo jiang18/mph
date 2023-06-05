@@ -102,4 +102,15 @@ Random seed in stochastic trace estimation. The default is 0.
 * mq.blue.csv: best linear unbiased estimates of fixed effects
 * mq.iter.csv: summary of REML iterations
 * mq.vc.csv: variance component estimates
+| Column | Description |
+|----------|----------|
+| name | Name of the variance component or GRM |
+| m | Weighted number of SNPs in the GRM |
+| var | Estimate of the variance component |
+| seV | Standard error of the variance component estimate |
+| pve | Estimate of the proportion of variance explained |
+| seP | Standard error of the estimate of the proportion of variance explained |
+| enrichment | Estimate of the per-SNP heritability enrichment |
+| seE | Standard error of the estimate of the per-SNP heritability enrichment |
+
 * mq.py.csv: residuals of the linear mixed model
