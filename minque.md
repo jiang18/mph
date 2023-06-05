@@ -8,7 +8,7 @@ filename: minque.md
 - [Input](#input)
 - [Options](#options)
     - [REML or iterative MINQUE](#reml-or-iterative-minque)
-    - [MINQUE(0) or MINQUE(1)](#minque(0)-or-minque(1))
+    - [MINQUE(0) or MINQUE(1)](#minque0-or-minque1)
     - [Memory-saving mode](#memory-saving-mode)
     - [Covariates](#covariates)
     - [Deregressed estimated breeding values](#deregressed-estimated-breeding-values)
@@ -99,7 +99,7 @@ Random seed in stochastic trace estimation. The default is 0.
 ---
 
 ## Output
-* mq.blue.csv
-* mq.iter.csv
-* mq.vc.csv
-* mq.py.csv
+* mq.blue.csv: best linear unbiased estimates of fixed effects
+* mq.iter.csv: summary of REML iterations
+* mq.vc.csv: variance component estimates
+* mq.py.csv: residuals of the linear mixed model
