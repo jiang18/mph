@@ -4,7 +4,19 @@ layout: template
 filename: minque.md
 ---
 
-## Input files
+## Table of contents
+- [Input](#input)
+- [Options](#options)
+    - [REML or iterative MINQUE](#reml-or-iterative-minque)
+    - [MINQUE(0) or MINQUE(1)](#minque(0)-or-minque(1))
+    - [Memory-saving mode](#memory-saving-mode)
+    - [Covariates](#covariates)
+    - [Deregressed estimated breeding values](#deregressed-estimated-breeding-values)
+    - [General relationship matrix](#general-relationship-matrix)
+    - [Additional options](#additional-options)
+- [Output](#output)
+
+## Input
 * \-\-grm_list: a space-delimited text file without header.
   * The first column lists GRM file path. 
   * The second column is optional and can list an initial VC value for each GRM.
@@ -18,7 +30,9 @@ Missing values of phenotypes or covariates should be left blank. Do not use -9, 
 
 ---
 
-## REML or iterative MINQUE
+## Options
+
+### REML or iterative MINQUE
 ```
 --minque
 ```
@@ -28,13 +42,13 @@ This flag turns on iterative MINQUE (equivalent to the Fisher scoring algorithm 
 mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
-## MINQUE(0) or MINQUE(1)
+### MINQUE(0) or MINQUE(1)
 To force MINQUE(0) or MINQUE(1), add *\-\-num_iterations 1*. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
 ```
 mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
 ```
 
-## Memory-saving mode
+### Memory-saving mode
 ```
 --save_memory
 ```
@@ -42,7 +56,7 @@ This flag enables the memory-saving mode. This mode is not necessarily slower, p
 
 ---
 
-## Covariates
+### Covariates
 To include covariates, add \-\-*covariate_file* and \-\-*covariate_names*.
 ```
 --covariate_file covar.csv --covariate_names all
@@ -52,7 +66,7 @@ If *all* is specified, MPH will use as covariates all columns from the 2nd to th
 --covariate_file covar.csv --covariate_names g1,g2,g3
 ```
 
-## Deregressed estimated breeding values
+### Deregressed estimated breeding values
 For DYD-like data, add \-\-*error_weight_name* to specify individual reliabilies.
 ```
 --error_weight_name milk_wt
@@ -61,12 +75,12 @@ The error weights can be set to 1/*r*<sup>2</sup>-1.
 
 ---
 
-## General relationship matrix
+### General relationship matrix
 The \-\-grm_list file can include any **general** relationship matrix, not just **genomic** relationship matrices.
 
 ---
 
-## Additional options
+### Additional options
 ```--heritability 0.5```
 The SNP heritability value for initializing MINQUE iterations. An accurate value may improve convergence. The default is 0.5.
 
@@ -81,3 +95,11 @@ Number of random probing vectors for stochastic trace estimation. The default (1
 
 ```--seed 0```
 Random seed in stochastic trace estimation. The default is 0.
+
+---
+
+## Output
+* mq.blue.csv
+* mq.iter.csv
+* mq.vc.csv
+* mq.py.csv
