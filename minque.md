@@ -102,6 +102,7 @@ Random seed in stochastic trace estimation. The default is 0.
 * mq.blue.csv: best linear unbiased estimates of fixed effects
 * mq.iter.csv: summary of REML iterations
 * mq.vc.csv: variance component estimates
+
 | Column | Description |
 |----------|----------|
 | name | Name of the variance component or GRM |
