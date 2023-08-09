@@ -39,6 +39,7 @@ while(<IN>)
 	chomp;
 	my @c = split /\s+/;
 	next unless (@c == 4);
+ 	$c[0] =~ s/chr//i;
 	push @{$gf{$c[0]}},[@c[1..3]];
 }
 close IN;
