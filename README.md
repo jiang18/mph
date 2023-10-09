@@ -12,7 +12,7 @@ The method has the following properties:
 TBA
 
 ## License 
-**MPH** is distributed under the [GPL-3.0 license](https://github.com/jiang18/mph/blob/master/LICENSE).
+**MPH** is distributed under the [GPL-3.0 license](https://github.com/jiang18/mph/blob/main/LICENSE).
 
 ## Author and contact
 [Jicai Jiang](https://cals.ncsu.edu/animal-science/people/jicai-jiang)
