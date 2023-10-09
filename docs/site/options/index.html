@@ -181,11 +181,11 @@
 
 <h2 id="grm">GRM</h2>
 <h3 id="input-file-formats">Input file formats</h3>
-<p>MPH uses PLINK bim/fam/bed files for genotypes. Other input files are mostly comma-separated values (CSV) or space-delimited text.</p>
+<p>MPH uses PLINK bim/fam/bed files for genotypes. Other input files are comma-separated values (CSV) or space-delimited text.</p>
 <h3 id="snp-info-file">SNP info file</h3>
 <p>This CSV file is necessary for making genomic relationship matrices (GRMs). </p>
 <p>The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../datasets/">example data</a>, there are five columns for five chromosomes.</p>
-<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put 1 in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
+<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
 <h3 id="making-additive-grms">Making additive GRMs</h3>
 <pre><code class="language-sh">for chr in {1..5}
 do
@@ -251,7 +251,7 @@ done
 <p>To include covariates, add <code>--covariate_file</code> and <code>--covariate_names</code>.</p>
 <pre><code class="language-sh">--covariate_file covar.csv --covariate_names all
 </code></pre>
-<p>If <em>all</em> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
+<p>If <strong>all</strong> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
 <pre><code class="language-sh">--covariate_file covar.csv --covariate_names g1,g2,g3
 </code></pre>
 <h3 id="pseudo-phenotypes">Pseudo-phenotypes</h3>
@@ -354,7 +354,7 @@ Random seed in stochastic trace estimation. The default is 0.</p>
 <p>Empirical best linear unbiased predictions (EBLUPs)</p>
 <pre><code class="language-sh">mph --pred --mq_file milk.chr --output milk.chr
 </code></pre>
-<p>MPH computes EBLUPs using the output of --minque and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p></div>
+<p>MPH computes EBLUPs using the output of <code>--minque</code> and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p></div>
         
         
     </div>
