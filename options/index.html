@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MINQUE for Partitioning Heritability">
+    <meta name="author" content="Jicai Jiang">
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Documentation - MPH</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="..">MPH</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../install/">Install</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Documentation</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../datasets/">Datasets</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../performance/">Performance</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../auxiliary/">Auxiliary</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../install/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../datasets/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#grm">GRM</a></li>
+            <li class="second-level"><a href="#input-file-formats">Input file formats</a></li>
+                
+            <li class="second-level"><a href="#snp-info-file">SNP info file</a></li>
+                
+            <li class="second-level"><a href="#making-additive-grms">Making additive GRMs</a></li>
+                
+            <li class="second-level"><a href="#making-dominance-grms">Making dominance GRMs</a></li>
+                
+            <li class="second-level"><a href="#grm-list">GRM list</a></li>
+                
+            <li class="second-level"><a href="#merging-grms">Merging GRMs</a></li>
+                
+            <li class="second-level"><a href="#deducting-grms">Deducting GRMs</a></li>
+                
+            <li class="second-level"><a href="#zeroing-out-grm-elements">Zeroing out GRM elements</a></li>
+                
+        <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
+            <li class="second-level"><a href="#input">Input</a></li>
+                
+            <li class="second-level"><a href="#reml-or-iterative-minque">REML or iterative MINQUE</a></li>
+                
+            <li class="second-level"><a href="#minque0-or-minque1">MINQUE(0) or MINQUE(1)</a></li>
+                
+            <li class="second-level"><a href="#memory-saving-mode">Memory-saving mode</a></li>
+                
+            <li class="second-level"><a href="#covariates">Covariates</a></li>
+                
+            <li class="second-level"><a href="#pseudo-phenotypes">Pseudo-phenotypes</a></li>
+                
+            <li class="second-level"><a href="#general-relationship-matrix">General relationship matrix</a></li>
+                
+            <li class="second-level"><a href="#additional-options">Additional options</a></li>
+                
+            <li class="second-level"><a href="#output">Output</a></li>
+                
+        <li class="first-level "><a href="#corefore">CORE/FORE</a></li>
+            <li class="second-level"><a href="#covariance-between-random-effects-core">COvariance between Random Effects (CORE)</a></li>
+                
+            <li class="second-level"><a href="#first-order-interaction-between-random-effects-fore">First-Order interaction between Random Effects (FORE)</a></li>
+                
+        <li class="first-level "><a href="#simulation">Simulation</a></li>
+        <li class="first-level "><a href="#prediction">Prediction</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h2 id="grm">GRM</h2>
+<h3 id="input-file-formats">Input file formats</h3>
+<p>MPH uses PLINK bim/fam/bed files for genotypes. Other input files are comma-separated values (CSV) or space-delimited text.</p>
+<h3 id="snp-info-file">SNP info file</h3>
+<p>This CSV file is necessary for making genomic relationship matrices (GRMs). </p>
+<p>The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../datasets/">example data</a>, there are five columns for five chromosomes.</p>
+<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
+<h3 id="making-additive-grms">Making additive GRMs</h3>
+<pre><code class="language-sh">for chr in {1..5}
+do
+  mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
+done
+</code></pre>
+<h3 id="making-dominance-grms">Making dominance GRMs</h3>
+<p>To construct a dominance GRM, add <code>--dominance</code>.</p>
+<pre><code class="language-sh">for chr in {1..5}
+do
+  mph --make_grm --dominance --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr.dom
+done
+</code></pre>
+<h3 id="grm-list">GRM list</h3>
+<p>The GRM list file is a space-delimited text file listing GRMs, like the example one, <strong>chr.grms.txt</strong>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
+<p>The GRM list is needed for <code>--merge_grms</code>, <code>--deduct_grms</code>, <code>--make_core</code>, <code>--make_fore</code>, and <code>--minque</code>.</p>
+<h3 id="merging-grms">Merging GRMs</h3>
+<p>If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.</p>
+<pre><code class="language-sh">mph --merge_grms --grm_list chr.grms.txt --output all_snps
+</code></pre>
+<p>If there are two columns in the GRM list file, the second one will be ignored in this procedure. </p>
+<h3 id="deducting-grms">Deducting GRMs</h3>
+<pre><code class="language-sh">mph --deduct_grms --grm_list list.grms.txt --output deducted
+</code></pre>
+<h3 id="zeroing-out-grm-elements">Zeroing out GRM elements</h3>
+<pre><code class="language-sh">mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
+</code></pre>
+<p>All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.</p>
+<h2 id="remlminque">REML/MINQUE</h2>
+<h3 id="input">Input</h3>
+<ul>
+<li><code>--grm_list</code>: a space-delimited text file without header.<ul>
+<li>The first column lists GRM file path. </li>
+<li>The second column is optional and can list an initial VC value for each GRM.</li>
+</ul>
+</li>
+<li><code>--phenotype</code>: a CSV file with a header line.<ul>
+<li>The first column must be the individual ID.</li>
+</ul>
+</li>
+<li><code>--covariate_file</code>: a CSV file with a header line.<ul>
+<li>The first column must be the individual ID.</li>
+<li>The covariate file is optional.</li>
+</ul>
+</li>
+</ul>
+<p>Missing values of phenotypes or covariates need to be left empty. Do not use space, -9, NA, or NaN.</p>
+<h3 id="reml-or-iterative-minque">REML or iterative MINQUE</h3>
+<pre><code>--minque
+</code></pre>
+<p>This flag turns on iterative MINQUE (equivalent to the Fisher scoring algorithm for REML).</p>
+<pre><code class="language-sh">mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
+</code></pre>
+<h3 id="minque0-or-minque1">MINQUE(0) or MINQUE(1)</h3>
+<p>To force MINQUE(0) or MINQUE(1), add <code>--num_iterations 1</code>. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).</p>
+<pre><code class="language-sh">mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
+</code></pre>
+<h3 id="memory-saving-mode">Memory-saving mode</h3>
+<pre><code>--save_memory
+</code></pre>
+<p>This flag enables the memory-saving mode. This mode is not necessarily slower, particularly on a solid-state drive.</p>
+<h3 id="covariates">Covariates</h3>
+<p>To include covariates, add <code>--covariate_file</code> and <code>--covariate_names</code>.</p>
+<pre><code class="language-sh">--covariate_file covar.csv --covariate_names all
+</code></pre>
+<p>If <strong>all</strong> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
+<pre><code class="language-sh">--covariate_file covar.csv --covariate_names g1,g2,g3
+</code></pre>
+<h3 id="pseudo-phenotypes">Pseudo-phenotypes</h3>
+<p>If needed, add <code>--error_weight_name</code> to specify individual reliabilies for pseudo-phenotypes (e.g., de-regressed estimated breeding values).</p>
+<pre><code>--error_weight_name milk_wt
+</code></pre>
+<p>The error weights can be set to 1/<em>r</em><sup>2</sup>-1.</p>
+<h3 id="general-relationship-matrix">General relationship matrix</h3>
+<p>The <code>--grm_list</code> file can include any <strong>general</strong> relationship matrix, not just <strong>genomic</strong> relationship matrices.</p>
+<h3 id="additional-options">Additional options</h3>
+<p><code>--heritability 0.5</code>
+The heritability value for initializing REML/MINQUE iterations. An accurate value may improve convergence. The default is 0.5.</p>
+<p><code>--num_iterations 20</code>
+Max number of REML iterations. The default is 20.</p>
+<p><code>--tol 0.01</code>
+Tolerance. REML iterations stop when logLL has a change smaller than that. The default is 0.01.</p>
+<p><code>--num_random_vectors 100</code>
+Number of random probing vectors for stochastic trace estimation. The default (100) is usually sufficient.</p>
+<p><code>--seed 0</code>
+Random seed in stochastic trace estimation. The default is 0.</p>
+<h3 id="output">Output</h3>
+<table>
+<thead>
+<tr>
+<th>Filename suffix</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mq.blue.csv</td>
+<td>Best linear unbiased estimates of fixed effects</td>
+</tr>
+<tr>
+<td>mq.iter.csv</td>
+<td>Summary of REML iterations</td>
+</tr>
+<tr>
+<td>mq.vc.csv</td>
+<td>Variance component estimates</td>
+</tr>
+<tr>
+<td>mq.py.csv</td>
+<td>Residuals of the linear mixed model</td>
+</tr>
+</tbody>
+</table>
+<p><strong>mq.vc.csv</strong> has the following columns.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Name of the variance component or GRM</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Weighted number of SNPs in the GRM</td>
+</tr>
+<tr>
+<td>var</td>
+<td>Estimate of the variance component</td>
+</tr>
+<tr>
+<td>seV</td>
+<td>Standard error of the variance component estimate</td>
+</tr>
+<tr>
+<td>pve</td>
+<td>Estimate of the proportion of variance explained</td>
+</tr>
+<tr>
+<td>seP</td>
+<td>Standard error of the estimate of the proportion of variance explained</td>
+</tr>
+<tr>
+<td>enrichment</td>
+<td>Estimate of the per-SNP heritability enrichment</td>
+</tr>
+<tr>
+<td>seE</td>
+<td>Standard error of the estimate of the per-SNP heritability enrichment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="corefore">CORE/FORE</h2>
+<h3 id="covariance-between-random-effects-core">COvariance between Random Effects (CORE)</h3>
+<h3 id="first-order-interaction-between-random-effects-fore">First-Order interaction between Random Effects (FORE)</h3>
+<h2 id="simulation">Simulation</h2>
+<p>Simulating phenotypes based on a list of GRMs</p>
+<pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
+</code></pre>
+<p>In the <em>i</em>th row of the GRM list file are GRM(<em>i</em>) and VC(<em>i</em>). MPH simulates total genetic values (<strong>g</strong>) by sampling <strong>g</strong> from N(<strong>0</strong>,<strong>V</strong>) in which <strong>V</strong> is equal to the sum of all GRM(<em>i</em>)*VC(<em>i</em>). MPH further simulates phenotypes by adding an error term (<strong>e</strong>) to <strong>g</strong> based on heritability.</p>
+<h2 id="prediction">Prediction</h2>
+<p>Empirical best linear unbiased predictions (EBLUPs)</p>
+<pre><code class="language-sh">mph --pred --mq_file milk.chr --output milk.chr
+</code></pre>
+<p>MPH computes EBLUPs using the output of <code>--minque</code> and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>MPH is licensed under the <a href='https://github.com/jiang18/mph/blob/master/LICENSE'>GPL-3.0 license</a></small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = ".."</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
