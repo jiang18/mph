@@ -184,7 +184,7 @@
 <p>MPH uses PLINK bim/fam/bed files for genotypes. Other input files are comma-separated values (CSV) or space-delimited text.</p>
 <h3 id="snp-info-file">SNP info file</h3>
 <p>This CSV file is necessary for making genomic relationship matrices (GRMs). </p>
-<p>The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../examples/">example data</a>, there are five columns for five chromosomes.</p>
+<p>The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../examples/#qtl-mas-2012">example data</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv">chr.snp_info.csv</a> has five columns for five chromosomes.</p>
 <p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
 <h3 id="making-additive-grms">Making additive GRMs</h3>
 <pre><code class="language-sh">for chr in {1..5}
@@ -200,7 +200,7 @@ do
 done
 </code></pre>
 <h3 id="grm-list">GRM list</h3>
-<p>The GRM list file is a space-delimited text file listing GRMs, like the example one, <a href="../examples/QTL-MAS-2012/chr.grms.txt">chr.grms.txt</a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
+<p>The GRM list file is a space-delimited text file listing GRMs, like the example one, <a href="/../../examples/QTL-MAS-2012/chr.grms.txt">chr.grms.txt</a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
 <p>The GRM list is needed for <code>--merge_grms</code>, <code>--deduct_grms</code>, <code>--make_core</code>, <code>--make_fore</code>, and <code>--minque</code>.</p>
 <h3 id="merging-grms">Merging GRMs</h3>
 <p>If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.</p>
