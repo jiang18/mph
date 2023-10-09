@@ -1,5 +1,5 @@
-## MPH (MINQUE for Partitioning Heritability)
-MPH is a C++ program for fast REML estimation of variance components.
+## MPH
+**MPH** (**M**INQUE for **P**artitioning **H**eritability) is a C++ program for fast REML estimation of variance components.
 
 The method has the following properties:
 
@@ -18,6 +18,3 @@ TBA
 [Jicai Jiang](https://cals.ncsu.edu/animal-science/people/jicai-jiang)
 
 If you want to submit a issue concerning the software please do so using the **MPH** [Github repository](https://github.com/jiang18/mph/issues).
-
-## Documentation
-https://jiang18.github.io/mph/
