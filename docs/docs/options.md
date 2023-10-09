@@ -6,7 +6,7 @@ MPH uses PLINK bim/fam/bed files for genotypes. Other input files are comma-sepa
 ### SNP info file
 This CSV file is necessary for making genomic relationship matrices (GRMs). 
 
-The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the [example data](examples.md#qtl-mas-2012), [chr.snp_info.csv](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1) has five columns for five chromosomes.
+The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the [example data](examples.md#qtl-mas-2012), [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1) has five columns for five chromosomes.
 
 If a SNP does not belong to a GRM, leave the corresponding cell **empty**. If a SNP belongs to ***n*** GRMs, put **1** in each of the ***n*** cells. To partition SNP heritability by **functional annotations**, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to **6** functional annotation categories, put **1** in each of those **6** cells.
 
@@ -28,7 +28,7 @@ done
 ```
 
 ### GRM list
-The GRM list file is a space-delimited text file listing GRMs, like the example one, [chr.grms.txt](../../examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
+The GRM list file is a space-delimited text file listing GRMs, like the example one, [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
 
 The GRM list is needed for `--merge_grms`, `--deduct_grms`, `--make_core`, `--make_fore`, and `--minque`.
 
