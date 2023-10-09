@@ -12,9 +12,9 @@ nav:
   - Home: index.md
   - Install: install.md
   - Documentation: options.md
-  - Datasets: datasets.md
+  - Examples: examples.md
   - Performance: performance.md
-  - Auxiliary: auxiliary.md
+  - Utilities: util.md
 
 markdown_extensions:
   - attr_list
