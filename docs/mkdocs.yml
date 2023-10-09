@@ -1,7 +1,7 @@
 site_name: MPH
 site_author: Jicai Jiang
 site_description: MINQUE for Partitioning Heritability
-copyright: "MPH is licensed under the <a href='https://github.com/jiang18/mph/blob/master/LICENSE'>GPL-3.0 license</a>"
+copyright: "MPH is licensed under the <a href='https://github.com/jiang18/mph/blob/main/LICENSE'>GPL-3.0 license</a>"
 
 theme:
   name: null
