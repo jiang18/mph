@@ -155,9 +155,9 @@
                 
             <li class="second-level"><a href="#deducting-grms">Deducting GRMs</a></li>
                 
-            <li class="second-level"><a href="#interaction-between-random-effects">Interaction between random effects</a></li>
+            <li class="second-level"><a href="#making-interaction-grms">Making interaction GRMs</a></li>
                 
-            <li class="second-level"><a href="#covariance-between-random-effects">Covariance between random effects</a></li>
+            <li class="second-level"><a href="#making-covariance-grms">Making covariance GRMs</a></li>
                 
             <li class="second-level"><a href="#zeroing-out-grm-elements">Zeroing out GRM elements</a></li>
                 
@@ -199,8 +199,8 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 </code></pre>
-<p><code>--min_maf 0</code> filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).
-<code>--min_hwe_pval 1e-8</code> filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).
+<p><code>--min_maf 0</code> filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).<br />
+<code>--min_hwe_pval 1e-8</code> filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).<br />
 <code>--snp_weight</code> specifies a column header name in the SNP info file (<code>--snp_info</code>). If not specified, <code>mph --make_grm</code> will use all variants listed in the SNP info file.</p>
 <h3 id="making-dominance-grms">Making dominance GRMs</h3>
 <p>To construct a dominance GRM, add <code>--dominance</code>.</p>
@@ -220,8 +220,8 @@ done
 <h3 id="deducting-grms">Deducting GRMs</h3>
 <pre><code class="language-sh">mph --deduct_grms --grm_list list.grms.txt --output deducted
 </code></pre>
-<h3 id="interaction-between-random-effects">Interaction between random effects</h3>
-<h3 id="covariance-between-random-effects">Covariance between random effects</h3>
+<h3 id="making-interaction-grms">Making interaction GRMs</h3>
+<h3 id="making-covariance-grms">Making covariance GRMs</h3>
 <h3 id="zeroing-out-grm-elements">Zeroing out GRM elements</h3>
 <pre><code class="language-sh">mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
 </code></pre>
