@@ -7,6 +7,8 @@ theme:
   name: null
   custom_dir: 'cinder'
   colorscheme: github
+  analytics:
+    gtag: G-K4MRX3DSPN
 
 nav:
   - Home: index.md
@@ -22,8 +24,3 @@ markdown_extensions:
 
 plugins:
   - search
-
-extra:
-  analytics:
-    provider: google
-    property: G-K4MRX3DSPN
