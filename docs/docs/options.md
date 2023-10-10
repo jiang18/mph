@@ -17,8 +17,8 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
-```--min_maf 0``` filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).
-```--min_hwe_pval 1e-8``` filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).
+```--min_maf 0``` filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).  
+```--min_hwe_pval 1e-8``` filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).  
 ```--snp_weight``` specifies a column header name in the SNP info file (`--snp_info`). If not specified, `mph --make_grm` will use all variants listed in the SNP info file.
 
 ### Making dominance GRMs
@@ -47,9 +47,9 @@ If there are two columns in the GRM list file, the second one will be ignored in
 mph --deduct_grms --grm_list list.grms.txt --output deducted
 ```
 
-### Interaction between random effects
+### Making interaction GRMs
 
-### Covariance between random effects
+### Making covariance GRMs
 
 ### Zeroing out GRM elements
 ```sh
