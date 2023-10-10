@@ -19,7 +19,7 @@ done
 ```
 ```--min_maf 0``` filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).  
 ```--min_hwe_pval 1e-8``` filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).  
-```--snp_weight``` specifies a column header name in the SNP info file (`--snp_info`). If not specified, `mph --make_grm` will use all variants listed in the SNP info file.
+```--snp_weight``` specifies a column header name in the SNP info file (`--snp_info`). If not specified, `mph` will use all variants listed in the SNP info file.
 
 ### Making dominance GRMs
 To construct a dominance GRM, add `--dominance`.
@@ -31,9 +31,9 @@ done
 ```
 
 ### GRM list
-The GRM list file is a space-delimited text file listing GRMs, like the example one, [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
+The GRM list file is a space-delimited text file listing GRMs, such as [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. 
 
-The GRM list is needed for `--merge_grms`, `--deduct_grms`, `--make_core`, `--make_fore`, and `--minque`.
+The GRM list is needed for `--merge_grms`, `--deduct_grms`, `--make_fore`, and `--minque`.
 
 ### Merging GRMs
 If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.
@@ -48,8 +48,10 @@ mph --deduct_grms --grm_list list.grms.txt --output deducted
 ```
 
 ### Making interaction GRMs
-
-### Making covariance GRMs
+To make GRMs for first-order interactions between random effects, use `--make_fore`.
+```sh
+mph --make_fore --grm_list fore.grms.txt --output all_snps
+```
 
 ### Zeroing out GRM elements
 ```sh
