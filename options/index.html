@@ -157,8 +157,6 @@
                 
             <li class="second-level"><a href="#making-interaction-grms">Making interaction GRMs</a></li>
                 
-            <li class="second-level"><a href="#making-covariance-grms">Making covariance GRMs</a></li>
-                
             <li class="second-level"><a href="#zeroing-out-grm-elements">Zeroing out GRM elements</a></li>
                 
         <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
@@ -201,7 +199,7 @@ done
 </code></pre>
 <p><code>--min_maf 0</code> filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).<br />
 <code>--min_hwe_pval 1e-8</code> filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).<br />
-<code>--snp_weight</code> specifies a column header name in the SNP info file (<code>--snp_info</code>). If not specified, <code>mph --make_grm</code> will use all variants listed in the SNP info file.</p>
+<code>--snp_weight</code> specifies a column header name in the SNP info file (<code>--snp_info</code>). If not specified, <code>mph</code> will use all variants listed in the SNP info file.</p>
 <h3 id="making-dominance-grms">Making dominance GRMs</h3>
 <p>To construct a dominance GRM, add <code>--dominance</code>.</p>
 <pre><code class="language-sh">for chr in {1..5}
@@ -210,8 +208,8 @@ do
 done
 </code></pre>
 <h3 id="grm-list">GRM list</h3>
-<p>The GRM list file is a space-delimited text file listing GRMs, like the example one, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
-<p>The GRM list is needed for <code>--merge_grms</code>, <code>--deduct_grms</code>, <code>--make_core</code>, <code>--make_fore</code>, and <code>--minque</code>.</p>
+<p>The GRM list file is a space-delimited text file listing GRMs, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
+<p>The GRM list is needed for <code>--merge_grms</code>, <code>--deduct_grms</code>, <code>--make_fore</code>, and <code>--minque</code>.</p>
 <h3 id="merging-grms">Merging GRMs</h3>
 <p>If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.</p>
 <pre><code class="language-sh">mph --merge_grms --grm_list chr.grms.txt --output all_snps
@@ -221,7 +219,9 @@ done
 <pre><code class="language-sh">mph --deduct_grms --grm_list list.grms.txt --output deducted
 </code></pre>
 <h3 id="making-interaction-grms">Making interaction GRMs</h3>
-<h3 id="making-covariance-grms">Making covariance GRMs</h3>
+<p>To make GRMs for first-order interactions between random effects, use <code>--make_fore</code>.</p>
+<pre><code class="language-sh">mph --make_fore --grm_list fore.grms.txt --output all_snps
+</code></pre>
 <h3 id="zeroing-out-grm-elements">Zeroing out GRM elements</h3>
 <pre><code class="language-sh">mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
 </code></pre>
