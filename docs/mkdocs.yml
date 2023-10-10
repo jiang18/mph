@@ -22,7 +22,3 @@ markdown_extensions:
 
 plugins:
   - search
-
-google_analytics:
-  - G-K4MRX3DSPN
-  - auto
