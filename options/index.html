@@ -155,6 +155,10 @@
                 
             <li class="second-level"><a href="#deducting-grms">Deducting GRMs</a></li>
                 
+            <li class="second-level"><a href="#interaction-between-random-effects">Interaction between random effects</a></li>
+                
+            <li class="second-level"><a href="#covariance-between-random-effects">Covariance between random effects</a></li>
+                
             <li class="second-level"><a href="#zeroing-out-grm-elements">Zeroing out GRM elements</a></li>
                 
         <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
@@ -176,11 +180,6 @@
                 
             <li class="second-level"><a href="#output">Output</a></li>
                 
-        <li class="first-level "><a href="#corefore">CORE/FORE</a></li>
-            <li class="second-level"><a href="#covariance-between-random-effects-core">COvariance between Random Effects (CORE)</a></li>
-                
-            <li class="second-level"><a href="#first-order-interaction-between-random-effects-fore">First-Order interaction between Random Effects (FORE)</a></li>
-                
         <li class="first-level "><a href="#simulation">Simulation</a></li>
         <li class="first-level "><a href="#prediction">Prediction</a></li>
     </ul>
@@ -200,6 +199,9 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 </code></pre>
+<p><code>--min_maf 0</code> filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).
+<code>--min_hwe_pval 1e-8</code> filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).
+<code>--snp_weight</code> specifies a column header name in the SNP info file (<code>--snp_info</code>). If not specified, <code>mph --make_grm</code> will use all variants listed in the SNP info file.</p>
 <h3 id="making-dominance-grms">Making dominance GRMs</h3>
 <p>To construct a dominance GRM, add <code>--dominance</code>.</p>
 <pre><code class="language-sh">for chr in {1..5}
@@ -218,6 +220,8 @@ done
 <h3 id="deducting-grms">Deducting GRMs</h3>
 <pre><code class="language-sh">mph --deduct_grms --grm_list list.grms.txt --output deducted
 </code></pre>
+<h3 id="interaction-between-random-effects">Interaction between random effects</h3>
+<h3 id="covariance-between-random-effects">Covariance between random effects</h3>
 <h3 id="zeroing-out-grm-elements">Zeroing out GRM elements</h3>
 <pre><code class="language-sh">mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
 </code></pre>
@@ -226,16 +230,18 @@ done
 <h3 id="input">Input</h3>
 <ul>
 <li><code>--grm_list</code>: a space-delimited text file without header.<ul>
-<li>The first column lists GRM file path. </li>
+<li>The first column needs to list GRM file path. </li>
 <li>The second column is optional and can list an initial VC value for each GRM.</li>
 </ul>
 </li>
 <li><code>--phenotype</code>: a CSV file with a header line.<ul>
 <li>The first column must be the individual ID.</li>
+<li>The header line needs to contain trait names.</li>
 </ul>
 </li>
 <li><code>--covariate_file</code>: a CSV file with a header line.<ul>
 <li>The first column must be the individual ID.</li>
+<li>The header line needs to contain covariate names.</li>
 <li>The covariate file is optional.</li>
 </ul>
 </li>
@@ -263,10 +269,10 @@ done
 <pre><code class="language-sh">--covariate_file covar.csv --covariate_names g1,g2,g3
 </code></pre>
 <h3 id="pseudo-phenotypes">Pseudo-phenotypes</h3>
-<p>If needed, add <code>--error_weight_name</code> to specify individual reliabilies for pseudo-phenotypes (e.g., de-regressed estimated breeding values).</p>
+<p>If needed, add <code>--error_weight_name</code> to accommodate individual reliabilies (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values).</p>
 <pre><code>--error_weight_name milk_wt
 </code></pre>
-<p>The error weights can be set to 1/<em>r</em><sup>2</sup>-1.</p>
+<p>The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file (<code>--phenotype</code>).</p>
 <h3 id="general-relationship-matrix">General relationship matrix</h3>
 <p>The <code>--grm_list</code> file can include any <strong>general</strong> relationship matrix, not just <strong>genomic</strong> relationship matrices.</p>
 <h3 id="additional-options">Additional options</h3>
@@ -350,9 +356,6 @@ Random seed in stochastic trace estimation. The default is 0.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="corefore">CORE/FORE</h2>
-<h3 id="covariance-between-random-effects-core">COvariance between Random Effects (CORE)</h3>
-<h3 id="first-order-interaction-between-random-effects-fore">First-Order interaction between Random Effects (FORE)</h3>
 <h2 id="simulation">Simulation</h2>
 <p>Simulating phenotypes based on a list of GRMs</p>
 <pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
