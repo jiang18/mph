@@ -17,6 +17,9 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
 done
 ```
+```--min_maf 0``` filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).
+```--min_hwe_pval 1e-8``` filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).
+```--snp_weight``` specifies a column header name in the SNP info file (`--snp_info`). If not specified, `mph --make_grm` will use all variants listed in the SNP info file.
 
 ### Making dominance GRMs
 To construct a dominance GRM, add `--dominance`.
@@ -44,6 +47,10 @@ If there are two columns in the GRM list file, the second one will be ignored in
 mph --deduct_grms --grm_list list.grms.txt --output deducted
 ```
 
+### Interaction between random effects
+
+### Covariance between random effects
+
 ### Zeroing out GRM elements
 ```sh
 mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
@@ -54,12 +61,14 @@ All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting ma
 
 ### Input
 - `--grm_list`: a space-delimited text file without header.
-    - The first column lists GRM file path. 
+    - The first column needs to list GRM file path. 
     - The second column is optional and can list an initial VC value for each GRM.
 - `--phenotype`: a CSV file with a header line.
     - The first column must be the individual ID.
+    - The header line needs to contain trait names.
 - `--covariate_file`: a CSV file with a header line.
     - The first column must be the individual ID.
+    - The header line needs to contain covariate names.
     - The covariate file is optional.
 
 Missing values of phenotypes or covariates need to be left empty. Do not use space, -9, NA, or NaN.
@@ -97,11 +106,11 @@ If **all** is specified, MPH will use as covariates all columns from the 2nd to 
 ```
 
 ### Pseudo-phenotypes
-If needed, add `--error_weight_name` to specify individual reliabilies for pseudo-phenotypes (e.g., de-regressed estimated breeding values).
+If needed, add `--error_weight_name` to accommodate individual reliabilies (*r*<sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values).
 ```
 --error_weight_name milk_wt
 ```
-The error weights can be set to 1/*r*<sup>2</sup>-1.
+The error weights can be set to 1/*r*<sup>2</sup>-1 and kept as a column of the phenotype file (`--phenotype`).
 
 ### General relationship matrix
 The `--grm_list` file can include any **general** relationship matrix, not just **genomic** relationship matrices.
@@ -142,12 +151,6 @@ Random seed in stochastic trace estimation. The default is 0.
 | seP | Standard error of the estimate of the proportion of variance explained |
 | enrichment | Estimate of the per-SNP heritability enrichment |
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
-
-## CORE/FORE
-
-### COvariance between Random Effects (CORE)
-
-### First-Order interaction between Random Effects (FORE)
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
