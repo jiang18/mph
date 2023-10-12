@@ -140,180 +140,391 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#grm">GRM</a></li>
-            <li class="second-level"><a href="#input-file-formats">Input file formats</a></li>
-                
-            <li class="second-level"><a href="#snp-info-file">SNP info file</a></li>
-                
-            <li class="second-level"><a href="#making-additive-grms">Making additive GRMs</a></li>
-                
-            <li class="second-level"><a href="#making-dominance-grms">Making dominance GRMs</a></li>
-                
-            <li class="second-level"><a href="#grm-list">GRM list</a></li>
-                
-            <li class="second-level"><a href="#merging-grms">Merging GRMs</a></li>
-                
-            <li class="second-level"><a href="#deducting-grms">Deducting GRMs</a></li>
-                
-            <li class="second-level"><a href="#making-interaction-grms">Making interaction GRMs</a></li>
-                
-            <li class="second-level"><a href="#zeroing-out-grm-elements">Zeroing out GRM elements</a></li>
-                
-        <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
+        <li class="first-level active"><a href="#making-a-grm-from-genotypes">Making a GRM from genotypes</a></li>
             <li class="second-level"><a href="#input">Input</a></li>
                 
-            <li class="second-level"><a href="#reml-or-iterative-minque">REML or iterative MINQUE</a></li>
-                
-            <li class="second-level"><a href="#minque0-or-minque1">MINQUE(0) or MINQUE(1)</a></li>
-                
-            <li class="second-level"><a href="#memory-saving-mode">Memory-saving mode</a></li>
-                
-            <li class="second-level"><a href="#covariates">Covariates</a></li>
-                
-            <li class="second-level"><a href="#pseudo-phenotypes">Pseudo-phenotypes</a></li>
-                
-            <li class="second-level"><a href="#general-relationship-matrix">General relationship matrix</a></li>
-                
-            <li class="second-level"><a href="#additional-options">Additional options</a></li>
+                <li class="third-level"><a href="#genotype-files">Genotype files</a></li>
+                <li class="third-level"><a href="#snp-info-file">SNP info file</a></li>
+            <li class="second-level"><a href="#options">Options</a></li>
                 
             <li class="second-level"><a href="#output">Output</a></li>
                 
+        <li class="first-level "><a href="#making-a-grm-from-grms">Making a GRM from GRMs</a></li>
+            <li class="second-level"><a href="#input_1">Input</a></li>
+                
+            <li class="second-level"><a href="#options_1">Options</a></li>
+                
+            <li class="second-level"><a href="#output_1">Output</a></li>
+                
+        <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
+            <li class="second-level"><a href="#input_2">Input</a></li>
+                
+                <li class="third-level"><a href="#grm-list-file">GRM list file</a></li>
+                <li class="third-level"><a href="#phenotype-file">Phenotype file</a></li>
+                <li class="third-level"><a href="#covariate-file">Covariate file</a></li>
+            <li class="second-level"><a href="#options_2">Options</a></li>
+                
+            <li class="second-level"><a href="#output_2">Output</a></li>
+                
+        <li class="first-level "><a href="#general-relationship-matrix">General relationship matrix</a></li>
         <li class="first-level "><a href="#simulation">Simulation</a></li>
         <li class="first-level "><a href="#prediction">Prediction</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h2 id="grm">GRM</h2>
-<h3 id="input-file-formats">Input file formats</h3>
-<p>MPH uses PLINK bim/fam/bed files for genotypes. Other input files are comma-separated values (CSV) or space-delimited text.</p>
-<h3 id="snp-info-file">SNP info file</h3>
-<p>This CSV file is necessary for making genomic relationship matrices (GRMs). </p>
-<p>The file has a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../examples/#qtl-mas-2012">example data</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
-<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
-<h3 id="making-additive-grms">Making additive GRMs</h3>
-<pre><code class="language-sh">for chr in {1..5}
-do
-  mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr
-done
-</code></pre>
-<p><code>--min_maf 0</code> filters out all variants with minor allele frequency (MAF) less than or equal to the provided threshold (default 0).<br />
-<code>--min_hwe_pval 1e-8</code> filters out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold (default 0).<br />
-<code>--snp_weight</code> specifies a column header name in the SNP info file (<code>--snp_info</code>). If not specified, <code>mph</code> will use all variants listed in the SNP info file.</p>
-<h3 id="making-dominance-grms">Making dominance GRMs</h3>
-<p>To construct a dominance GRM, add <code>--dominance</code>.</p>
-<pre><code class="language-sh">for chr in {1..5}
-do
-  mph --make_grm --dominance --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out $chr.dom
-done
-</code></pre>
-<h3 id="grm-list">GRM list</h3>
-<p>The GRM list file is a space-delimited text file listing GRMs, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a number or a short GRM identifier. </p>
-<p>The GRM list is needed for <code>--merge_grms</code>, <code>--deduct_grms</code>, <code>--make_fore</code>, and <code>--minque</code>.</p>
-<h3 id="merging-grms">Merging GRMs</h3>
-<p>If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM.</p>
-<pre><code class="language-sh">mph --merge_grms --grm_list chr.grms.txt --output all_snps
-</code></pre>
-<p>If there are two columns in the GRM list file, the second one will be ignored in this procedure. </p>
-<h3 id="deducting-grms">Deducting GRMs</h3>
-<pre><code class="language-sh">mph --deduct_grms --grm_list list.grms.txt --output deducted
-</code></pre>
-<h3 id="making-interaction-grms">Making interaction GRMs</h3>
-<p>To make GRMs for first-order interactions between random effects, use <code>--make_fore</code>.</p>
-<pre><code class="language-sh">mph --make_fore --grm_list fore.grms.txt --output all_snps
-</code></pre>
-<h3 id="zeroing-out-grm-elements">Zeroing out GRM elements</h3>
-<pre><code class="language-sh">mph --zero_grm 0.05 --binary_grm all_snps --output zero_outed
-</code></pre>
-<p>All off-diagonal elements smaller than 0.05 are zeroed out, and the resulting matrix is written to the output file.</p>
-<h2 id="remlminque">REML/MINQUE</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+massa, nec semper lorem quam in massa.</p>
+</div>
+<p>Option names may be abbreviated if the abbreviation is unique or is an exact match for some defined option; e.g., <code>--phenotype</code> works the same as <code>--phenotype_file</code>.</p>
+<h2 id="making-a-grm-from-genotypes">Making a GRM from genotypes</h2>
 <h3 id="input">Input</h3>
-<ul>
-<li><code>--grm_list</code>: a space-delimited text file without header.<ul>
-<li>The first column needs to list GRM file path. </li>
-<li>The second column is optional and can list an initial VC value for each GRM.</li>
-</ul>
-</li>
-<li><code>--phenotype</code>: a CSV file with a header line.<ul>
-<li>The first column must be the individual ID.</li>
-<li>The header line needs to contain trait names.</li>
-</ul>
-</li>
-<li><code>--covariate_file</code>: a CSV file with a header line.<ul>
-<li>The first column must be the individual ID.</li>
-<li>The header line needs to contain covariate names.</li>
-<li>The covariate file is optional.</li>
-</ul>
-</li>
-</ul>
-<p>Missing values of phenotypes or covariates need to be left empty. Do not use space, -9, NA, or NaN.</p>
-<h3 id="reml-or-iterative-minque">REML or iterative MINQUE</h3>
-<pre><code>--minque
-</code></pre>
-<p>This flag turns on iterative MINQUE (equivalent to the Fisher scoring algorithm for REML).</p>
-<pre><code class="language-sh">mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
-</code></pre>
-<h3 id="minque0-or-minque1">MINQUE(0) or MINQUE(1)</h3>
-<p>To force MINQUE(0) or MINQUE(1), add <code>--num_iterations 1</code>. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).</p>
-<pre><code class="language-sh">mph --minque --num_iterations 1 --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --output milk.chr
-</code></pre>
-<h3 id="memory-saving-mode">Memory-saving mode</h3>
-<pre><code>--save_memory
-</code></pre>
-<p>This flag enables the memory-saving mode. This mode is not necessarily slower, particularly on a solid-state drive.</p>
-<h3 id="covariates">Covariates</h3>
-<p>To include covariates, add <code>--covariate_file</code> and <code>--covariate_names</code>.</p>
-<pre><code class="language-sh">--covariate_file covar.csv --covariate_names all
-</code></pre>
-<p>If <strong>all</strong> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
-<pre><code class="language-sh">--covariate_file covar.csv --covariate_names g1,g2,g3
-</code></pre>
-<h3 id="pseudo-phenotypes">Pseudo-phenotypes</h3>
-<p>If needed, add <code>--error_weight_name</code> to accommodate individual reliabilies (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values).</p>
-<pre><code>--error_weight_name milk_wt
-</code></pre>
-<p>The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file (<code>--phenotype</code>).</p>
-<h3 id="general-relationship-matrix">General relationship matrix</h3>
-<p>The <code>--grm_list</code> file can include any <strong>general</strong> relationship matrix, not just <strong>genomic</strong> relationship matrices.</p>
-<h3 id="additional-options">Additional options</h3>
-<p><code>--heritability 0.5</code>
-The heritability value for initializing REML/MINQUE iterations. An accurate value may improve convergence. The default is 0.5.</p>
-<p><code>--num_iterations 20</code>
-Max number of REML iterations. The default is 20.</p>
-<p><code>--tol 0.01</code>
-Tolerance. REML iterations stop when logLL has a change smaller than that. The default is 0.01.</p>
-<p><code>--num_random_vectors 100</code>
-Number of random probing vectors for stochastic trace estimation. The default (100) is usually sufficient.</p>
-<p><code>--seed 0</code>
-Random seed in stochastic trace estimation. The default is 0.</p>
-<h3 id="output">Output</h3>
 <table>
 <thead>
 <tr>
-<th>Filename suffix</th>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>mq.blue.csv</td>
-<td>Best linear unbiased estimates of fixed effects</td>
+<td><code>--binary_genotype_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>PLINK bed/bim/fam filename prefix</td>
 </tr>
 <tr>
-<td>mq.iter.csv</td>
-<td>Summary of REML iterations</td>
+<td><code>--snp_info_file</code></td>
+<td>FILE</td>
+<td>Required</td>
+<td>SNP info file in CSV format</td>
 </tr>
 <tr>
-<td>mq.vc.csv</td>
-<td>Variance component estimates</td>
+<td><code>--snp_weight_name</code></td>
+<td>STRING</td>
+<td>Optional</td>
+<td>Must be a column header in the SNP info file and specify which column to use for weighting SNPs in a GRM. If the option is not present, all variants listed in the SNP info file will be used with a weight of 1.</td>
 </tr>
 <tr>
-<td>mq.py.csv</td>
-<td>Residuals of the linear mixed model</td>
+<td><code>--min_maf</code></td>
+<td>FLOAT</td>
+<td>Optional</td>
+<td>Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0]</td>
+</tr>
+<tr>
+<td><code>--min_hwe_pval</code></td>
+<td>FLOAT</td>
+<td>Optional</td>
+<td>Filter out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold [default=0]</td>
 </tr>
 </tbody>
 </table>
-<p><strong>mq.vc.csv</strong> has the following columns.</p>
+<h4 id="genotype-files">Genotype files</h4>
+<p>MPH uses PLINK bim/fam/bed files for genotypes. The bed/bim/fam file format is described <a href="https://www.cog-genomics.org/plink/1.9/formats">here</a>.</p>
+<h4 id="snp-info-file">SNP info file</h4>
+<p>This CSV file must have a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../examples/#qtl-mas-2012">example data</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
+<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
+<h3 id="options">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--make_grm</code></td>
+<td>FLAG</td>
+<td>Required</td>
+<td>To make a GRM from genotypes</td>
+</tr>
+<tr>
+<td><code>--dominance</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to make a dominance GRM rather than an additive GRM</td>
+</tr>
+<tr>
+<td><code>--num_threads</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Number of computational threads to use [default=1]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output">Output</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>Output filename prefix</td>
+</tr>
+</tbody>
+</table>
+<p>Two files will be generated for a GRM: one with the suffix <strong>.grm.iid</strong> and the other with <strong>.grm.bin</strong>.</p>
+<h2 id="making-a-grm-from-grms">Making a GRM from GRMs</h2>
+<h3 id="input_1">Input</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--grm_list</code></td>
+<td>FILE</td>
+<td>Required</td>
+<td>Space-delimited text file listing GRMs that have been made</td>
+</tr>
+</tbody>
+</table>
+<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for <code>--make_fore</code> and <code>--make_core</code>. </p>
+<h3 id="options_1">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--merge_grms</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to merge a list of GRMs</td>
+</tr>
+<tr>
+<td><code>--deduct_grms</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to deduct the subsequent GRMs from the first in a list</td>
+</tr>
+<tr>
+<td><code>--make_fore</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to make first-order interaction GRMs</td>
+</tr>
+<tr>
+<td><code>--make_core</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to make GRMs for covariances between random effects</td>
+</tr>
+<tr>
+<td><code>--num_threads</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Number of computational threads to use [default=1]</td>
+</tr>
+</tbody>
+</table>
+<p>If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identical SNPs in the resulting GRM of <code>--merge_grms</code>.</p>
+<h3 id="output_1">Output</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>Output filename prefix</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>--merge_grms</code> and <code>--deduct_grms</code> generate one GRM.</li>
+<li><code>--make_fore</code> generates <em>n</em>(<em>n</em>+1)/2 GRMs for <em>n</em> GRMs in a GRM list.</li>
+<li><code>--make_core</code> generates <em>n</em>(<em>n</em>-1)/2 GRMs for <em>n</em> GRMs in a GRM list.</li>
+</ul>
+<h2 id="remlminque">REML/MINQUE</h2>
+<h3 id="input_2">Input</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--grm_list</code></td>
+<td>FILE</td>
+<td>Required</td>
+<td>Space-delimited text file listing GRMs that have been made</td>
+</tr>
+<tr>
+<td><code>--phenotype_file</code></td>
+<td>FILE</td>
+<td>Required</td>
+<td>Phenotype file in CSV format</td>
+</tr>
+<tr>
+<td><code>--trait</code></td>
+<td>STRING</td>
+<td>Required</td>
+<td>Must be a column header in the phenotype file and specify which trait to analyze</td>
+</tr>
+<tr>
+<td><code>--error_weight_name</code></td>
+<td>STRING</td>
+<td>Optional</td>
+<td>Must be a column header in the phenotype file and specify which column contains individual error variance weights</td>
+</tr>
+<tr>
+<td><code>--covariate_file</code></td>
+<td>FILE</td>
+<td>Optional</td>
+<td>Covariate file in CSV format</td>
+</tr>
+<tr>
+<td><code>--covariate_names</code></td>
+<td>STRING</td>
+<td>Optional</td>
+<td>Comma-separated list of covariates to include in the analysis</td>
+</tr>
+</tbody>
+</table>
+<h4 id="grm-list-file">GRM list file</h4>
+<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can list an initial variance component (VC) value for each GRM. </p>
+<h4 id="phenotype-file">Phenotype file</h4>
+<p>The phenotype file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain trait names.</p>
+<p>Missing values of phenotypes need to be left empty. Do not use space, -9, NA, or NaN.</p>
+<p>MPH has <code>--error_weight_name</code> to accommodate individual reliabilies (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file.</p>
+<h4 id="covariate-file">Covariate file</h4>
+<p>The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. </p>
+<p>Missing values of covariates need to be left empty. Do not use space, -9, NA, or NaN.</p>
+<p>If <code>--covariate_names all</code> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
+<h3 id="options_2">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--minque</code></td>
+<td>FLAG</td>
+<td>Required</td>
+<td>Flag to run REML or iterative MINQUE</td>
+</tr>
+<tr>
+<td><code>--save_memory</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to enable the memory-saving mode</td>
+</tr>
+<tr>
+<td><code>--num_threads</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Number of computational threads to use [default=1]</td>
+</tr>
+<tr>
+<td><code>--heritability</code></td>
+<td>FLOAT</td>
+<td>Optional</td>
+<td>Initial heritability value in REML iterations [default=0.5]</td>
+</tr>
+<tr>
+<td><code>--exact_init</code></td>
+<td>FLAG</td>
+<td>Optional</td>
+<td>Flag to set initial VC values to the exact values of the GRM list file's second column rather than their ratios</td>
+</tr>
+<tr>
+<td><code>--num_iterations</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Max number of REML iterations [default=20]</td>
+</tr>
+<tr>
+<td><code>--tol</code></td>
+<td>FLOAT</td>
+<td>Optional</td>
+<td>Absolute convergence tolerance for REML log-likelihood [default=0.01]</td>
+</tr>
+<tr>
+<td><code>--num_random_vectors</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Number of random probing vectors for stochastic trace estimation [default=100]</td>
+</tr>
+<tr>
+<td><code>--seed</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Random seed in stochastic trace estimation [default=0]</td>
+</tr>
+</tbody>
+</table>
+<p>To force MINQUE(0) or MINQUE(1), set <code>--num_iterations 1</code>. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).</p>
+<p>The memory-saving mode (--save_memory) is not necessarily slower, particularly on a solid-state drive. </p>
+<h3 id="output_2">Output</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--output_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>Output filename prefix</td>
+</tr>
+</tbody>
+</table>
+<p>Four files are generated, as shown below. 
+| Filename suffix | Description |
+|----------|----------|
+| .mq.blue.csv | Best linear unbiased estimates of fixed effects |
+| .mq.iter.csv | Summary of REML iterations |
+| .mq.vc.csv | Variance component estimates |
+| .mq.py.csv | Residuals of the linear mixed model |</p>
+<p><strong>.mq.vc.csv</strong> has the following columns.</p>
 <table>
 <thead>
 <tr>
@@ -356,6 +567,8 @@ Random seed in stochastic trace estimation. The default is 0.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="general-relationship-matrix">General relationship matrix</h2>
+<p>The <code>--grm_list</code> file can include any <strong>general</strong> relationship matrix, not just <strong>genomic</strong> relationship matrices.</p>
 <h2 id="simulation">Simulation</h2>
 <p>Simulating phenotypes based on a list of GRMs</p>
 <pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
