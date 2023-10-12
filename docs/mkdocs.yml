@@ -17,6 +17,7 @@ nav:
   - Utilities: util.md
 
 markdown_extensions:
+  - admonition
   - attr_list
   - footnotes
 
