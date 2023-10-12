@@ -137,7 +137,7 @@ Four files are generated, as shown below.
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
 
 ## General relationship matrix
-The `--grm_list` file can include any **general** relationship matrix, not just **genomic** relationship matrices.
+The `--grm_list` file can list any **general** relationship matrix, not necessarily **genomic** relationship matrices.
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
