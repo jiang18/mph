@@ -137,7 +137,9 @@ Four files are generated, as shown below.
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
 
 ## General relationship matrix
-The `--grm_list` file can list any **general** relationship matrix, not necessarily **genomic** relationship matrices.
+The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
+
+Scripts[util.md] are provided to convert a general relationship matrix to the MPH format. 
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
