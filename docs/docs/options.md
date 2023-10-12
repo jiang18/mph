@@ -8,7 +8,7 @@
 |-------|-------|-------|--------------|
 | `--binary_genotype_file` | FILE PREFIX | Required | PLINK bed/bim/fam filename prefix |
 | `--snp_info_file` | FILE | Required | SNP info file in CSV format |
-| `--snp_weight_name` |  STRING | Optional | Must be a column header in the SNP info file and specify which column to use for weighting SNPs in a GRM. If the option is not present, all variants listed in the SNP info file will be used with a weight of 1. |
+| `--snp_weight_name` |  STRING | Optional | Must be a column header in the SNP info file and specify which column to use for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a weight of 1. |
 | `--min_maf` | FLOAT | Optional | Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0] |
 | `--min_hwe_pval` | FLOAT | Optional | Filter out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold [default=0] |
 
@@ -114,7 +114,8 @@ The memory-saving mode (--save_memory) is not necessarily slower, particularly o
 |-------|-------|-------|--------------|
 | `--output_file` | FILE PREFIX | Required | Output filename prefix |
 
-Four files are generated, as shown below. 
+Four files are generated, as shown below.
+
 | Filename suffix | Description |
 |----------|----------|
 | .mq.blue.csv | Best linear unbiased estimates of fixed effects |
