@@ -139,7 +139,7 @@ Four files are generated, as shown below.
 ## General relationship matrix
 The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
 
-Scripts[util.md] are provided to convert a general relationship matrix to the MPH format. 
+[Scripts](util.md) are provided to convert a general relationship matrix to the MPH format. 
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
