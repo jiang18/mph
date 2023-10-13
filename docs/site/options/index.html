@@ -222,9 +222,9 @@
 </tbody>
 </table>
 <h4 id="genotype-files">Genotype files</h4>
-<p>MPH uses PLINK bim/fam/bed files for genotypes. The bed/bim/fam file format is described <a href="https://www.cog-genomics.org/plink/1.9/formats">here</a>.</p>
+<p>MPH uses PLINK bim/fam/bed files for genotypes. The bed/bim/fam file format is described on the <a href="https://www.cog-genomics.org/plink/1.9/formats">PLINK website</a>.</p>
 <h4 id="snp-info-file">SNP info file</h4>
-<p>This CSV file must have a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the <a href="../examples/#qtl-mas-2012">example data</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
+<p>This CSV file must have a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the example of <a href="../examples/#qtl-mas-2012">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
 <p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
 <h3 id="options">Options</h3>
 <table>
@@ -297,7 +297,7 @@
 </tr>
 </tbody>
 </table>
-<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for <code>--make_fore</code> and <code>--make_core</code>. </p>
+<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for <code>--make_fore</code> and <code>--make_core</code>. </p>
 <h3 id="options_1">Options</h3>
 <table>
 <thead>
