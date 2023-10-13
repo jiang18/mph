@@ -9,7 +9,19 @@
 
 #### Simulated sequence genotypes
 - The data set is available for download [here]().
-- Simulated by [genosim](https://aipl.arsusda.gov/software/genosim/)
+- Sequence genotypes were simulated by [genosim](https://aipl.arsusda.gov/software/genosim/).
 - 10k unrelated individuals, 5M sequence variants, and 30 chromosomes
-- Functional annotations are quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the sequence variants in order.
-- Phenotypes are simulated using the S-LDSC baseline result for human traits. 
+- Functional annotations were quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the simulated sequence variants in order.
+- Phenotypes were simulated using the S-LDSC baseline model enrichment estimates for human traits ([Source data to Fig.4](https://www.nature.com/articles/ng.3404#MOESM30) in [this article](https://www.nature.com/articles/ng.3404)).
+    - The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.
+    - The VC estimates were set as true values in [phenotype simulation](options.md#simulation).
+    - A small value was added to intercept's VC to enhance the positive definiteness of the all-in-one GRM. 
+
+### Partitioning *h*<sup>2</sup> by chromosomes
+
+### Dominance and epistasis
+
+### Genetic correlation
+
+### Functional annotations
+
