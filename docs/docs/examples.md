@@ -1,4 +1,4 @@
-## Datasets
+## Simulated datasets
 
 ### QTL-MAS 2012
 - The data set is available for download [here](https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip).
