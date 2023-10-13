@@ -2,7 +2,7 @@
 
 ### QTL-MAS 2012
 - The data set is available for download [here](https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip).
-- [This article](https://pubmed.ncbi.nlm.nih.gov/25519515/) describes how the data set was simulated.
+- [This article](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) describes how the data set was simulated.
 - 3k related animals, 10k SNPs, 5 chromosomes, and 3 traits
 
 ### Simulated sequence genotypes
@@ -13,13 +13,14 @@
 - Phenotypes were simulated using the S-LDSC baseline model enrichment estimates for human traits ([Source data to Fig.4](https://www.nature.com/articles/ng.3404#MOESM30) in [this article](https://www.nature.com/articles/ng.3404)).
     - The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.
     - The VC estimates were set as true values in [phenotype simulation](options.md#simulation).
-    - A small value was added to intercept's VC to enhance the positive definiteness of the all-in-one GRM. 
+    - A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. 
 
-## Partitioning *h*<sup>2</sup> by chromosomes
+## Partitioning heritability
+
+### By chromosomes
+
+### By functional annotations
 
 ## Dominance and epistasis
 
 ## Genetic correlation
-
-## Functional annotations
-
