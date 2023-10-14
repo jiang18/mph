@@ -1,7 +1,7 @@
 !!! note
     Option names may be abbreviated if the abbreviation is unique or is an exact match for some defined option; e.g., `--phenotype` works the same as `--phenotype_file`.
 
-## Making a GRM from genotypes
+## Making a GRM from SNPs
 
 ### Input
 | Option | Argument | Type | Description |
@@ -136,11 +136,6 @@ Four files are generated, as shown below.
 | enrichment | Estimate of the per-SNP heritability enrichment |
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
 
-## General relationship matrix
-The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
-
-[Scripts](util.md) are provided to convert a general relationship matrix to the MPH format. 
-
 ## Simulation
 Simulating phenotypes based on a list of GRMs
 ```sh
@@ -155,3 +150,7 @@ mph --pred --mq_file milk.chr --output milk.chr
 ```
 MPH computes EBLUPs using the output of `--minque` and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
 
+## General relationship matrix
+The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
+
+[Scripts](util.md) are provided to convert a general relationship matrix to the MPH format.
