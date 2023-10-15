@@ -14,16 +14,10 @@ done
 ## REML (or I-MINQUE)
 - GRM list file: chr.grms.txt
 - Phenotype file: phen.csv
+- Covariate file: covar.csv
 
 ```sh
 mkdir minque
 
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --num_threads 10 --out ./minque/milk.chr
-```
-
-## REML including additional covariates
-- Covariate file: covar.csv
-
-```sh
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./minque/milk.chr.cc
+mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./minque/milk.chr
 ```
