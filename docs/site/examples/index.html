@@ -182,24 +182,45 @@
 <ol>
 <li>Create a <a href="../options/#snp-info-file">SNP info file</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a>.</li>
 <li><a href="../options/#making-a-grm-from-snps">Make a GRM</a> for each chromosome.</li>
-</ol>
-<pre><code class="language-sh">mkdir grm
-
-for chr in {1..5}
-do
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./grm/$chr
-done
-</code></pre>
-<ol>
-<li>Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. { start=3 }</li>
+<li>Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>.</li>
 <li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
 </ol>
-<pre><code class="language-sh">mkdir minque
+<pre><code class="language-sh"># Making GRMs
+# Input: geno and chr.snp_info.csv
+mkdir chromosomes
+for chr in {1..5}
+do
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./chromosomes/$chr
+done
 
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./minque/milk.chr
+# Running REML
+# Input: chr.grms.txt, phen.csv, and covar.csv
+mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./chromosomes/milk
 </code></pre>
 <h3 id="by-functional-annotations">By functional annotations</h3>
 <h2 id="dominance-and-epistasis">Dominance and epistasis</h2>
+<p>Decomposing genetic variance into additive, dominance, and epistatic components for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
+<ol>
+<li><a href="../options/#making-a-grm-from-snps">Make GRMs from SNPs</a>: one for additive and one for dominance.</li>
+<li>Create a <a href="../options/#input-1">GRM list</a> for <code>--make_fore</code>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>.</li>
+<li><a href="../options/#options-1">Make first-order interaction GRMs</a>.</li>
+<li>Create a <a href="../options/#grm-list-file">GRM list</a> for <code>--minque</code>, listing A, D, AxA, AxD, and DxD: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt"><strong>ADE.grms.txt</strong></a>.</li>
+<li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
+</ol>
+<pre><code class="language-sh"># Making one additive GRM and one dominance GRM
+# Input: geno and chr.snp_info.csv
+mkdir nonadditive
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test --dom
+
+# Making three first-order interaction GRMs
+# Input: AD.grms.txt listing the GRMs that have been made
+mph --make_fore --grm_list AD.grms.txt --num_threads 10 --out ./nonadditive/test
+
+# Running REML
+# Input: ADE.grms.txt, phen.csv, and covar.csv
+mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./nonadditive/milk
+</code></pre>
 <h2 id="genetic-correlation">Genetic correlation</h2></div>
         
         
