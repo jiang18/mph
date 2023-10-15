@@ -18,6 +18,11 @@
 ## Partitioning heritability
 
 ### By chromosomes
+Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) dataset
+
+1. Create a [SNP info file](options.md#snp-info-file): 
+2. 
+
 
 ### By functional annotations
 
