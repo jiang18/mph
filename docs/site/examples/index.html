@@ -182,17 +182,19 @@
 <ol>
 <li>Create a <a href="../options/#snp-info-file">SNP info file</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a>.</li>
 <li>
-<p><a href="../options/#making-a-grm-from-snps">Make a GRM</a> for each chromosome
-    ```
-    mkdir grm</p>
+<p><a href="../options/#making-a-grm-from-snps">Make a GRM</a> for each chromosome.</p>
+<p>```sh
+mkdir grm</p>
 <p>for chr in {1..5}
 do
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./grm/$chr
 done
-```
-3. Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>.
-4. Run <a href="../options/#remlminque">REML/MINQUE</a>.</p>
+```</p>
 </li>
+<li>
+<p>Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>.</p>
+</li>
+<li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
 </ol>
 <pre><code class="language-sh">mkdir minque
 
