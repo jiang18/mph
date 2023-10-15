@@ -21,7 +21,7 @@
 Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) dataset
 
 1. Create a [SNP info file](options.md#snp-info-file): [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1).
-2. Make a GRM for each chromosome
+2. [Make a GRM](options.md#making-a-grm-from-snps) for each chromosome
 ```sh
 mkdir grm
 
@@ -30,12 +30,12 @@ do
   mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./grm/$chr
 done
 ```
-3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
-4. Run REML (or I-MINQUE).
+3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). {start=3}
+4. Run [REML/MINQUE](options.md#remlminque).
 ```sh
 mkdir minque
 
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./minque/milk.chr
+mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./minque/milk.chr
 ```
 
 ### By functional annotations
