@@ -22,7 +22,7 @@ Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) d
 
 1. Create a [SNP info file](options.md#snp-info-file): [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1).
 2. [Make a GRM](options.md#making-a-grm-from-snps) for each chromosome
-    ```sh
+    ```
     mkdir grm
 
     for chr in {1..5}
