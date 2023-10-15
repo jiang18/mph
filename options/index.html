@@ -140,7 +140,7 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#making-a-grm-from-genotypes">Making a GRM from genotypes</a></li>
+        <li class="first-level active"><a href="#making-a-grm-from-snps">Making a GRM from SNPs</a></li>
             <li class="second-level"><a href="#input">Input</a></li>
                 
                 <li class="third-level"><a href="#genotype-files">Genotype files</a></li>
@@ -166,9 +166,9 @@
                 
             <li class="second-level"><a href="#output_2">Output</a></li>
                 
-        <li class="first-level "><a href="#general-relationship-matrix">General relationship matrix</a></li>
         <li class="first-level "><a href="#simulation">Simulation</a></li>
         <li class="first-level "><a href="#prediction">Prediction</a></li>
+        <li class="first-level "><a href="#general-relationship-matrix">General relationship matrix</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -177,7 +177,7 @@
 <p class="admonition-title">Note</p>
 <p>Option names may be abbreviated if the abbreviation is unique or is an exact match for some defined option; e.g., <code>--phenotype</code> works the same as <code>--phenotype_file</code>.</p>
 </div>
-<h2 id="making-a-grm-from-genotypes">Making a GRM from genotypes</h2>
+<h2 id="making-a-grm-from-snps">Making a GRM from SNPs</h2>
 <h3 id="input">Input</h3>
 <table>
 <thead>
@@ -224,8 +224,9 @@
 <h4 id="genotype-files">Genotype files</h4>
 <p>MPH uses PLINK bim/fam/bed files for genotypes. The bed/bim/fam file format is described on the <a href="https://www.cog-genomics.org/plink/1.9/formats">PLINK website</a>.</p>
 <h4 id="snp-info-file">SNP info file</h4>
-<p>This CSV file must have a header line. The first column lists SNP IDs. Each of other columns corresponds to one GRM and each row corresponds to a SNP. In the example of <a href="../examples/#qtl-mas-2012">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
+<p>The SNP info file is a CSV file with a header line. The first column must list SNP IDs. Each of the other columns corresponds to one GRM and each row corresponds to a SNP. </p>
 <p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
+<p>In the example of <a href="../examples/#qtl-mas-2012">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
 <h3 id="options">Options</h3>
 <table>
 <thead>
@@ -584,9 +585,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="general-relationship-matrix">General relationship matrix</h2>
-<p>The <code>--grm_list</code> file can list any <strong>general</strong> relationship matrix, not necessarily a <strong>genomic</strong> relationship matrix.</p>
-<p><a href="../util/">Scripts</a> are provided to convert a general relationship matrix to the MPH format. </p>
 <h2 id="simulation">Simulation</h2>
 <p>Simulating phenotypes based on a list of GRMs</p>
 <pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
@@ -596,7 +594,10 @@
 <p>Empirical best linear unbiased predictions (EBLUPs)</p>
 <pre><code class="language-sh">mph --pred --mq_file milk.chr --output milk.chr
 </code></pre>
-<p>MPH computes EBLUPs using the output of <code>--minque</code> and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p></div>
+<p>MPH computes EBLUPs using the output of <code>--minque</code> and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p>
+<h2 id="general-relationship-matrix">General relationship matrix</h2>
+<p>The <code>--grm_list</code> file can list any <strong>general</strong> relationship matrix, not necessarily a <strong>genomic</strong> relationship matrix.</p>
+<p><a href="../util/">Scripts</a> are provided to convert a general relationship matrix to the MPH format.</p></div>
         
         
     </div>
