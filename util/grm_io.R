@@ -7,7 +7,7 @@ write_grm=function(prefix, iid, grm){
     return(1)
   }
   write.table(iid, file=idfile, quote=F, row.names=F, col.names=F)
-  print("Completed writing the iid file.")
+  print(paste0("Completed writing the iid file: ", prefix, ".grm.iid"))
   
   # sample size
   np = length(iid)
@@ -17,7 +17,7 @@ write_grm=function(prefix, iid, grm){
   writeBin(as.integer(np), con, size=4)
   writeBin(as.numeric( c(nm,grm[lower.tri(grm, diag=TRUE)]) ), con, size=4)
   close(con)
-  print("Completed writing the bin file.")
+  print(paste0("Completed writing the bin file: ", prefix, ".grm.bin"))
 }
 
 # R script to read MPH GRM files (.iid and .bin)
