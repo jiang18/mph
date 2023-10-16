@@ -55,7 +55,9 @@ Decomposing genetic variance into additive, dominance, and epistatic components 
 # Making one additive GRM and one dominance GRM
 # Input: geno and chr.snp_info.csv
 mkdir nonadditive
+
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test
+
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test --dom
 
 # Making three first-order interaction GRMs
@@ -74,7 +76,7 @@ Bivariate GREML with two variance components (VCs) is equivalent to univariate G
 
 1. Make a new phenotype file and a new covariate file for a trait pair.
 2. Make five relationship matrices for a trait pair.
-3. Run REML using [this GRM list file](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
+3. Run REML using a GRM list file like [this](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
 4. Interpret the VC estimates.
 
 ```sh
@@ -91,6 +93,7 @@ Rscript --no-save make_grms_for_pair.R ./bivarREML/test ./bivarREML/test
 mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
 ```
 
+Below is an R script for computing between-trait correlation estimates from the **.mq.vc.csv** output file.
 ```R
 vc = read.csv("./bivarREML/milk.fat.mq.vc.csv")
 
