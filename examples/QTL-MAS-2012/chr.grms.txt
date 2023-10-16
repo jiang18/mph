@@ -1,5 +1,5 @@
-./grm/1 1
-./grm/2 1
-./grm/3 1
-./grm/4 1.0
-./grm/5 1.0
+./chromosomes/1 1
+./chromosomes/2 1
+./chromosomes/3 1
+./chromosomes/4 1.0
+./chromosomes/5 1.0

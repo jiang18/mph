@@ -1,0 +1,5 @@
+./bivarREML/test.G.t1 1
+./bivarREML/test.G.t2 1
+./bivarREML/test.G.t1t2 0
+./bivarREML/test.E.t1 0
+./bivarREML/test.E.t1t2 0

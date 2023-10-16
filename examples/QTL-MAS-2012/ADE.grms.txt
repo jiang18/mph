@@ -1,0 +1,5 @@
+./nonadditive/test 30
+./nonadditive/test.d 1
+./nonadditive/test.fore.AxA 0
+./nonadditive/test.fore.AxD 0
+./nonadditive/test.fore.DxD 0

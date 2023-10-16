@@ -1,0 +1,2 @@
+./nonadditive/test A
+./nonadditive/test.d D

@@ -40,6 +40,7 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_w
 ```
 
 ### By functional annotations
+TBA
 
 ## Dominance and epistasis
 Decomposing genetic variance into additive, dominance, and epistatic components for the [QTL-MAS 2012](#qtl-mas-2012) dataset
@@ -67,3 +68,59 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 ```
 
 ## Genetic correlation
+Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-mas-2012) dataset
+
+Bivariate GREML with two variance components (VCs) is equivalent to univariate GREML with six VCs. Though MPH is not designed for estimating between-trait correltions, it can do so when provided the five GRMs (excluding the residual one). 
+
+1. Make a new phenotype file and a new covariate file for a trait pair.
+2. Make five relationship matrices for a trait pair.
+3. Create a GRM list and run REML.
+4. Interpret the VC estimates.
+
+```sh
+mkdir bivarREML
+
+Rscript --no-save make_pheno_for_pair.R phen.csv milk fat ./bivarREML/test
+
+Rscript --no-save make_covariate_for_pair.R covar.csv ./bivarREML/test.covar.csv
+
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./bivarREML/test
+
+Rscript --no-save make_grms_for_pair.R ./bivarREML/test ./bivarREML/test
+
+mph --minque --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
+```
+
+```R
+vc = read.csv("./bivarREML/milk.fat.mq.vc.csv")
+
+# Calculate the genetic correlation estimate and SE. 
+x1 = vc[1,3]
+x2 = vc[2,3]
+x12 = vc[3,3]
+var_x1 = vc[1,14]
+var_x2 = vc[2,15]
+var_x12 = vc[3,16]
+cov_x1_x2 = vc[1,15]
+cov_x1_x12 = vc[1,16]
+cov_x2_x12 = vc[2,16]
+
+gcorr = x12 / sqrt(x1 * x2)
+var_gcorr = gcorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
+se_gcorr = sqrt(var_gcorr)
+
+# Calculate the environmental correlation estimate and SE. 
+x1 = vc[4,3] + vc[6,3]
+x2 = vc[6,3]
+x12 = vc[5,3]
+var_x1 = vc[4,17] + vc[6,4] **2 + 2*vc[6,17]
+var_x2 = vc[6,4] **2
+var_x12 = vc[5,18]
+cov_x1_x2 = vc[6,17] + vc[6,4] **2
+cov_x1_x12 = vc[4,18] + vc[6,18]
+cov_x2_x12 = vc[6,18]
+
+ecorr = x12 / sqrt(x1 * x2)
+var_ecorr = ecorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
+se_ecorr = sqrt(var_ecorr)
+```
