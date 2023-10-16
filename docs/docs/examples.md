@@ -70,11 +70,11 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 ## Genetic correlation
 Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-mas-2012) dataset
 
-Bivariate GREML with two variance components (VCs) is equivalent to univariate GREML with six VCs. Though MPH is not designed for estimating between-trait correltions, it can do so when provided the five GRMs (excluding the residual one). 
+Bivariate GREML with two variance components (VCs) is equivalent to univariate GREML with six VCs. Though MPH is not designed for estimating between-trait correlations, it can do so when provided the five GRMs (excluding the residual one). 
 
 1. Make a new phenotype file and a new covariate file for a trait pair.
 2. Make five relationship matrices for a trait pair.
-3. Create a GRM list and run REML.
+3. Run REML using [this GRM list file](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
 4. Interpret the VC estimates.
 
 ```sh
@@ -88,7 +88,7 @@ mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info
 
 Rscript --no-save make_grms_for_pair.R ./bivarREML/test ./bivarREML/test
 
-mph --minque --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
+mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
 ```
 
 ```R
