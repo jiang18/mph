@@ -72,7 +72,7 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 ## Genetic correlation
 Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-mas-2012) dataset
 
-Bivariate REML can be transformed into univariate REML. Though MPH is not designed for estimating between-trait correlations, it can do so when provided with correct GRMs. 
+Bivariate REML can be transformed into univariate REML. Though MPH is not designed for estimating between-trait correlations, it can effectively do so when provided with correct GRMs. 
 
 ### Genome-wide
 1. Make a new phenotype file and a new covariate file for a pair of traits.
