@@ -1,0 +1,17 @@
+./bivarREML/1.G.t1 1
+./bivarREML/1.G.t2 1
+./bivarREML/1.G.t1t2 0
+./bivarREML/2.G.t1 1
+./bivarREML/2.G.t2 1
+./bivarREML/2.G.t1t2 0
+./bivarREML/3.G.t1 1
+./bivarREML/3.G.t2 1
+./bivarREML/3.G.t1t2 0
+./bivarREML/4.G.t1 1
+./bivarREML/4.G.t2 1
+./bivarREML/4.G.t1t2 0
+./bivarREML/5.G.t1 1
+./bivarREML/5.G.t2 1
+./bivarREML/5.G.t1t2 0
+./bivarREML/test.E.t1 0
+./bivarREML/test.E.t1t2 0
