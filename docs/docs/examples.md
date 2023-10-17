@@ -90,6 +90,8 @@ mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info
 
 Rscript --no-save make_grms_for_pair.R ./bivarREML/test ./bivarREML/test
 
+Rscript --no-save make_rescor_for_pair.R ./bivarREML/test ./bivarREML/test
+
 mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
 ```
 
