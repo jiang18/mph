@@ -28,12 +28,3 @@ full = matrix(0, nrow=dim*2, ncol=dim*2)
 full[1:dim, (1+dim):(dim*2)] = grm
 full[(1+dim):(dim*2), 1:dim] = grm
 write_grm(paste0(outfile, ".G.t1t2"), iid, full)
-
-full = matrix(0, nrow=dim*2, ncol=dim*2)
-diag(full[1:dim, 1:dim]) = 1
-write_grm(paste0(outfile, ".E.t1"), iid, full)
-
-full = matrix(0, nrow=dim*2, ncol=dim*2)
-diag(full[1:dim, (1+dim):(dim*2)]) = 1
-diag(full[(1+dim):(dim*2), 1:dim]) = 1
-write_grm(paste0(outfile, ".E.t1t2"), iid, full)
