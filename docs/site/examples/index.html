@@ -152,6 +152,10 @@
                 
         <li class="first-level "><a href="#dominance-and-epistasis">Dominance and epistasis</a></li>
         <li class="first-level "><a href="#genetic-correlation">Genetic correlation</a></li>
+            <li class="second-level"><a href="#genome-wide">Genome-wide</a></li>
+                
+            <li class="second-level"><a href="#chromosome-wise">Chromosome-wise</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -211,7 +215,9 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_w
 <pre><code class="language-sh"># Making one additive GRM and one dominance GRM
 # Input: geno and chr.snp_info.csv
 mkdir nonadditive
+
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test
+
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test --dom
 
 # Making three first-order interaction GRMs
@@ -224,11 +230,12 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 </code></pre>
 <h2 id="genetic-correlation">Genetic correlation</h2>
 <p>Estimating genetic and environmental correlations for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
-<p>Bivariate GREML with two variance components (VCs) is equivalent to univariate GREML with six VCs. Though MPH is not designed for estimating between-trait correlations, it can do so when provided the five GRMs (excluding the residual one). </p>
+<p>Bivariate REML can be transformed into univariate REML. Though MPH is not designed for estimating between-trait correlations, it can do so when provided with correct GRMs. </p>
+<h3 id="genome-wide">Genome-wide</h3>
 <ol>
-<li>Make a new phenotype file and a new covariate file for a trait pair.</li>
-<li>Make five relationship matrices for a trait pair.</li>
-<li>Run REML using <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt">this GRM list file</a>. </li>
+<li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
+<li>Make three GRMs and two residual covariance matrices for a pair of traits.</li>
+<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt">this</a>. </li>
 <li>Interpret the VC estimates.</li>
 </ol>
 <pre><code class="language-sh">mkdir bivarREML
@@ -241,8 +248,11 @@ mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info
 
 Rscript --no-save make_grms_for_pair.R ./bivarREML/test ./bivarREML/test
 
+Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
+
 mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
 </code></pre>
+<p>Below is an R script for computing between-trait correlation estimates from the <strong>.mq.vc.csv</strong> output file.</p>
 <pre><code class="language-R">vc = read.csv(&quot;./bivarREML/milk.fat.mq.vc.csv&quot;)
 
 # Calculate the genetic correlation estimate and SE. 
@@ -274,6 +284,30 @@ cov_x2_x12 = vc[6,18]
 ecorr = x12 / sqrt(x1 * x2)
 var_ecorr = ecorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
 se_ecorr = sqrt(var_ecorr)
+</code></pre>
+<h3 id="chromosome-wise">Chromosome-wise</h3>
+<ol>
+<li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
+<li>Make 15 GRMs (three for each chromosome) and two residual covariance matrices for a pair of traits.</li>
+<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt">this</a>. </li>
+<li>Interpret the VC estimates.</li>
+</ol>
+<pre><code class="language-sh">mkdir bivarREML
+
+Rscript --no-save make_pheno_for_pair.R phen.csv milk fat ./bivarREML/test
+
+Rscript --no-save make_covariate_for_pair.R covar.csv ./bivarREML/test.covar.csv
+
+for chr in {1..5}
+do
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./bivarREML/$chr
+
+Rscript --no-save make_grms_for_pair.R ./bivarREML/$chr ./bivarREML/$chr
+done
+
+Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
+
+mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
 </code></pre></div>
         
         
