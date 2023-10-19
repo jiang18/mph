@@ -1,4 +1,4 @@
-``` note
+!!! note
     All utility scripts used in the examples are described in [Utilities](util.md).
 
 ## Simulated datasets
