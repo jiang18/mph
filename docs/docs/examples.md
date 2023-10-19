@@ -1,3 +1,6 @@
+``` note
+    All utility scripts used in the examples are described in [Utilities](util.md).
+
 ## Simulated datasets
 
 ### QTL-MAS 2012
@@ -72,13 +75,13 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 ## Genetic correlation
 Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-mas-2012) dataset
 
-Bivariate REML can be transformed into univariate REML. Though MPH is not designed for estimating between-trait correlations, it can effectively do so when provided with correct GRMs. 
+Bivariate REML can be transformed into univariate REML. Though MPH is designed for univariate REML, it can **effectively** do bivariate REML when provided with correct GRMs. 
 
 ### Genome-wide
 1. Make a new phenotype file and a new covariate file for a pair of traits.
 2. Make three GRMs and two residual covariance matrices for a pair of traits.
 3. Run REML using a GRM list file like [this](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
-4. Interpret the VC estimates.
+4. Compute the genetic correlation estimate from the VC estimates.
 
 ```sh
 mkdir bivarREML
@@ -135,7 +138,7 @@ se_ecorr = sqrt(var_ecorr)
 1. Make a new phenotype file and a new covariate file for a pair of traits.
 2. Make 15 GRMs (three for each chromosome) and two residual covariance matrices for a pair of traits.
 3. Run REML using a GRM list file like [this](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt). 
-4. Interpret the VC estimates.
+4. Compute the genetic correlation estimates from the VC estimates.
 
 ```sh
 mkdir bivarREML
@@ -154,4 +157,28 @@ done
 Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
 
 mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
+```
+
+Below is an Rscript for computing chromosome-wise genetic correlations between traits.
+```R
+vc = read.csv("./bivarREML/chr.milk.fat.mq.vc.csv")
+
+# Calculate the genetic correlation estimate and SE. 
+gcorr = matrix(nrow=nrow(vc)/3-1, ncol=2)
+for (k in 1:nrow(gcorr)) {
+    x1 = vc[1+(k-1)*3,3]
+    x2 = vc[2+(k-1)*3,3]
+    x12 = vc[3+(k-1)*3,3]
+    var_x1 = vc[1+(k-1)*3, 8+nrow(vc)+(k-1)*3]
+    var_x2 = vc[2+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
+    var_x12 = vc[3+(k-1)*3,8+nrow(vc)+2+(k-1)*3]
+    cov_x1_x2 = vc[1+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
+    cov_x1_x12 = vc[1+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
+    cov_x2_x12 = vc[2+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
+
+    est = x12 / sqrt(x1 * x2)
+    var_est = est**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
+    gcorr[k, 1] = est
+    gcorr[k, 2] = sqrt(var_est)
+}
 ```
