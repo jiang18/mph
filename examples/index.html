@@ -140,16 +140,7 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#simulated-datasets">Simulated datasets</a></li>
-            <li class="second-level"><a href="#qtl-mas-2012">QTL-MAS 2012</a></li>
-                
-            <li class="second-level"><a href="#sequence-genotypes">Sequence genotypes</a></li>
-                
-        <li class="first-level "><a href="#partitioning-heritability">Partitioning heritability</a></li>
-            <li class="second-level"><a href="#by-chromosomes">By chromosomes</a></li>
-                
-            <li class="second-level"><a href="#by-functional-annotations">By functional annotations</a></li>
-                
+        <li class="first-level active"><a href="#by-functional-annotations">By functional annotations</a></li>
         <li class="first-level "><a href="#dominance-and-epistasis">Dominance and epistasis</a></li>
         <li class="first-level "><a href="#genetic-correlation">Genetic correlation</a></li>
             <li class="second-level"><a href="#genome-wide">Genome-wide</a></li>
@@ -160,36 +151,37 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h2 id="simulated-datasets">Simulated datasets</h2>
-<h3 id="qtl-mas-2012">QTL-MAS 2012</h3>
-<ul>
-<li>The data set is available for download <a href="https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip">here</a>.</li>
-<li><a href="https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1">This article</a> describes how the data set was simulated.</li>
-<li>3k related animals, 10k SNPs, 5 chromosomes, and 3 traits</li>
-</ul>
-<h3 id="sequence-genotypes">Sequence genotypes</h3>
-<ul>
-<li>The data set is available for download <a href="">here</a>.</li>
-<li>Sequence genotypes were simulated by <a href="https://aipl.arsusda.gov/software/genosim/">genosim</a>.</li>
-<li>10k unrelated individuals, 5M sequence variants, and 30 chromosomes</li>
-<li>Functional annotations were quickly simulated by assigning <a href="https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz">LDSC baseline annotations</a> to the simulated sequence variants in order.</li>
-<li>Phenotypes were simulated using the <a href="https://www.nature.com/articles/ng.3404/figures/4">S-LDSC baseline model enrichment estimates for human traits</a>.<ul>
-<li>The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.</li>
-<li>The VC estimates were set as true values in <a href="../options/#simulation">phenotype simulation</a>.</li>
-<li>A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. </li>
-</ul>
-</li>
-</ul>
-<h2 id="partitioning-heritability">Partitioning heritability</h2>
-<h3 id="by-chromosomes">By chromosomes</h3>
-<p>Partitioning heritability by chromosomes for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
-<ol>
-<li>Create a <a href="../options/#snp-info-file">SNP info file</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a>.</li>
-<li><a href="../options/#making-a-grm-from-snps">Make a GRM</a> for each chromosome.</li>
-<li>Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>.</li>
-<li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
-</ol>
-<pre><code class="language-sh"># Making GRMs
+<pre><code class="language-note">    All utility scripts used in the examples are described in [Utilities](util.md).
+
+## Simulated datasets
+
+### QTL-MAS 2012
+- The data set is available for download [here](https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip).
+- [This article](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) describes how the data set was simulated.
+- 3k related animals, 10k SNPs, 5 chromosomes, and 3 traits
+
+### Sequence genotypes
+- The data set is available for download [here]().
+- Sequence genotypes were simulated by [genosim](https://aipl.arsusda.gov/software/genosim/).
+- 10k unrelated individuals, 5M sequence variants, and 30 chromosomes
+- Functional annotations were quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the simulated sequence variants in order.
+- Phenotypes were simulated using the [S-LDSC baseline model enrichment estimates for human traits](https://www.nature.com/articles/ng.3404/figures/4).
+    - The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.
+    - The VC estimates were set as true values in [phenotype simulation](options.md#simulation).
+    - A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. 
+
+## Partitioning heritability
+
+### By chromosomes
+Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) dataset
+
+1. Create a [SNP info file](options.md#snp-info-file): [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1).
+2. [Make a GRM](options.md#making-a-grm-from-snps) for each chromosome.
+3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
+4. Run [REML/MINQUE](options.md#remlminque).
+
+```sh
+# Making GRMs
 # Input: geno and chr.snp_info.csv
 mkdir chromosomes
 for chr in {1..5}
@@ -230,13 +222,13 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 </code></pre>
 <h2 id="genetic-correlation">Genetic correlation</h2>
 <p>Estimating genetic and environmental correlations for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
-<p>Bivariate REML can be transformed into univariate REML. Though MPH is not designed for estimating between-trait correlations, it can do so when provided with correct GRMs. </p>
+<p>Bivariate REML can be transformed into univariate REML. Though MPH is designed for univariate REML, it can <strong>effectively</strong> do bivariate REML when provided with correct GRMs. </p>
 <h3 id="genome-wide">Genome-wide</h3>
 <ol>
 <li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
 <li>Make three GRMs and two residual covariance matrices for a pair of traits.</li>
 <li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt">this</a>. </li>
-<li>Interpret the VC estimates.</li>
+<li>Compute the genetic correlation estimate from the VC estimates.</li>
 </ol>
 <pre><code class="language-sh">mkdir bivarREML
 
@@ -290,7 +282,7 @@ se_ecorr = sqrt(var_ecorr)
 <li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
 <li>Make 15 GRMs (three for each chromosome) and two residual covariance matrices for a pair of traits.</li>
 <li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt">this</a>. </li>
-<li>Interpret the VC estimates.</li>
+<li>Compute the genetic correlation estimates from the VC estimates.</li>
 </ol>
 <pre><code class="language-sh">mkdir bivarREML
 
@@ -308,6 +300,28 @@ done
 Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
 
 mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
+</code></pre>
+<p>Below is an Rscript for computing chromosome-wise genetic correlations between traits.</p>
+<pre><code class="language-R">vc = read.csv(&quot;./bivarREML/chr.milk.fat.mq.vc.csv&quot;)
+
+# Calculate the genetic correlation estimate and SE. 
+gcorr = matrix(nrow=nrow(vc)/3-1, ncol=2)
+for (k in 1:nrow(gcorr)) {
+    x1 = vc[1+(k-1)*3,3]
+    x2 = vc[2+(k-1)*3,3]
+    x12 = vc[3+(k-1)*3,3]
+    var_x1 = vc[1+(k-1)*3, 8+nrow(vc)+(k-1)*3]
+    var_x2 = vc[2+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
+    var_x12 = vc[3+(k-1)*3,8+nrow(vc)+2+(k-1)*3]
+    cov_x1_x2 = vc[1+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
+    cov_x1_x12 = vc[1+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
+    cov_x2_x12 = vc[2+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
+
+    est = x12 / sqrt(x1 * x2)
+    var_est = est**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
+    gcorr[k, 1] = est
+    gcorr[k, 2] = sqrt(var_est)
+}
 </code></pre></div>
         
         
