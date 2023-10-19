@@ -140,7 +140,16 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#by-functional-annotations">By functional annotations</a></li>
+        <li class="first-level active"><a href="#simulated-datasets">Simulated datasets</a></li>
+            <li class="second-level"><a href="#qtl-mas-2012">QTL-MAS 2012</a></li>
+                
+            <li class="second-level"><a href="#sequence-genotypes">Sequence genotypes</a></li>
+                
+        <li class="first-level "><a href="#partitioning-heritability">Partitioning heritability</a></li>
+            <li class="second-level"><a href="#by-chromosomes">By chromosomes</a></li>
+                
+            <li class="second-level"><a href="#by-functional-annotations">By functional annotations</a></li>
+                
         <li class="first-level "><a href="#dominance-and-epistasis">Dominance and epistasis</a></li>
         <li class="first-level "><a href="#genetic-correlation">Genetic correlation</a></li>
             <li class="second-level"><a href="#genome-wide">Genome-wide</a></li>
@@ -151,37 +160,40 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<pre><code class="language-note">    All utility scripts used in the examples are described in [Utilities](util.md).
-
-## Simulated datasets
-
-### QTL-MAS 2012
-- The data set is available for download [here](https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip).
-- [This article](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) describes how the data set was simulated.
-- 3k related animals, 10k SNPs, 5 chromosomes, and 3 traits
-
-### Sequence genotypes
-- The data set is available for download [here]().
-- Sequence genotypes were simulated by [genosim](https://aipl.arsusda.gov/software/genosim/).
-- 10k unrelated individuals, 5M sequence variants, and 30 chromosomes
-- Functional annotations were quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the simulated sequence variants in order.
-- Phenotypes were simulated using the [S-LDSC baseline model enrichment estimates for human traits](https://www.nature.com/articles/ng.3404/figures/4).
-    - The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.
-    - The VC estimates were set as true values in [phenotype simulation](options.md#simulation).
-    - A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. 
-
-## Partitioning heritability
-
-### By chromosomes
-Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) dataset
-
-1. Create a [SNP info file](options.md#snp-info-file): [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1).
-2. [Make a GRM](options.md#making-a-grm-from-snps) for each chromosome.
-3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
-4. Run [REML/MINQUE](options.md#remlminque).
-
-```sh
-# Making GRMs
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All utility scripts used in the examples are described in <a href="../util/">Utilities</a>.</p>
+</div>
+<h2 id="simulated-datasets">Simulated datasets</h2>
+<h3 id="qtl-mas-2012">QTL-MAS 2012</h3>
+<ul>
+<li>The data set is available for download <a href="https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip">here</a>.</li>
+<li><a href="https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1">This article</a> describes how the data set was simulated.</li>
+<li>3k related animals, 10k SNPs, 5 chromosomes, and 3 traits</li>
+</ul>
+<h3 id="sequence-genotypes">Sequence genotypes</h3>
+<ul>
+<li>The data set is available for download <a href="">here</a>.</li>
+<li>Sequence genotypes were simulated by <a href="https://aipl.arsusda.gov/software/genosim/">genosim</a>.</li>
+<li>10k unrelated individuals, 5M sequence variants, and 30 chromosomes</li>
+<li>Functional annotations were quickly simulated by assigning <a href="https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz">LDSC baseline annotations</a> to the simulated sequence variants in order.</li>
+<li>Phenotypes were simulated using the <a href="https://www.nature.com/articles/ng.3404/figures/4">S-LDSC baseline model enrichment estimates for human traits</a>.<ul>
+<li>The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.</li>
+<li>The VC estimates were set as true values in <a href="../options/#simulation">phenotype simulation</a>.</li>
+<li>A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. </li>
+</ul>
+</li>
+</ul>
+<h2 id="partitioning-heritability">Partitioning heritability</h2>
+<h3 id="by-chromosomes">By chromosomes</h3>
+<p>Partitioning heritability by chromosomes for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
+<ol>
+<li>Create a <a href="../options/#snp-info-file">SNP info file</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a>.</li>
+<li><a href="../options/#making-a-grm-from-snps">Make a GRM</a> for each chromosome.</li>
+<li>Create a <a href="../options/#grm-list-file">GRM list</a>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>.</li>
+<li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
+</ol>
+<pre><code class="language-sh"># Making GRMs
 # Input: geno and chr.snp_info.csv
 mkdir chromosomes
 for chr in {1..5}
