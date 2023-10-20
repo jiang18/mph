@@ -157,6 +157,24 @@
 </div>
 <h2 id="utility-scripts">Utility scripts</h2>
 <h3 id="grm-io">GRM I/O</h3>
+<ul>
+<li>
+<p><code>grm_io.R</code> contains two R functions.</p>
+<ul>
+<li>write_grm() writes an R GRM into MPH files (.iid and .bin).</li>
+<li>read_grm() reads a MPH GRM into R.</li>
+<li>The R matrix to be written can be any <strong>general</strong> relationship matrix.</li>
+<li>This script is sourced in other R scripts for GRM I/O.</li>
+</ul>
+</li>
+<li>
+<p><code>grm_txt2bin.R</code> converts a relationship matrix from txt to MPH binary format. </p>
+<ul>
+<li><code>Rscript grm_txt2bin.R example.grm.txt example</code></li>
+<li><a href="https://github.com/jiang18/mph/blob/main/examples/example.grm.txt">example.grm.txt</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="making-files-for-trait-pair">Making files for trait pair</h3>
 <h3 id="heritability-enrichment">Heritability enrichment</h3></div>
         
