@@ -1,4 +1,5 @@
 #!/usr/bin/env Rscript
+source("grm_io.R")
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 2) {
@@ -7,8 +8,6 @@ if (length(args) != 2) {
 
 infile = args[1]
 outfile = args[2]
-
-source("grm_io.R")
 
 keep = read.table(paste0(infile, ".grm.iid"))
 dim = length(keep[,1])
