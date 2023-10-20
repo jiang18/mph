@@ -1,5 +1,5 @@
 # use AGHmatrix to construct numerator relationship matrix with renumf90 ped file
-
+source("grm_io.R")
 library(AGHmatrix)
 
 args = commandArgs(trailingOnly=TRUE)
@@ -28,5 +28,4 @@ print("First few elements:")
 print(grm[1:5,1:5])
 
 iid = colnames(grm)
-source("grm_io.R")
 write_grm(prefix, iid, grm)
