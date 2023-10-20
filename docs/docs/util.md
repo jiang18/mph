@@ -6,7 +6,7 @@
 ### GRM I/O
 - `grm_io.R` contains two R functions.
     - write_grm() writes an R GRM into MPH files (.iid and .bin).
-    - read_grm() reads a MPH GRM into R.
+    - read_grm() reads an MPH GRM into R.
     - The R matrix to be written can be any **general** relationship matrix.
     - This script is sourced in other R scripts for GRM I/O.
 
