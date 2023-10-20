@@ -1,4 +1,4 @@
-# R script to write GRM into MPH files (.iid and .bin)
+# R script to write GRM into MPH format files (.iid and .bin)
 write_grm=function(prefix, iid, grm){
   idfile = paste0(prefix, ".grm.iid")
   binfile = paste0(prefix, ".grm.bin")
