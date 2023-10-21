@@ -17,13 +17,13 @@ dim = dim(grm)[1]
 iid = c(paste0("t1.", colnames(grm)), paste0("t2.", colnames(grm)))
 full = matrix(0, nrow=dim*2, ncol=dim*2)
 full[1:dim, 1:dim] = grm
-write_grm(paste0(outfile, ".G.t1"), iid, full)
+write_grm(paste0(outfile, ".G11"), iid, full)
 
 full = matrix(0, nrow=dim*2, ncol=dim*2)
 full[(1+dim):(dim*2), (1+dim):(dim*2)] = grm
-write_grm(paste0(outfile, ".G.t2"), iid, full)
+write_grm(paste0(outfile, ".G22"), iid, full)
 
 full = matrix(0, nrow=dim*2, ncol=dim*2)
 full[1:dim, (1+dim):(dim*2)] = grm
 full[(1+dim):(dim*2), 1:dim] = grm
-write_grm(paste0(outfile, ".G.t1t2"), iid, full)
+write_grm(paste0(outfile, ".G12"), iid, full)
