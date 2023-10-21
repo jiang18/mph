@@ -15,9 +15,9 @@ iid = c(paste0("t1.", keep[,1]), paste0("t2.", keep[,1]))
 
 full = matrix(0, nrow=dim*2, ncol=dim*2)
 diag(full[1:dim, 1:dim]) = 1
-write_grm(paste0(outfile, ".E.t1"), iid, full)
+write_grm(paste0(outfile, ".E1d"), iid, full)
 
 full = matrix(0, nrow=dim*2, ncol=dim*2)
 diag(full[1:dim, (1+dim):(dim*2)]) = 1
 diag(full[(1+dim):(dim*2), 1:dim]) = 1
-write_grm(paste0(outfile, ".E.t1t2"), iid, full)
+write_grm(paste0(outfile, ".E12"), iid, full)
