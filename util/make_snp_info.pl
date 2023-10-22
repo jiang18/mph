@@ -1,4 +1,4 @@
-# Make a SNP info file for MPH from a file of genomic feature
+# Make a SNP info file for MPH from a file of genomic functional annotations
 
 # All postions are 1-based.
 # start and end are included in invervals.
@@ -31,7 +31,7 @@ for (keys %snp)
 print "There are ", scalar(@snp_arr), " SNPs in $snp_pos_file.\n";
 
 # step 2
-# get genomic feature
+# get genomic functional annotations
 open IN,$gf_file or die "Cannot open file $gf_file: $!\n";
 my %gf;
 while(<IN>)
@@ -52,7 +52,7 @@ for (keys %gf)
 print "Completed reading $gf_file\n";
 
 # step 3
-# assign SNPs to genomic features with single pass
+# assign SNPs to genomic functional annotations with single pass
 my %snp2gf;
 my %useful_gf;
 for my $chrom (keys %snp)
@@ -89,11 +89,11 @@ for my $chrom (keys %snp)
 my @categories = sort keys %useful_gf;
 
 if(scalar(keys %snp2gf) == 0) {
-	print "Something went wrong: no SNPs are within genomic features.\n";
+	print "Something went wrong: no SNPs are within genomic functional annotations.\n";
 	print "No snp info file generated\n";
 	exit(1);
 }
-print scalar(keys %snp2gf), " SNPs are assigned into ", scalar(@categories), " genomic features.\n";
+print scalar(keys %snp2gf), " SNPs are assigned into ", scalar(@categories), " genomic functional annotations.\n";
 
 # step 4
 # generate output file
@@ -120,9 +120,9 @@ print "$output_prefix.snp_info.csv generated\n";
 sub print_usage()
 {
 	print "Usage:\n";
-	print "  perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix\n";
+	print "  perl make_snp_info.pl PLINK-bim-file functional-annotation-file output-filename-prefix\n";
 	print "  Both input files should be in plain text format without header lines.\n";
-	print "  Genomic-feature-file's first four columns should be chrom, start, end, and category.\n";
+	print "  Functional-annotation-file's first four columns should be chrom, start, end, and category.\n";
 	exit(1);
 }
 
