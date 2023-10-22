@@ -40,14 +40,15 @@ A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](opt
 
 Usage:
 
-- `perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix`
+- `perl make_snp_info.pl PLINK-bim-file functional-annotation-file output-filename-prefix`
 - Both input files should be in plain text format without header lines.
-- Genomic-feature-file's first four columns should be chrom, start, end, and category.
+- Functional-annotation-file's first four columns should be chrom, start, end, and category.
 
 Example:
 
 - `perl make_snp_info.pl test.bim test.annot.txt test`
-- Input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt)
+- The input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt).
 - An output file named **test.snp_info.csv** will be generated. 
 
-#### Overlapping 
+#### Estimating enrichments from VCs
+
