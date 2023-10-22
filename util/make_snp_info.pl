@@ -38,7 +38,7 @@ while(<IN>)
 {
 	chomp;
 	my @c = split /\s+/;
-	next unless (@c == 4);
+	next if (@c < 4);
  	$c[0] =~ s/chr//i;
 	push @{$gf{$c[0]}},[@c[1..3]];
 }
@@ -119,10 +119,10 @@ print "$output_prefix.snp_info.csv generated\n";
 
 sub print_usage()
 {
-	print "Run the program:\n";
-	print "  perl make_snp_info.pl plink-bim-file genomic-feature-file output-filename-prefix \n";
-	print "  Both input files are plain text and have NO header line.\n";
-	print "  genomic-feature-file: the first four (4) columns are chrom, start, end, and category\n";
+	print "Usage:\n";
+	print "  perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix\n";
+	print "  Both input files should be in plain text format without header lines.\n";
+	print "  Genomic-feature-file's first four columns should be chrom, start, end, and category.\n";
 	exit(1);
 }
 
