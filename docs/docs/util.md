@@ -1,9 +1,7 @@
 !!! note  
     Utility scripts are hosted in [the MPH repository](https://github.com/jiang18/mph/tree/main/util).
 
-## Utility scripts
-
-### GRM input/output
+## GRM input/output
 MPH computes only **genomic** relationship matrices. `External` **general** relationship matrices can be converted to MPH format for use in MPH. 
 
 - `grm_io.R` contains two R functions.
@@ -16,7 +14,7 @@ MPH computes only **genomic** relationship matrices. `External` **general** rela
     - This input file should be structured like [example.grm.txt](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
 - `AGHmatrix2mph.R` constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/index.html) and writes it into MPH format files.
 
-### Making files for a trait pair
+## Making files for a trait pair
 Four R scripts are provided to prepare input files for bivariate REML in MPH.
 
 - `make_pheno_for_pair.R` generates new phenotype and covariate files for a trait pair.
@@ -34,8 +32,8 @@ Four R scripts are provided to prepare input files for bivariate REML in MPH.
 
 Usage examples are available [here](examples.md#genetic-correlation).
 
-### Heritability enrichment
-#### Making a SNP info file
+## Heritability enrichment
+### Making a SNP info file
 A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](options.md#snp-info-file).
 
 Usage:
@@ -50,5 +48,5 @@ Example:
 - The input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt).
 - An output file named **test.snp_info.csv** will be generated. 
 
-#### From VCs to enrichments
+### From VCs to enrichments
 
