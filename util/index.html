@@ -203,14 +203,18 @@
 <h3 id="heritability-enrichment">Heritability enrichment</h3>
 <h4 id="making-a-snp-info-file">Making a SNP info file</h4>
 <p>A Perl script, <code>make_snp_info.pl</code>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a>.</p>
-<p>Usage:<br />
-- <code>perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix</code>
-- Both input files should be in plain text format without header lines.
-- Genomic-feature-file's first four columns should be chrom, start, end, and category.</p>
-<p>Example:<br />
-- <code>perl make_snp_info.pl test.bim test.annot.txt test</code>
-- Input files are <a href="https://github.com/jiang18/mph/blob/main/examples/test.bim">test.bim</a> and <a href="https://github.com/jiang18/mph/blob/main/examples/test.annot.txt">test.annot.txt</a>
-- An output file named <strong>test.snp_info.csv</strong> will be generated. </p>
+<p>Usage:</p>
+<ul>
+<li><code>perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix</code></li>
+<li>Both input files should be in plain text format without header lines.</li>
+<li>Genomic-feature-file's first four columns should be chrom, start, end, and category.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li><code>perl make_snp_info.pl test.bim test.annot.txt test</code></li>
+<li>Input files are <a href="https://github.com/jiang18/mph/blob/main/examples/test.bim">test.bim</a> and <a href="https://github.com/jiang18/mph/blob/main/examples/test.annot.txt">test.annot.txt</a></li>
+<li>An output file named <strong>test.snp_info.csv</strong> will be generated. </li>
+</ul>
 <h4 id="overlapping">Overlapping</h4></div>
         
         
