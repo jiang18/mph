@@ -1,0 +1,4 @@
+1 100 200 exon
+1 201 300 intron
+2 100 200 intron
+2 201 300 exon
