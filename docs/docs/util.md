@@ -49,4 +49,7 @@ Example:
 - An output file named **test.snp_info.csv** will be generated. 
 
 ### From VCs to enrichments
+The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and standard errors of VCs and enrichments, where enrichments are calculated under the assumption that functional annotation categories do not overlap with one another.
+
+If functional categories actually overlap, one more quick computation is needed to recalculate enrichments from **.mq.vc.csv** and the SNP info file. 
 
