@@ -147,6 +147,8 @@
                 
             <li class="second-level"><a href="#heritability-enrichment">Heritability enrichment</a></li>
                 
+                <li class="third-level"><a href="#making-a-snp-info-file">Making a SNP info file</a></li>
+                <li class="third-level"><a href="#overlapping">Overlapping</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -198,7 +200,18 @@
 </li>
 </ul>
 <p>Usage examples are available <a href="../examples/#genetic-correlation">here</a>.</p>
-<h3 id="heritability-enrichment">Heritability enrichment</h3></div>
+<h3 id="heritability-enrichment">Heritability enrichment</h3>
+<h4 id="making-a-snp-info-file">Making a SNP info file</h4>
+<p>A Perl script, <code>make_snp_info.pl</code>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a>.</p>
+<p>Usage:
+- <code>perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix</code>
+- Both input files should be in plain text format without header lines.
+- Genomic-feature-file's first four columns should be chrom, start, end, and category.</p>
+<p>Example:
+- <code>perl make_snp_info.pl test.bim test.annot.txt test</code>
+- Input files are <a href="https://github.com/jiang18/mph/blob/main/examples/test.bim">test.bim</a> and <a href="https://github.com/jiang18/mph/blob/main/examples/test.annot.txt">test.annot.txt</a>
+- An output file named <strong>test.snp_info.csv</strong> will be generated. </p>
+<h4 id="overlapping">Overlapping</h4></div>
         
         
     </div>
