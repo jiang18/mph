@@ -35,4 +35,17 @@ Four R scripts are provided to prepare input files for bivariate REML in MPH.
 Usage examples are available [here](examples.md#genetic-correlation).
 
 ### Heritability enrichment
+#### Making a SNP info file
+A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](options.md#snp-info-file).
 
+Usage:
+- `perl make_snp_info.pl PLINK-bim-file genomic-feature-file output-filename-prefix`
+- Both input files should be in plain text format without header lines.
+- Genomic-feature-file's first four columns should be chrom, start, end, and category.
+
+Example:
+- `perl make_snp_info.pl test.bim test.annot.txt test`
+- Input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt)
+- An output file named **test.snp_info.csv** will be generated. 
+
+#### Overlapping 
