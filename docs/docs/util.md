@@ -16,7 +16,7 @@ MPH computes only **genomic** relationship matrices. `External` **general** rela
     - This input file should be structured like [example.grm.txt](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
 - `AGHmatrix2mph.R` constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/index.html) and writes it into MPH format files.
 
-### Making files for trait pair
+### Making files for a trait pair
 Four R scripts are provided to prepare input files for bivariate REML in MPH.
 
 - `make_pheno_for_pair.R` generates new phenotype and covariate files for a trait pair.
@@ -50,5 +50,5 @@ Example:
 - The input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt).
 - An output file named **test.snp_info.csv** will be generated. 
 
-#### Estimating enrichments from VCs
+#### From VCs to enrichments
 
