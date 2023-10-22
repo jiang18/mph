@@ -140,15 +140,13 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#utility-scripts">Utility scripts</a></li>
-            <li class="second-level"><a href="#grm-inputoutput">GRM input/output</a></li>
+        <li class="first-level active"><a href="#grm-inputoutput">GRM input/output</a></li>
+        <li class="first-level "><a href="#making-files-for-a-trait-pair">Making files for a trait pair</a></li>
+        <li class="first-level "><a href="#heritability-enrichment">Heritability enrichment</a></li>
+            <li class="second-level"><a href="#making-a-snp-info-file">Making a SNP info file</a></li>
                 
-            <li class="second-level"><a href="#making-files-for-a-trait-pair">Making files for a trait pair</a></li>
+            <li class="second-level"><a href="#from-vcs-to-enrichments">From VCs to enrichments</a></li>
                 
-            <li class="second-level"><a href="#heritability-enrichment">Heritability enrichment</a></li>
-                
-                <li class="third-level"><a href="#making-a-snp-info-file">Making a SNP info file</a></li>
-                <li class="third-level"><a href="#from-vcs-to-enrichments">From VCs to enrichments</a></li>
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -157,8 +155,7 @@
 <p class="admonition-title">Note</p>
 <p>Utility scripts are hosted in <a href="https://github.com/jiang18/mph/tree/main/util">the MPH repository</a>.</p>
 </div>
-<h2 id="utility-scripts">Utility scripts</h2>
-<h3 id="grm-inputoutput">GRM input/output</h3>
+<h2 id="grm-inputoutput">GRM input/output</h2>
 <p>MPH computes only <strong>genomic</strong> relationship matrices. <code>External</code> <strong>general</strong> relationship matrices can be converted to MPH format for use in MPH. </p>
 <ul>
 <li><code>grm_io.R</code> contains two R functions.<ul>
@@ -175,7 +172,7 @@
 </li>
 <li><code>AGHmatrix2mph.R</code> constructs a <strong>numerator</strong> relationship matrix with <a href="https://cran.r-project.org/web/packages/AGHmatrix/index.html">AGHmatrix</a> and writes it into MPH format files.</li>
 </ul>
-<h3 id="making-files-for-a-trait-pair">Making files for a trait pair</h3>
+<h2 id="making-files-for-a-trait-pair">Making files for a trait pair</h2>
 <p>Four R scripts are provided to prepare input files for bivariate REML in MPH.</p>
 <ul>
 <li><code>make_pheno_for_pair.R</code> generates new phenotype and covariate files for a trait pair.<ul>
@@ -200,8 +197,8 @@
 </li>
 </ul>
 <p>Usage examples are available <a href="../examples/#genetic-correlation">here</a>.</p>
-<h3 id="heritability-enrichment">Heritability enrichment</h3>
-<h4 id="making-a-snp-info-file">Making a SNP info file</h4>
+<h2 id="heritability-enrichment">Heritability enrichment</h2>
+<h3 id="making-a-snp-info-file">Making a SNP info file</h3>
 <p>A Perl script, <code>make_snp_info.pl</code>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a>.</p>
 <p>Usage:</p>
 <ul>
@@ -215,7 +212,7 @@
 <li>The input files are <a href="https://github.com/jiang18/mph/blob/main/examples/test.bim">test.bim</a> and <a href="https://github.com/jiang18/mph/blob/main/examples/test.annot.txt">test.annot.txt</a>.</li>
 <li>An output file named <strong>test.snp_info.csv</strong> will be generated. </li>
 </ul>
-<h4 id="from-vcs-to-enrichments">From VCs to enrichments</h4></div>
+<h3 id="from-vcs-to-enrichments">From VCs to enrichments</h3></div>
         
         
     </div>
