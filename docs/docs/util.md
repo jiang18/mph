@@ -60,4 +60,4 @@ If functional categories actually overlap, one more quick computation is needed 
 - nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
 - annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
 
-An usage example is available [here](examples.md#by-functional-annotations).
+A usage example is available [here](examples.md#by-functional-annotations).
