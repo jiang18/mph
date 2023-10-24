@@ -16,7 +16,7 @@
 - Phenotypes were simulated using the [S-LDSC baseline model enrichment estimates for human traits](https://www.nature.com/articles/ng.3404/figures/4).
     - The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.
     - The VC estimates were set as true values in [phenotype simulation](options.md#simulation).
-    - A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. 
+    - A small value was added to the intercept's VC to enhance the all-in-one GRM's positive definiteness. 
 
 ## Partitioning heritability
 
@@ -48,13 +48,15 @@ Partitioning heritability by functional annotations for the [sequence genotypes]
 ```bash
 # 1. Create a new SNP info file including only variants that pass quality control.
 # SNPs with an MAF < 0.01 are removed from funct.snp_info.csv, producing qc.funct.snp_info.csv.
-
-# 2. Make a GRM for each functional annotation category.
-mkdir grms
 snpinfo="qc.funct.snp_info.csv"
 
-# Read the first line of the SNP info file and split it by a comma.
+# Read the first line of the SNP info file and split it by a comma to get the annotation list.
 IFS=',' read -ra elements < $snpinfo
+
+# 2. Make a GRM for each functional annotation category.
+# It may take about one hour to contruct all the GRMs. 
+# Note that precomputed GRMs are included in the dataset. Go to the step 3 to save time. 
+mkdir grms
 
 # Iterate over the list of annotation categories.
 # Use PLINK to extract SNPs in each category for faster I/O.
@@ -76,10 +78,56 @@ for ((i = 1; i < ${#elements[@]}; i++)); do
 done
 
 # Run REML.
-mph --minque --save_memory --grm_list $grmlist --phenotype sim.pheno.csv --trait 1 --num_threads 14 --out 1
-
+mkdir reml
+mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 ```
-It took 
+
+Below is an R script for recalculating the proportion of genetic variance explained and enrichments and visualization.
+```R
+source("recalculate_enrichments.R")
+library(data.table)
+
+# Read the SNP info file to get the SNP weighting matrix.
+sw = as.matrix(fread("qc.funct.snp_info.csv"),rownames=1)
+sw[is.na(sw)] = 0
+
+# Get the SNP incidence matrix.
+# The SNP weighting matrix is often the incidence matrix, but not always.
+si = (sw != 0) * 1
+
+# More annotation categories can be included in the incidence matrix.
+gene = as.numeric( rowSums(si[, c("Coding_UCSC", "Intron_UCSC", "Promoter_UCSC", "UTR_3_UCSC", "UTR_5_UCSC")]) > 0 )
+si = cbind(si, gene)
+annot_size = colSums(si)
+
+# Calculate the crossproduct of si and sw.
+# The columns of sw should match the rows of vcfile.
+index = 1:25; sw = sw[, index]
+cp = crossprod(si, sw)
+
+vcfile = "reml/1.mq.vc.csv"
+result = recalculate_enrichments(vcfile, cp, annot.size=annot_size) 
+result
+
+# plot
+library(ggplot2)
+
+result = as.data.frame(result[-1,])
+pct = result$prop * 100
+pct = round(pct,2)
+rownames(result) = paste0(rownames(result)," (",pct,"%)")
+
+df = data.frame(FunctionalAnnotation=rownames(result), Enrichment=result$enrichment, SE=result$enrichment.se)
+p<- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
+  geom_bar(stat="identity", color="black", 
+           position=position_dodge()) +
+  geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.5, position=position_dodge(.9)) 
+p<- p + theme(text = element_text(size=20), axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ylab("Per-SNP heritability enrichment estimate") + ggtitle("Trait 1")
+p
+```
+The following figure will be produced.
+![FunctAnnotTrait1](img/FunctAnnotTrait1.jpg)
 
 ## Dominance and epistasis
 Decomposing genetic variance into additive, dominance, and epistatic components for the [QTL-MAS 2012](#qtl-mas-2012) dataset
