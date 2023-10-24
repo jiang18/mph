@@ -122,7 +122,7 @@ p<- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) +
   geom_bar(stat="identity", color="black", 
            position=position_dodge()) +
   geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.5, position=position_dodge(.9)) 
-p<- p + theme(text = element_text(size=20), axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+p<- p + theme(text = element_text(size=22), axis.text.x = element_text(angle = 65, vjust = 1, hjust=1))
 p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ylab("Per-SNP heritability enrichment estimate") + ggtitle("Trait 1")
 p
 ```
