@@ -43,7 +43,43 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_w
 ```
 
 ### By functional annotations
-TBA
+Partitioning heritability by functional annotations for the [sequence genotypes](#sequence-genotypes) dataset
+
+```bash
+# 1. Create a new SNP info file including only variants that pass quality control.
+# SNPs with an MAF < 0.01 are removed from funct.snp_info.csv, producing qc.funct.snp_info.csv.
+
+# 2. Make a GRM for each functional annotation category.
+mkdir grms
+snpinfo="qc.funct.snp_info.csv"
+
+# Read the first line of the SNP info file and split it by a comma.
+IFS=',' read -ra elements < $snpinfo
+
+# Iterate over the list of annotation categories.
+# Use PLINK to extract SNPs in each category for faster I/O.
+for ((i = 1; i < ${#elements[@]}; i++)); do
+    awk -F ',' -v colname="${elements[i]}" 'NR == 1 { for (j = 1; j <= NF; j++) if ($j == colname) col = j } NR > 1 && $col == 1 { print $1 }' $snpinfo >  "${elements[i]}.extract.txt"
+    plink --bfile geno --chr-set 30 --extract "${elements[i]}.extract.txt" --threads 14 --make-bed --out ${elements[i]}
+    mph --make_grm --binary_geno ${elements[i]} --snp_info $snpinfo --snp_weight ${elements[i]} --num_threads 14 --out ./grms/${elements[i]}
+    rm ${elements[i]}.*
+done
+
+# 3. Create a GRM list and run REML.
+# Create a GRM list.
+grmlist="funct.grms.txt"
+if [ -e $grmlist ]; then
+    rm $grmlist
+fi
+for ((i = 1; i < ${#elements[@]}; i++)); do
+    echo "grms/${elements[i]} 1" >> $grmlist
+done
+
+# Run REML.
+mph --minque --save_memory --grm_list $grmlist --phenotype sim.pheno.csv --trait 1 --num_threads 14 --out 1
+
+```
+It took 
 
 ## Dominance and epistasis
 Decomposing genetic variance into additive, dominance, and epistatic components for the [QTL-MAS 2012](#qtl-mas-2012) dataset
