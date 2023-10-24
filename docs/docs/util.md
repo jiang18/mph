@@ -4,7 +4,7 @@
 ## GRM input/output
 MPH computes only **genomic** relationship matrices. `External` **general** relationship matrices can be converted to MPH format for use in MPH. 
 
-- `grm_io.R` contains two R functions.
+- `mph_functs.R` contains two R functions for GRM input/output.
     - `write_grm()` writes an R GRM into MPH format files (.iid and .bin).
     - `read_grm()` reads an MPH GRM into R.
     - The R matrix to be written can be any **general** relationship matrix.
@@ -51,7 +51,7 @@ Example:
 ### From VCs to enrichments
 The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
-If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the R function in [recalculate_enrichments.R](https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R).
+If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the `recalculate_enrichments()` function in [mph_functs.R](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
 
 `recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
 
