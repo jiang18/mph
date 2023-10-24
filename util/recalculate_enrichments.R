@@ -19,8 +19,8 @@ recalculate_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA) 
     mq = mq[1:ncol(crossprod),]
 
     # PVE estimate
-    var = lhs %*% as.matrix(mq[,9:(8+nrow(mq))]) %*% t(lhs)
-    pve.est = lhs %*% mq$enrichment / sum(mq$m)
+    var = crossprod %*% as.matrix(mq[,9:(8+nrow(mq))]) %*% t(crossprod)
+    pve.est = crossprod %*% mq$enrichment / sum(mq$m)
     pve.se = sqrt(diag(var)) / sum(mq$m) 
 
     # enrichment estimate
