@@ -53,11 +53,9 @@ The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and st
 
 If functional categories actually overlap, one more quick computation is needed to recalculate enrichments from **.mq.vc.csv** and the SNP info file. This can be quickly done by the R function in [recalculate_enrichments.R](https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R).
 
-Arguments of `recalculate_enrichments(vcfile, snpinfo=NA, crossprod=NA, nsnps=NA, annot.size=NA, index=NULL)`
+Arguments of `recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
 
 - vcfile: the .mq.vc.csv file produced by `mph --minque`.
-- snpinfo: SNP info file. Igonored if crossprod is provided.
-- crossprod: the crossproduct matrix of the weighting matrix in the SNP info file.
+- crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 - nsnps: the total number of SNPs. If not provided, it is set to the first GRM's number of SNPs in vcfile.
-- annot.size: a list of the number of SNPs in each output annotation category. If not provided, it is set to the "m" column of vcfile.
-- index: a list of column indices in snpinfo or crossprod matching the rows of vcfile. The first category should be indexed as 1, the second as 2, and so on.
+- annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be calculated from the column-wise sum of the corresponding SNP incidence matrix. If not provided, it is set to the "m" column of vcfile.
