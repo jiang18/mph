@@ -1,5 +1,5 @@
 # use AGHmatrix to construct numerator relationship matrix with renumf90 ped file
-source("grm_io.R")
+source("mph_functs.R")
 library(AGHmatrix)
 
 args = commandArgs(trailingOnly=TRUE)

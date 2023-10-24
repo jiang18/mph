@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-source("grm_io.R")
+source("mph_functs.R")
 library(data.table)
 
 args = commandArgs(trailingOnly=TRUE)
