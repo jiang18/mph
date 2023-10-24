@@ -84,7 +84,7 @@ mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv 
 
 Below is an R script for recalculating the proportion of genetic variance explained and enrichments and visualization.
 ```R
-source("recalculate_enrichments.R")
+source("mph_functs.R")
 library(data.table)
 
 # Read the SNP info file to get the SNP weighting matrix.
