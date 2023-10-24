@@ -180,7 +180,7 @@
 <li>Phenotypes were simulated using the <a href="https://www.nature.com/articles/ng.3404/figures/4">S-LDSC baseline model enrichment estimates for human traits</a>.<ul>
 <li>The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.</li>
 <li>The VC estimates were set as true values in <a href="../options/#simulation">phenotype simulation</a>.</li>
-<li>A small value was added to intercept's VC to enhance the all-in-one GRM's positive definiteness. </li>
+<li>A small value was added to the intercept's VC to enhance the all-in-one GRM's positive definiteness. </li>
 </ul>
 </li>
 </ul>
@@ -209,13 +209,15 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_w
 <p>Partitioning heritability by functional annotations for the <a href="#sequence-genotypes">sequence genotypes</a> dataset</p>
 <pre><code class="language-bash"># 1. Create a new SNP info file including only variants that pass quality control.
 # SNPs with an MAF &lt; 0.01 are removed from funct.snp_info.csv, producing qc.funct.snp_info.csv.
-
-# 2. Make a GRM for each functional annotation category.
-mkdir grms
 snpinfo=&quot;qc.funct.snp_info.csv&quot;
 
-# Read the first line of the SNP info file and split it by a comma.
+# Read the first line of the SNP info file and split it by a comma to get the annotation list.
 IFS=',' read -ra elements &lt; $snpinfo
+
+# 2. Make a GRM for each functional annotation category.
+# It may take about one hour to contruct all the GRMs. 
+# Note that precomputed GRMs are included in the dataset. Go to the step 3 to save time. 
+mkdir grms
 
 # Iterate over the list of annotation categories.
 # Use PLINK to extract SNPs in each category for faster I/O.
@@ -237,10 +239,54 @@ for ((i = 1; i &lt; ${#elements[@]}; i++)); do
 done
 
 # Run REML.
-mph --minque --save_memory --grm_list $grmlist --phenotype sim.pheno.csv --trait 1 --num_threads 14 --out 1
-
+mkdir reml
+mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 </code></pre>
-<p>It took </p>
+<p>Below is an R script for recalculating the proportion of genetic variance explained and enrichments and visualization.</p>
+<pre><code class="language-R">source(&quot;mph_functs.R&quot;)
+library(data.table)
+
+# Read the SNP info file to get the SNP weighting matrix.
+sw = as.matrix(fread(&quot;qc.funct.snp_info.csv&quot;),rownames=1)
+sw[is.na(sw)] = 0
+
+# Get the SNP incidence matrix.
+# The SNP weighting matrix is often the incidence matrix, but not always.
+si = (sw != 0) * 1
+
+# More annotation categories can be included in the incidence matrix.
+gene = as.numeric( rowSums(si[, c(&quot;Coding_UCSC&quot;, &quot;Intron_UCSC&quot;, &quot;Promoter_UCSC&quot;, &quot;UTR_3_UCSC&quot;, &quot;UTR_5_UCSC&quot;)]) &gt; 0 )
+si = cbind(si, gene)
+annot_size = colSums(si)
+
+# Calculate the crossproduct of si and sw.
+# The columns of sw should match the rows of vcfile.
+index = 1:25; sw = sw[, index]
+cp = crossprod(si, sw)
+
+vcfile = &quot;reml/1.mq.vc.csv&quot;
+result = recalculate_enrichments(vcfile, cp, annot.size=annot_size) 
+result
+
+# plot
+library(ggplot2)
+
+result = as.data.frame(result[-1,])
+pct = result$prop * 100
+pct = round(pct,2)
+rownames(result) = paste0(rownames(result),&quot; (&quot;,pct,&quot;%)&quot;)
+
+df = data.frame(FunctionalAnnotation=rownames(result), Enrichment=result$enrichment, SE=result$enrichment.se)
+p&lt;- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
+  geom_bar(stat=&quot;identity&quot;, color=&quot;black&quot;, 
+           position=position_dodge()) +
+  geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.5, position=position_dodge(.9)) 
+p&lt;- p + theme(text = element_text(size=20), axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+p&lt;- p+ geom_hline(yintercept=1, linetype=&quot;dashed&quot;, color = &quot;red&quot;) + xlab(&quot;&quot;) + ylab(&quot;Per-SNP heritability enrichment estimate&quot;) + ggtitle(&quot;Trait 1&quot;)
+p
+</code></pre>
+<p>The following figure will be produced.
+<img alt="FunctAnnotTrait1" src="../img/FunctAnnotTrait1.jpg" /></p>
 <h2 id="dominance-and-epistasis">Dominance and epistasis</h2>
 <p>Decomposing genetic variance into additive, dominance, and epistatic components for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
 <ol>

@@ -158,7 +158,7 @@
 <h2 id="grm-inputoutput">GRM input/output</h2>
 <p>MPH computes only <strong>genomic</strong> relationship matrices. <code>External</code> <strong>general</strong> relationship matrices can be converted to MPH format for use in MPH. </p>
 <ul>
-<li><code>grm_io.R</code> contains two R functions.<ul>
+<li><code>mph_functs.R</code> contains two R functions for GRM input/output.<ul>
 <li><code>write_grm()</code> writes an R GRM into MPH format files (.iid and .bin).</li>
 <li><code>read_grm()</code> reads an MPH GRM into R.</li>
 <li>The R matrix to be written can be any <strong>general</strong> relationship matrix.</li>
@@ -214,7 +214,7 @@
 </ul>
 <h3 id="from-vcs-to-enrichments">From VCs to enrichments</h3>
 <p>The <strong>.mq.vc.csv</strong> file produced by <code>mph --minque</code> contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.</p>
-<p>If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from <strong>.mq.vc.csv</strong> and <a href="../options/#snp-info-file">the SNP info file</a>. This can be quickly done by the R function in <a href="https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R">recalculate_enrichments.R</a>.</p>
+<p>If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from <strong>.mq.vc.csv</strong> and <a href="../options/#snp-info-file">the SNP info file</a>. This can be quickly done by the <code>recalculate_enrichments()</code> function in <a href="https://github.com/jiang18/mph/tree/main/util/mph_functs.R">mph_functs.R</a>.</p>
 <p><code>recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)</code></p>
 <ul>
 <li>vcfile: the .mq.vc.csv file produced by <code>mph --minque</code>.</li>
@@ -222,7 +222,7 @@
 <li>nsnps: the total number of SNPs. If <code>NA</code>, it is set to the first GRM's number of SNPs in vcfile.</li>
 <li>annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If <code>NA</code>, it is set to the <code>m</code> column of vcfile.</li>
 </ul>
-<p>An usage example is available <a href="../examples/#by-functional-annotations">here</a>.</p></div>
+<p>A usage example is available <a href="../examples/#by-functional-annotations">here</a>.</p></div>
         
         
     </div>
