@@ -215,13 +215,14 @@
 <h3 id="from-vcs-to-enrichments">From VCs to enrichments</h3>
 <p>The <strong>.mq.vc.csv</strong> file produced by <code>mph --minque</code> contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.</p>
 <p>If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from <strong>.mq.vc.csv</strong> and <a href="../options/#snp-info-file">the SNP info file</a>. This can be quickly done by the R function in <a href="https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R">recalculate_enrichments.R</a>.</p>
-<p>Arguments of <code>recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)</code></p>
+<p><code>recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)</code></p>
 <ul>
 <li>vcfile: the .mq.vc.csv file produced by <code>mph --minque</code>.</li>
 <li>crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.</li>
 <li>nsnps: the total number of SNPs. If <code>NA</code>, it is set to the first GRM's number of SNPs in vcfile.</li>
 <li>annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If <code>NA</code>, it is set to the <code>m</code> column of vcfile.</li>
-</ul></div>
+</ul>
+<p>An usage example is available <a href="../examples/#by-functional-annotations">here</a>.</p></div>
         
         
     </div>
