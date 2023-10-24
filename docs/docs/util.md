@@ -49,13 +49,13 @@ Example:
 - An output file named **test.snp_info.csv** will be generated. 
 
 ### From VCs to enrichments
-The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and standard errors of VCs and enrichments, where enrichments are calculated under the assumption that functional annotation categories do not overlap with one another.
+The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
-If functional categories actually overlap, one more quick computation is needed to recalculate enrichments from **.mq.vc.csv** and the SNP info file. This can be quickly done by the R function in [recalculate_enrichments.R](https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R).
+If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the R function in [recalculate_enrichments.R](https://github.com/jiang18/mph/tree/main/util/recalculate_enrichments.R).
 
 Arguments of `recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
 
 - vcfile: the .mq.vc.csv file produced by `mph --minque`.
 - crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
-- nsnps: the total number of SNPs. If not provided, it is set to the first GRM's number of SNPs in vcfile.
-- annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be calculated from the column-wise sum of the corresponding SNP incidence matrix. If not provided, it is set to the "m" column of vcfile.
+- nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
+- annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
