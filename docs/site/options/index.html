@@ -224,9 +224,10 @@
 <h4 id="genotype-files">Genotype files</h4>
 <p>MPH uses PLINK bim/fam/bed files for genotypes. The bed/bim/fam file format is described on the <a href="https://www.cog-genomics.org/plink/1.9/formats">PLINK website</a>.</p>
 <h4 id="snp-info-file">SNP info file</h4>
-<p>The SNP info file is a CSV file with a header line. The first column must list SNP IDs. Each of the other columns corresponds to one GRM and each row corresponds to a SNP. </p>
-<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a category of a functional annotation. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
-<p>In the example of <a href="../examples/#qtl-mas-2012">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
+<p>The SNP info file is a CSV file with a header line. The first column must list SNP IDs. Each of the other columns corresponds to one GRM, and each row corresponds to a SNP.</p>
+<p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a functional annotation category. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
+<p>In the example of <a href="../examples/#by-chromosomes">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
+<p><a href="../util/#making-a-snp-info-file">A Perl script</a> is provided to create the SNP info file.</p>
 <h3 id="options">Options</h3>
 <table>
 <thead>
@@ -469,6 +470,12 @@
 <td>Flag to set initial VC values to the exact values of the GRM list file's second column rather than their ratios</td>
 </tr>
 <tr>
+<td><code>--num_grms</code></td>
+<td>INT</td>
+<td>Optional</td>
+<td>Number of the list's first matrices to be used as genomic relationships [default=all]</td>
+</tr>
+<tr>
 <td><code>--num_iterations</code></td>
 <td>INT</td>
 <td>Optional</td>
@@ -585,19 +592,23 @@
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to <a href="../util/#from-vcs-to-enrichments">recalculate PVEs and enrichments</a>. </p>
+</div>
 <h2 id="simulation">Simulation</h2>
 <p>Simulating phenotypes based on a list of GRMs</p>
-<pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output sim_pheno
+<pre><code class="language-sh">mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output pheno
 </code></pre>
 <p>In the <em>i</em>th row of the GRM list file are GRM(<em>i</em>) and VC(<em>i</em>). MPH simulates total genetic values (<strong>g</strong>) by sampling <strong>g</strong> from N(<strong>0</strong>,<strong>V</strong>) in which <strong>V</strong> is equal to the sum of all GRM(<em>i</em>)*VC(<em>i</em>). MPH further simulates phenotypes by adding an error term (<strong>e</strong>) to <strong>g</strong> based on heritability.</p>
 <h2 id="prediction">Prediction</h2>
 <p>Empirical best linear unbiased predictions (EBLUPs)</p>
-<pre><code class="language-sh">mph --pred --mq_file milk.chr --output milk.chr
+<pre><code class="language-sh">mph --pred --mq_file milk --output milk
 </code></pre>
 <p>MPH computes EBLUPs using the output of <code>--minque</code> and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. </p>
 <h2 id="general-relationship-matrix">General relationship matrix</h2>
 <p>The <code>--grm_list</code> file can list any <strong>general</strong> relationship matrix, not necessarily a <strong>genomic</strong> relationship matrix.</p>
-<p><a href="../util/">Scripts</a> are provided to convert a general relationship matrix to the MPH format.</p></div>
+<p><a href="../util/#grm-inputoutput">Utility scripts</a> are provided to convert a general relationship matrix to the MPH format.</p></div>
         
         
     </div>
