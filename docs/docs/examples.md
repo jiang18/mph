@@ -9,7 +9,7 @@
 - 3k related animals, 10k SNPs, 5 chromosomes, and 3 traits
 
 ### Sequence genotypes
-- The data set is available for download [here]().
+- The data set is available for download [here](https://figshare.com/account/articles/24432948).
 - Sequence genotypes were simulated by [genosim](https://aipl.arsusda.gov/software/genosim/).
 - 10k unrelated individuals, 5M sequence variants, and 30 chromosomes
 - Functional annotations were quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the simulated sequence variants in order.
@@ -106,7 +106,7 @@ index = 1:25; sw = sw[, index]
 cp = crossprod(si, sw)
 
 vcfile = "reml/1.mq.vc.csv"
-result = recalculate_enrichments(vcfile, cp, annot.size=annot_size) 
+result = recompute_enrichments(vcfile, cp, annot.size=annot_size) 
 result
 
 # plot

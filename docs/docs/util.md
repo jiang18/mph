@@ -51,9 +51,9 @@ Example:
 ### From VCs to enrichments
 The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
-If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the `recalculate_enrichments()` function in [mph_functs.R](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
+If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the `recompute_enrichments()` function in [mph_functs.R](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
 
-`recalculate_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
+`recompute_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
 
 - vcfile: the .mq.vc.csv file produced by `mph --minque`.
 - crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.

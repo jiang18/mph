@@ -3,7 +3,7 @@
 # crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 # nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
 # annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
-recalculate_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA) {
+recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA) {
     if(is.na(vcfile)) {
         stop("vcfile must be specifiled.")
     }
