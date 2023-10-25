@@ -1,4 +1,4 @@
-# Recalculate the estimates and SEs of PVEs and enrichments from MPH VC estimates
+# Recompute the estimates and SEs of PVEs and enrichments from MPH VC estimates
 # vcfile: the .mq.vc.csv file produced by `mph --minque`.
 # crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 # nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
