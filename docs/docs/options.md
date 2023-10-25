@@ -85,14 +85,14 @@ The GRM list file is a space-delimited text file, such as [**chr.grms.txt**](htt
 #### Phenotype file
 The phenotype file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain trait names.
 
-Missing values of phenotypes need to be left empty. Do not use space, -9, NA, or NaN.
+Missing values of phenotypes need to be left empty. **Do not use space, -9, NA, or NaN.**
 
 MPH has `--error_weight_name` to accommodate individual reliabilies (*r*<sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/*r*<sup>2</sup>-1 and kept as a column of the phenotype file.
 
 #### Covariate file
 The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. 
 
-Missing values of covariates need to be left empty. Do not use space, -9, NA, or NaN.
+Missing values of covariates need to be left empty. **Do not use space, -9, NA, or NaN.**
 
 If `--covariate_names all` is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.
 
@@ -112,7 +112,7 @@ If `--covariate_names all` is specified, MPH will use as covariates all columns 
 
 To force MINQUE(0) or MINQUE(1), set `--num_iterations 1`. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
 
-The memory-saving mode (--save_memory) is not necessarily slower, particularly on a solid-state drive. 
+The memory-saving mode (`--save_memory`) is not necessarily slower, particularly on a solid-state drive. 
 
 ### Output
 | Option | Argument | Type | Description |
