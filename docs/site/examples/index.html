@@ -242,7 +242,7 @@ done
 mkdir reml
 mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 </code></pre>
-<p>Below is an R script for recalculating the proportion of genetic variance explained and enrichments and visualization.</p>
+<p>Below is an R script for recomputing the proportion of genetic variance explained and enrichments.</p>
 <pre><code class="language-R">source(&quot;mph_functs.R&quot;)
 library(data.table)
 
@@ -268,7 +268,7 @@ vcfile = &quot;reml/1.mq.vc.csv&quot;
 result = recompute_enrichments(vcfile, cp, annot.size=annot_size) 
 result
 
-# plot
+# Visualization
 library(ggplot2)
 
 result = as.data.frame(result[-1,])
@@ -291,8 +291,8 @@ p
 <p>Decomposing genetic variance into additive, dominance, and epistatic components for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
 <ol>
 <li><a href="../options/#making-a-grm-from-snps">Make GRMs from SNPs</a>: one for additive and one for dominance.</li>
-<li>Create a <a href="../options/#input-1">GRM list</a> for <code>--make_fore</code>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>.</li>
-<li><a href="../options/#options-1">Make first-order interaction GRMs</a>.</li>
+<li>Create a <a href="../options/#input_1">GRM list</a> for <code>--make_fore</code>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>.</li>
+<li><a href="../options/#options_1">Make first-order interaction GRMs</a>.</li>
 <li>Create a <a href="../options/#grm-list-file">GRM list</a> for <code>--minque</code>, listing A, D, AxA, AxD, and DxD: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt"><strong>ADE.grms.txt</strong></a>.</li>
 <li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
 </ol>
