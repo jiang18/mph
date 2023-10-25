@@ -142,7 +142,7 @@ Four files are generated, as shown below.
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
 
 !!! note  
-    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recalculate PVEs and enrichments](util.md#from-vcs-to-enrichments). 
+    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](util.md#from-vcs-to-enrichments). 
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
