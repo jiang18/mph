@@ -82,7 +82,7 @@ mkdir reml
 mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 ```
 
-Below is an R script for recomputing the proportion of genetic variance explained and enrichments.
+Below is an R script for recomputing the proportions of genetic variance explained and enrichments.
 ```R
 source("mph_functs.R")
 library(data.table)
@@ -96,17 +96,22 @@ sw[is.na(sw)] = 0
 si = (sw != 0) * 1
 
 # More annotation categories can be included in the incidence matrix.
+# For example, a new annotation of gene is derived here.
 gene = as.numeric( rowSums(si[, c("Coding_UCSC", "Intron_UCSC", "Promoter_UCSC", "UTR_3_UCSC", "UTR_5_UCSC")]) > 0 )
 si = cbind(si, gene)
-annot_size = colSums(si)
 
-# Calculate the crossproduct of si and sw.
-# The columns of sw should match the rows of vcfile.
+# Calculate the crossproduct of 'si' and 'sw'.
+# The columns of 'sw' should match the rows of 'vcfile'; otherwise, they should be reordered.
 index = 1:25; sw = sw[, index]
 cp = crossprod(si, sw)
 
+# Number of SNPs in each annotation category of interest
+annot_size = colSums(si)
+# Total number of SNPs
+nsnps = nrow(si)
+
 vcfile = "reml/1.mq.vc.csv"
-result = recompute_enrichments(vcfile, cp, annot.size=annot_size) 
+result = recompute_enrichments(vcfile, cp, nsnps=nsnps, annot.size=annot_size) 
 result
 
 # Visualization
