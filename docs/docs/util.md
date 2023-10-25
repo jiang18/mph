@@ -2,7 +2,7 @@
     Utility scripts are hosted in [the MPH repository](https://github.com/jiang18/mph/tree/main/util).
 
 ## GRM input/output
-MPH computes only **genomic** relationship matrices. `External` **general** relationship matrices can be converted to MPH format for use in MPH. 
+MPH computes only **genomic** relationship matrices. **External general** relationship matrices can be converted to MPH format for use in MPH. 
 
 - `mph_functs.R` contains two R functions for GRM input/output.
     - `write_grm()` writes an R GRM into MPH format files (.iid and .bin).
@@ -11,7 +11,7 @@ MPH computes only **genomic** relationship matrices. `External` **general** rela
     - This script is sourced in other R scripts for GRM input/output.
 - `grm_txt2bin.R` converts a relationship matrix from txt to MPH binary format.
     - `Rscript --no-save grm_txt2bin.R example.grm.txt example`
-    - This input file should be structured like [example.grm.txt](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
+    - This input file should be structured like [**example.grm.txt**](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
 - `AGHmatrix2mph.R` constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/) and writes it into MPH format files.
 
 ## Making files for a trait pair
@@ -45,13 +45,13 @@ Usage:
 Example:
 
 - `perl make_snp_info.pl test.bim test.annot.txt test`
-- The input files are [test.bim](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [test.annot.txt](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt).
+- The input files are [**test.bim**](https://github.com/jiang18/mph/blob/main/examples/test.bim) and [**test.annot.txt**](https://github.com/jiang18/mph/blob/main/examples/test.annot.txt).
 - An output file named **test.snp_info.csv** will be generated. 
 
 ### From VCs to enrichments
 The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
-If functional categories actually overlap, one more quick computation is needed to recalculate PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by the `recompute_enrichments()` function in [mph_functs.R](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
+If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by `recompute_enrichments()` in [**mph_functs.R**](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
 
 `recompute_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA)`
 
