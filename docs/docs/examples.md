@@ -207,6 +207,8 @@ gcorr = x12 / sqrt(x1 * x2)
 var_gcorr = gcorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
 se_gcorr = sqrt(var_gcorr)
 
+print(paste("Genetic correlation estimate is", gcorr, "with an SE of", se_gcorr))
+
 # Calculate the environmental correlation estimate and SE. 
 x1 = vc[4,3] + vc[6,3]
 x2 = vc[6,3]
@@ -221,6 +223,8 @@ cov_x2_x12 = vc[6,18]
 ecorr = x12 / sqrt(x1 * x2)
 var_ecorr = ecorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
 se_ecorr = sqrt(var_ecorr)
+
+print(paste("Environmental correlation estimate is", ecorr, "with an SE of", se_ecorr))
 ```
 
 ### Chromosome-wise
@@ -254,6 +258,8 @@ vc = read.csv("./bivarREML/chr.milk.fat.mq.vc.csv")
 
 # Calculate the genetic correlation estimate and SE. 
 gcorr = matrix(nrow=nrow(vc)/3-1, ncol=2)
+colnames(gcorr) = c("estimate", "SE")
+rownames(gcorr) = paste0("Chr", 1:5)
 for (k in 1:nrow(gcorr)) {
     x1 = vc[1+(k-1)*3,3]
     x2 = vc[2+(k-1)*3,3]
@@ -270,4 +276,7 @@ for (k in 1:nrow(gcorr)) {
     gcorr[k, 1] = est
     gcorr[k, 2] = sqrt(var_est)
 }
+
+# Chromosome-wise genetic correlations
+print(gcorr)
 ```
