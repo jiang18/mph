@@ -140,6 +140,7 @@ Four files are generated, as shown below.
 | seP | Standard error of the estimate of the proportion of variance explained |
 | enrichment | Estimate of the per-SNP heritability enrichment |
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
+
 Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.
 
 !!! note  
