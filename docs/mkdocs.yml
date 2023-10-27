@@ -7,6 +7,9 @@ theme:
   name: null
   custom_dir: 'cinder'
   colorscheme: github
+  highlightjs: true
+  hljs_languages:
+      - r
 
 nav:
   - Home: index.md
