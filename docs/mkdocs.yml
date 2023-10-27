@@ -9,7 +9,6 @@ theme:
   colorscheme: github
   highlightjs: true
   hljs_languages:
-      - shell
       - r
 
 nav:
