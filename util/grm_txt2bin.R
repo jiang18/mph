@@ -1,4 +1,8 @@
+# Convert a relationship matrix from txt to MPH binary format
+# Oct 27, 2023: initial release along with MPH v0.49.2
+
 #!/usr/bin/env Rscript
+
 source("mph_functs.R")
 library(data.table)
 
