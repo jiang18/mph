@@ -28,7 +28,7 @@ Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) d
 3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
 4. Run [REML/MINQUE](options.md#remlminque).
 
-```sh
+```shell
 # Making GRMs
 # Input: geno and chr.snp_info.csv
 mkdir chromosomes
@@ -144,7 +144,7 @@ Decomposing genetic variance into additive, dominance, and epistatic components 
 4. Create a [GRM list](options.md#grm-list-file) for `--minque`, listing A, D, AxA, AxD, and DxD: [**ADE.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt).
 5. Run [REML/MINQUE](options.md#remlminque).
 
-```sh
+```shell
 # Making one additive GRM and one dominance GRM
 # Input: geno and chr.snp_info.csv
 mkdir nonadditive
@@ -173,7 +173,7 @@ Bivariate REML can be transformed into univariate REML. Though MPH is designed f
 3. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
 4. Compute the genetic correlation estimate from the VC estimates.
 
-```sh
+```shell
 # The R scripts are documented at https://jiang18.github.io/mph/util/.
 mkdir bivarREML
 
@@ -235,7 +235,7 @@ print(paste("Environmental correlation estimate is", ecorr, "with an SE of", se_
 3. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt). 
 4. Compute the genetic correlation estimates from the VC estimates.
 
-```sh
+```shell
 mkdir bivarREML
 
 Rscript --no-save make_pheno_for_pair.R phen.csv milk fat ./bivarREML/test
