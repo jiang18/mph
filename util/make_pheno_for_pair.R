@@ -1,6 +1,9 @@
-#!/usr/bin/env Rscript
-args = commandArgs(trailingOnly=TRUE)
+# Generate new phenotype and covariate files for a trait pair
+# Oct 27, 2023: initial release along with MPH v0.49.2
 
+#!/usr/bin/env Rscript
+
+args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 4) {
     stop("Four arguments must be supplied:\n  input phenotype filename, trait 1, trait 2, and output filename prefix\n", call.=FALSE)
 }
