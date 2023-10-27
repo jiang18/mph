@@ -83,7 +83,7 @@ mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv 
 ```
 
 Below is an R script for recomputing the proportions of genetic variance explained and enrichments.
-```R
+```r
 # mph_functs.R is documented at https://jiang18.github.io/mph/util/.
 source("mph_functs.R")
 library(data.table)
@@ -191,7 +191,7 @@ mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.m
 ```
 
 Below is an R script for computing between-trait correlation estimates from the **.mq.vc.csv** output file.
-```R
+```r
 vc = read.csv("./bivarREML/milk.fat.mq.vc.csv")
 
 # Calculate the genetic correlation estimate and SE. 
@@ -255,7 +255,7 @@ mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/te
 ```
 
 Below is an Rscript for computing chromosome-wise genetic correlations between traits.
-```R
+```r
 vc = read.csv("./bivarREML/chr.milk.fat.mq.vc.csv")
 
 # Calculate the genetic correlation estimate and SE. 
