@@ -243,7 +243,8 @@ mkdir reml
 mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 </code></pre>
 <p>Below is an R script for recomputing the proportions of genetic variance explained and enrichments.</p>
-<pre><code class="language-R">source(&quot;mph_functs.R&quot;)
+<pre><code class="language-R"># mph_functs.R is documented at https://jiang18.github.io/mph/util/.
+source(&quot;mph_functs.R&quot;)
 library(data.table)
 
 # Read the SNP info file to get the SNP weighting matrix.
@@ -324,10 +325,11 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 <ol>
 <li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
 <li>Make three GRMs and two residual covariance matrices for a pair of traits.</li>
-<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt">this</a>. </li>
+<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt"><strong>this</strong></a>. </li>
 <li>Compute the genetic correlation estimate from the VC estimates.</li>
 </ol>
-<pre><code class="language-sh">mkdir bivarREML
+<pre><code class="language-sh"># The R scripts are documented at https://jiang18.github.io/mph/util/.
+mkdir bivarREML
 
 Rscript --no-save make_pheno_for_pair.R phen.csv milk fat ./bivarREML/test
 
@@ -382,7 +384,7 @@ print(paste(&quot;Environmental correlation estimate is&quot;, ecorr, &quot;with
 <ol>
 <li>Make a new phenotype file and a new covariate file for a pair of traits.</li>
 <li>Make 15 GRMs (three for each chromosome) and two residual covariance matrices for a pair of traits.</li>
-<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt">this</a>. </li>
+<li>Run REML using a GRM list file like <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt"><strong>this</strong></a>. </li>
 <li>Compute the genetic correlation estimates from the VC estimates.</li>
 </ol>
 <pre><code class="language-sh">mkdir bivarREML
