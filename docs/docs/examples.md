@@ -169,7 +169,7 @@ Bivariate REML can be transformed into univariate REML. Though MPH is designed f
 ### Genome-wide
 1. Make a new phenotype file and a new covariate file for a pair of traits.
 2. Make three GRMs and two residual covariance matrices for a pair of traits.
-3. Run REML using a GRM list file like [this](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
+3. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
 4. Compute the genetic correlation estimate from the VC estimates.
 
 ```sh
@@ -230,7 +230,7 @@ print(paste("Environmental correlation estimate is", ecorr, "with an SE of", se_
 ### Chromosome-wise
 1. Make a new phenotype file and a new covariate file for a pair of traits.
 2. Make 15 GRMs (three for each chromosome) and two residual covariance matrices for a pair of traits.
-3. Run REML using a GRM list file like [this](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt). 
+3. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt). 
 4. Compute the genetic correlation estimates from the VC estimates.
 
 ```sh
