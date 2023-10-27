@@ -243,7 +243,7 @@ mkdir reml
 mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 </code></pre>
 <p>Below is an R script for recomputing the proportions of genetic variance explained and enrichments.</p>
-<pre><code class="language-R"># mph_functs.R is documented at https://jiang18.github.io/mph/util/.
+<pre><code class="language-r"># mph_functs.R is documented at https://jiang18.github.io/mph/util/.
 source(&quot;mph_functs.R&quot;)
 library(data.table)
 
@@ -344,7 +344,7 @@ Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
 mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
 </code></pre>
 <p>Below is an R script for computing between-trait correlation estimates from the <strong>.mq.vc.csv</strong> output file.</p>
-<pre><code class="language-R">vc = read.csv(&quot;./bivarREML/milk.fat.mq.vc.csv&quot;)
+<pre><code class="language-r">vc = read.csv(&quot;./bivarREML/milk.fat.mq.vc.csv&quot;)
 
 # Calculate the genetic correlation estimate and SE. 
 x1 = vc[1,3]
@@ -405,7 +405,7 @@ Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
 mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
 </code></pre>
 <p>Below is an Rscript for computing chromosome-wise genetic correlations between traits.</p>
-<pre><code class="language-R">vc = read.csv(&quot;./bivarREML/chr.milk.fat.mq.vc.csv&quot;)
+<pre><code class="language-r">vc = read.csv(&quot;./bivarREML/chr.milk.fat.mq.vc.csv&quot;)
 
 # Calculate the genetic correlation estimate and SE. 
 gcorr = matrix(nrow=nrow(vc)/3-1, ncol=2)
