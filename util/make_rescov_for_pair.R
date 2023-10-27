@@ -1,7 +1,11 @@
-#!/usr/bin/env Rscript
-source("mph_functs.R")
-args = commandArgs(trailingOnly=TRUE)
+# Generate two residual covariance matrices for a trait pair
+# Oct 27, 2023: initial release along with MPH v0.49.2
 
+#!/usr/bin/env Rscript
+
+source("mph_functs.R")
+
+args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
     stop("Two arguments must be supplied:\n  input GRM filename prefix and output filename prefix\n", call.=FALSE)
 }
