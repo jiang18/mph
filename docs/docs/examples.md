@@ -34,7 +34,7 @@ Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) d
 mkdir chromosomes
 for chr in {1..5}
 do
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./chromosomes/$chr
+    mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./chromosomes/$chr
 done
 
 # Running REML
@@ -244,9 +244,8 @@ Rscript --no-save make_covariate_for_pair.R covar.csv ./bivarREML/test.covar.csv
 
 for chr in {1..5}
 do
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./bivarREML/$chr
-
-Rscript --no-save make_grms_for_pair.R ./bivarREML/$chr ./bivarREML/$chr
+    mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./bivarREML/$chr
+    Rscript --no-save make_grms_for_pair.R ./bivarREML/$chr ./bivarREML/$chr
 done
 
 Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
@@ -254,7 +253,7 @@ Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
 mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
 ```
 
-Below is an Rscript for computing chromosome-wise genetic correlations between traits.
+Below is an R script for computing chromosome-wise genetic correlations between traits.
 ```r
 vc = read.csv("./bivarREML/chr.milk.fat.mq.vc.csv")
 
