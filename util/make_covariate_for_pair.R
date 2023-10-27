@@ -1,6 +1,9 @@
-#!/usr/bin/env Rscript
-args = commandArgs(trailingOnly=TRUE)
+# Generates a new covariate file for a trait pair
+# Oct 27, 2023: initial release along with MPH v0.49.2
 
+#!/usr/bin/env Rscript
+
+args = commandArgs(trailingOnly=TRUE)
 if (length(args) != 2) {
     stop("Two arguments must be supplied:\n  input covariate filename and output filename\n", call.=FALSE)
 }
