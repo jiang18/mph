@@ -1,4 +1,6 @@
-# use AGHmatrix to construct numerator relationship matrix with renumf90 ped file
+# Use AGHmatrix to construct numerator relationship matrix with renumf90 ped file
+# Oct 27, 2023: initial release along with MPH v0.49.2
+
 source("mph_functs.R")
 library(AGHmatrix)
 
