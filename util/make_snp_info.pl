@@ -1,5 +1,6 @@
-# Make a SNP info file for MPH from a file of genomic functional annotations
+# Oct 27, 2023: initial release along with MPH v0.49.2
 
+# Make a SNP info file for MPH from a file of genomic functional annotations.
 # All postions are 1-based.
 # start and end are included in invervals.
 
@@ -38,6 +39,7 @@ while(<IN>)
 {
 	chomp;
 	my @c = split /\s+/;
+	shift @c if($c[0] eq '');
 	next if (@c < 4);
  	$c[0] =~ s/chr//i;
 	push @{$gf{$c[0]}},[@c[1..3]];
