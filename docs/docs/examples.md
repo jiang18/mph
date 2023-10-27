@@ -45,7 +45,7 @@ mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_w
 ### By functional annotations
 Partitioning heritability by functional annotations for the [sequence genotypes](#sequence-genotypes) dataset
 
-```bash
+```shell
 # 1. Create a new SNP info file including only variants that pass quality control.
 # SNPs with an MAF < 0.01 are removed from funct.snp_info.csv, producing qc.funct.snp_info.csv.
 snpinfo="qc.funct.snp_info.csv"
