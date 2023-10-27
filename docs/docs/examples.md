@@ -124,12 +124,11 @@ pct = round(pct,2)
 rownames(result) = paste0(rownames(result)," (",pct,"%)")
 
 df = data.frame(FunctionalAnnotation=rownames(result), Enrichment=result$enrichment, SE=result$enrichment.se)
-p<- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
-  geom_bar(stat="identity", color="black", 
-           position=position_dodge()) +
+p = ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
+  geom_bar(stat="identity", color="black", position=position_dodge()) +
   geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.5, position=position_dodge(.9)) 
-p<- p + theme(text = element_text(size=22), axis.text.x = element_text(angle = 65, vjust = 1, hjust=1))
-p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ylab("Per-SNP heritability enrichment estimate") + ggtitle("Trait 1")
+p = p + theme(text = element_text(size=22), axis.text.x = element_text(angle = 65, vjust = 1, hjust=1))
+p = p + geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ylab("Per-SNP heritability enrichment estimate") + ggtitle("Trait 1")
 p
 ```
 The following figure will be produced.
