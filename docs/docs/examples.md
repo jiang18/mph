@@ -84,6 +84,7 @@ mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv 
 
 Below is an R script for recomputing the proportions of genetic variance explained and enrichments.
 ```R
+# mph_functs.R is documented at https://jiang18.github.io/mph/util/.
 source("mph_functs.R")
 library(data.table)
 
@@ -173,6 +174,7 @@ Bivariate REML can be transformed into univariate REML. Though MPH is designed f
 4. Compute the genetic correlation estimate from the VC estimates.
 
 ```sh
+# The R scripts are documented at https://jiang18.github.io/mph/util/.
 mkdir bivarREML
 
 Rscript --no-save make_pheno_for_pair.R phen.csv milk fat ./bivarREML/test
