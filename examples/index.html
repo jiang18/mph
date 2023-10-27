@@ -283,12 +283,11 @@ pct = round(pct,2)
 rownames(result) = paste0(rownames(result),&quot; (&quot;,pct,&quot;%)&quot;)
 
 df = data.frame(FunctionalAnnotation=rownames(result), Enrichment=result$enrichment, SE=result$enrichment.se)
-p&lt;- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
-  geom_bar(stat=&quot;identity&quot;, color=&quot;black&quot;, 
-           position=position_dodge()) +
+p = ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
+  geom_bar(stat=&quot;identity&quot;, color=&quot;black&quot;, position=position_dodge()) +
   geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.5, position=position_dodge(.9)) 
-p&lt;- p + theme(text = element_text(size=22), axis.text.x = element_text(angle = 65, vjust = 1, hjust=1))
-p&lt;- p+ geom_hline(yintercept=1, linetype=&quot;dashed&quot;, color = &quot;red&quot;) + xlab(&quot;&quot;) + ylab(&quot;Per-SNP heritability enrichment estimate&quot;) + ggtitle(&quot;Trait 1&quot;)
+p = p + theme(text = element_text(size=22), axis.text.x = element_text(angle = 65, vjust = 1, hjust=1))
+p = p + geom_hline(yintercept=1, linetype=&quot;dashed&quot;, color = &quot;red&quot;) + xlab(&quot;&quot;) + ylab(&quot;Per-SNP heritability enrichment estimate&quot;) + ggtitle(&quot;Trait 1&quot;)
 p
 </code></pre>
 <p>The following figure will be produced.
