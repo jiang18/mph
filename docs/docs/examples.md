@@ -247,7 +247,7 @@ do
     Rscript --no-save make_grms_for_pair.R ./bivarREML/$chr ./bivarREML/$chr
 done
 
-Rscript --no-save make_rescov_for_pair.R ./bivarREML/test ./bivarREML/test
+Rscript --no-save make_rescov_for_pair.R ./bivarREML/1 ./bivarREML/test
 
 mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
 ```
