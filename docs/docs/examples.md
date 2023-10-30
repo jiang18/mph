@@ -280,3 +280,9 @@ for (k in 1:nrow(gcorr)) {
 # Chromosome-wise genetic correlations
 print(gcorr)
 ```
+
+## Genotype–covariate interaction
+MPH can **effectively** do [GCI-GREML](https://www.nature.com/articles/ng.3912).
+
+Estimating the proportion of phenotypic variance contributed by genotype–covariate interaction effects for the [QTL-MAS 2012](#qtl-mas-2012) dataset
+
