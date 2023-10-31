@@ -1,0 +1,2 @@
+./gci/test 1
+./gci/test.gci 0
