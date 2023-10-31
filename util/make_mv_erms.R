@@ -1,4 +1,4 @@
-# Generate multivariate environmental relationship matrices
+# Generate multivariate environmental relationship matrices (ERMs).
 # Oct 31, 2023: initial release along with MPH v0.49.2
 
 #!/usr/bin/env Rscript
