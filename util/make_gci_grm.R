@@ -1,4 +1,4 @@
-# Generate a genotype–covariate interaction GRM from a routine GRM and an incidence matrix
+# Generate a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.
 # Oct 29, 2023: initial release along with MPH v0.49.2
 
 #!/usr/bin/env Rscript
