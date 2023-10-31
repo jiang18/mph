@@ -1,4 +1,4 @@
-# Generate multivariate genomic relationship matrices
+# Generate multivariate genomic relationship matrices, each corresponding to a specific trait pair.
 # Oct 31, 2023: initial release along with MPH v0.49.2
 
 #!/usr/bin/env Rscript
