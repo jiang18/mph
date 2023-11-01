@@ -16,7 +16,7 @@ if(any(duplicated(mvtrt))) {
     stop("Trait names must differ from each other.\n", call.=FALSE)
 }
 
-phe = read.csv(infile, row.names=1)
+phe = read.csv(infile, row.names=1, check.names = FALSE)
 trt = colnames(phe)
 if(! all(mvtrt %in% trt) ) {
     stop(paste("One or more trait names are unavailable in", infile), call.=FALSE)
