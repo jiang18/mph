@@ -16,7 +16,7 @@ if (length(args) == 2) {
     stop("Two or three arguments must be supplied:\n  input covariate CSV filename, output CSV filename, and number of traits (optional)\n", call.=FALSE)
 }
 
-covar = read.csv(infile)
+covar = read.csv(infile, check.names = FALSE)
 dim = nrow(covar)
 nc = ncol(covar)-1
 iid = paste(rep(1:ntrt, each=dim), rep(covar[,1], ntrt), sep=".")
