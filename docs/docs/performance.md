@@ -11,10 +11,10 @@ Testing platform
 All the following tests used 14 threads (`--num_threads 14` in MPH). 
 
 The following figure illustrates the computational performance of MPH **REML** for a fixed sample size of 50,000 with varying numbers of genomic relationship matrices (GRMs).
-![50kTiming](img/50kTiming.jpg)
+[![50kTiming](img/50kTiming.jpg)](img/50kTiming.jpg)
 
 <br />
 
 The following figure illustrates the computational performance of MPH **REML** for a fixed set of 30 GRMs across a range of sample sizes.
-![30GRMsTiming](img/30GRMsTiming.jpg)
+[![30GRMsTiming](img/30GRMsTiming.jpg)](img/30GRMsTiming.jpg)
 
