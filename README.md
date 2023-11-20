@@ -1,12 +1,12 @@
 ## MPH (MINQUE for Partitioning Heritability)
-MPH is a C++ program for fast REML estimation of genetic variance components.
+MPH is a C++ program for fast REML estimation of genetic variance and covariance components.
 
 The method has the following properties:
 
 - It is fast and memory-efficient.
 - It has robust convergence.
 - It supports the analyses of dominance, epistasis, and genetic correlation.
-- It can perform complex genome-partitioning of quantitative genetic variation.
+- It can perform complex genome-partitioning of quantitative genetic variation and covariation.
 
 ## Citation
 TBA
