@@ -1,5 +1,0 @@
-./bivarREML/test.G11 1
-./bivarREML/test.G22 1
-./bivarREML/test.G12 0
-./bivarREML/test.E1d 0
-./bivarREML/test.E12 0

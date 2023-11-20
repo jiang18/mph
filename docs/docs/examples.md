@@ -164,123 +164,29 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 ## Genetic correlation
 Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-mas-2012) dataset
 
-Multivariate REML can be transformed into univariate REML. Though MPH is designed for univariate REML, it can **effectively** do multivariate REML when provided with correct GRMs. 
-
 ### Genome-wide
-1. Make multivariate phenotype and covariate files.
-2. Make multivariate GRMs and environmental relationship matrices (ERMs).
-3. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.grms.txt). 
-4. Compute the genetic correlation estimate from the VC estimates.
 
 ```shell
-# The R scripts are documented at https://jiang18.github.io/mph/util/.
-mkdir bivarREML
+mkdir multi-trait
 
-Rscript --no-save make_mv_pheno.R phen.csv milk fat ./bivarREML/test
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./multi-trait/test
 
-Rscript --no-save make_mv_covariates.R covar.csv ./bivarREML/test.covar.csv
-
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./bivarREML/test
-
-Rscript --no-save make_mv_grms.R ./bivarREML/test ./bivarREML/test
-
-Rscript --no-save make_mv_erms.R ./bivarREML/test ./bivarREML/test
-
-mph --minque --save_mem --grm_list bivar.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/milk.fat
-```
-
-Below is an R script for computing between-trait correlation estimates from the **.mq.vc.csv** output file.
-```r
-vc = read.csv("./bivarREML/milk.fat.mq.vc.csv")
-
-# Calculate the genetic correlation estimate and SE. 
-x1 = vc[1,3]
-x2 = vc[2,3]
-x12 = vc[3,3]
-var_x1 = vc[1,14]
-var_x2 = vc[2,15]
-var_x12 = vc[3,16]
-cov_x1_x2 = vc[1,15]
-cov_x1_x12 = vc[1,16]
-cov_x2_x12 = vc[2,16]
-
-gcorr = x12 / sqrt(x1 * x2)
-var_gcorr = gcorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
-se_gcorr = sqrt(var_gcorr)
-
-print(paste("Genetic correlation estimate is", gcorr, "with an SE of", se_gcorr))
-
-# Calculate the environmental correlation estimate and SE. 
-x1 = vc[4,3] + vc[6,3]
-x2 = vc[6,3]
-x12 = vc[5,3]
-var_x1 = vc[4,17] + vc[6,4] **2 + 2*vc[6,17]
-var_x2 = vc[6,4] **2
-var_x12 = vc[5,18]
-cov_x1_x2 = vc[6,17] + vc[6,4] **2
-cov_x1_x12 = vc[4,18] + vc[6,18]
-cov_x2_x12 = vc[6,18]
-
-ecorr = x12 / sqrt(x1 * x2)
-var_ecorr = ecorr**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
-se_ecorr = sqrt(var_ecorr)
-
-print(paste("Environmental correlation estimate is", ecorr, "with an SE of", se_ecorr))
+mph --minque --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
 ```
 
 ### Chromosome-wise
-1. Make multivariate phenotype and covariate files.
-2. Make multivariate GRMs for each chromosome.
-3. Make multivariate environmental relationship matrices (ERMs).
-4. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/bivar.chr.grms.txt). 
-5. Compute the genetic correlation estimates from the VC estimates.
 
 ```shell
-# The R scripts are documented at https://jiang18.github.io/mph/util/.
-mkdir bivarREML
-
-Rscript --no-save make_mv_pheno.R phen.csv milk fat ./bivarREML/test
-
-Rscript --no-save make_mv_covariates.R covar.csv ./bivarREML/test.covar.csv
-
+# This step may have been run. 
+mkdir chromosomes
 for chr in {1..5}
 do
-    mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./bivarREML/$chr
-    Rscript --no-save make_mv_grms.R ./bivarREML/$chr ./bivarREML/$chr
+    mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --snp_weight $chr --num_threads 10 --out ./chromosomes/$chr
 done
 
-Rscript --no-save make_mv_erms.R ./bivarREML/1 ./bivarREML/test
-
-mph --minque --save_mem --grm_list bivar.chr.grms.txt --phenotype ./bivarREML/test.milk.fat.pheno.csv --trait scaled --covariate_file ./bivarREML/test.covar.csv --covariate_names all --num_threads 10 --out ./bivarREML/chr.milk.fat
-```
-
-Below is an R script for computing chromosome-wise genetic correlations between traits.
-```r
-vc = read.csv("./bivarREML/chr.milk.fat.mq.vc.csv")
-
-# Calculate the genetic correlation estimate and SE. 
-gcorr = matrix(nrow=nrow(vc)/3-1, ncol=2)
-colnames(gcorr) = c("estimate", "SE")
-rownames(gcorr) = paste0("Chr", 1:5)
-for (k in 1:nrow(gcorr)) {
-    x1 = vc[1+(k-1)*3,3]
-    x2 = vc[2+(k-1)*3,3]
-    x12 = vc[3+(k-1)*3,3]
-    var_x1 = vc[1+(k-1)*3, 8+nrow(vc)+(k-1)*3]
-    var_x2 = vc[2+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
-    var_x12 = vc[3+(k-1)*3,8+nrow(vc)+2+(k-1)*3]
-    cov_x1_x2 = vc[1+(k-1)*3, 8+nrow(vc)+1+(k-1)*3]
-    cov_x1_x12 = vc[1+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
-    cov_x2_x12 = vc[2+(k-1)*3, 8+nrow(vc)+2+(k-1)*3]
-
-    est = x12 / sqrt(x1 * x2)
-    var_est = est**2 * ( var_x1/(4 * x1**2) + var_x2/(4 * x2**2) + var_x12/x12**2 + cov_x1_x2/(2*x1*x2) - cov_x1_x12/(x1*x12) - cov_x2_x12/(x2*x12) )
-    gcorr[k, 1] = est
-    gcorr[k, 2] = sqrt(var_est)
-}
-
-# Chromosome-wise genetic correlations
-print(gcorr)
+# The directory may have been created.
+mkdir multi-trait
+mph --minque --save_mem --grm_list chr.grms.txt --phenotype phen.csv --trait milk,fat,fat_percent --num_threads 10 --out ./multi-trait/chromosomes
 ```
 
 ## Genotype–covariate interaction
