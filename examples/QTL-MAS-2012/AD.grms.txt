@@ -1,2 +1,2 @@
-./nonadditive/test A
-./nonadditive/test.d D
+./nonadditive/genome A
+./nonadditive/genome.d D

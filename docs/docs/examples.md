@@ -148,13 +148,13 @@ Decomposing genetic variance into additive, dominance, and epistatic components 
 # Input: geno and chr.snp_info.csv
 mkdir nonadditive
 
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/genome
 
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/test --dom
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./nonadditive/genome --dom
 
 # Making three first-order interaction GRMs
 # Input: AD.grms.txt listing the GRMs that have been made
-mph --make_fore --grm_list AD.grms.txt --num_threads 10 --out ./nonadditive/test
+mph --make_fore --grm_list AD.grms.txt --num_threads 10 --out ./nonadditive/genome
 
 # Running REML
 # Input: ADE.grms.txt, phen.csv, and covar.csv
@@ -169,7 +169,7 @@ Estimating genetic and environmental correlations for the [QTL-MAS 2012](#qtl-ma
 ```shell
 mkdir multi-trait
 
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./multi-trait/test
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./multi-trait/genome
 
 mph --minque --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
 ```
@@ -201,9 +201,9 @@ Estimating the proportion of phenotypic variance contributed by genotype–covar
 # The R scripts are documented at https://jiang18.github.io/mph/util/.
 mkdir GCI
 
-mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./GCI/test
+mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./GCI/genome
 
-Rscript --no-save make_gci_grm.R ./GCI/test covar.csv ./GCI/test
+Rscript --no-save make_gci_grm.R ./GCI/genome covar.csv ./GCI/genome
 
 mph --minque --save_mem --grm_list GCI.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./GCI/milk
 

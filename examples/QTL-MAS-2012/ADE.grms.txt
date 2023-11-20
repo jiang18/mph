@@ -1,5 +1,5 @@
-./nonadditive/test 30
-./nonadditive/test.d 1
-./nonadditive/test.fore.AxA 0
-./nonadditive/test.fore.AxD 0
-./nonadditive/test.fore.DxD 0
+./nonadditive/genome 30
+./nonadditive/genome.d 1
+./nonadditive/genome.fore.AxA 0
+./nonadditive/genome.fore.AxD 0
+./nonadditive/genome.fore.DxD 0

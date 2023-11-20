@@ -1,2 +1,2 @@
-./GCI/test 1
-./GCI/test.gci 0
+./GCI/genome 1
+./GCI/genome.gci 0
