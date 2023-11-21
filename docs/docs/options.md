@@ -107,7 +107,7 @@ If `--covariate_names all` is specified, MPH will use as covariates all columns 
 | `--num_iterations` | INT | Optional | Max number of REML iterations [default=20] |
 | `--tol` | FLOAT | Optional | Absolute convergence tolerance for REML log-likelihood [default=0.01] |
 | `--num_random_vectors` | INT | Optional | Number of random probing vectors for stochastic trace estimation [default=100] |
-| `--distribution` | STRING | Optional | Specify whether the stochastic trace estimation uses a Gaussian or Rademacher distribution [default=`Rademacher`] |
+| `--distribution` | STRING | Optional | Specify whether the stochastic trace estimation uses a **Gaussian** or **Rademacher** distribution [default=Rademacher] |
 | `--seed` | INT | Optional | Random seed in stochastic trace estimation [default=0] |
 
 To force MINQUE(0) or MINQUE(1), set `--num_iterations 1`. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
@@ -145,6 +145,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, particularly
 Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.
 
 For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (1-3):
+
 - Variance of trait 1
 - Covariance between traits 1 and 2
 - Variance of trait 2
@@ -161,8 +162,6 @@ Simulating phenotypes based on a list of GRMs
 mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 --output pheno
 ```
 In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V** is equal to the sum of all GRM(*i*)\*VC(*i*). MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
-
-**The simulation of correlated traits is not currently supported.**
 
 ## Prediction
 Empirical best linear unbiased predictions (EBLUPs)
