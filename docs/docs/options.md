@@ -144,7 +144,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, particularly
 
 Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.
 
-For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (1-3):
+For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (`--trait 1,2,3`):
 
 - Variance of trait 1
 - Covariance between traits 1 and 2
@@ -168,7 +168,7 @@ Empirical best linear unbiased predictions (EBLUPs)
 ```sh
 mph --pred --mq_file milk --output milk
 ```
-MPH computes EBLUPs using the output of `--minque` and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
+MPH computes EBLUPs using the output of `--minque` and outputs them to a file with a suffix of **.mq.blup.csv**. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
 
 **Multi-trait BLUP is not currently supported.**
 
@@ -176,3 +176,6 @@ MPH computes EBLUPs using the output of `--minque` and outputs them to a file wi
 The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
 
 [Utility scripts](util.md#grm-inputoutput) are provided to convert a general relationship matrix to the MPH format.
+
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
