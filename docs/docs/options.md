@@ -176,6 +176,3 @@ MPH computes EBLUPs using the output of `--minque` and outputs them to a file wi
 The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
 
 [Utility scripts](util.md#grm-inputoutput) are provided to convert a general relationship matrix to the MPH format.
-
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
