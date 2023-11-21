@@ -8,7 +8,7 @@
 |-------|-------|-------|--------------|
 | `--binary_genotype_file` | FILE PREFIX | Required | PLINK bed/bim/fam filename prefix |
 | `--snp_info_file` | FILE | Required | SNP info file in CSV format |
-| `--snp_weight_name` |  STRING | Optional | Must be a column header in the SNP info file and specify which column to use for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a weight of 1. |
+| `--snp_weight_name` |  STRING | Optional | Specify a column header in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1. |
 | `--min_maf` | FLOAT | Optional | Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0] |
 | `--min_hwe_pval` | FLOAT | Optional | Filter out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold [default=0] |
 
@@ -74,8 +74,8 @@ If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identi
 |-------|-------|-------|--------------|
 | `--grm_list` | FILE | Required | Space-delimited text file listing GRMs that have been made |
 | `--phenotype_file` | FILE | Required | Phenotype file in CSV format |
-| `--trait` | STRING | Required | Must be a column header in the phenotype file and specify which trait to analyze |
-| `--error_weight_name` | STRING | Optional | Must be a column header in the phenotype file and specify which column contains individual error variance weights |
+| `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column headers in the phenotype file |
+| `--error_weight_names` | STRING | Optional | Single column header or comma-separated list of column headers in the phenotype file, specifying individual error variance weights for each corresponding trait |
 | `--covariate_file` | FILE | Optional | Covariate file in CSV format |
 | `--covariate_names` | STRING | Optional | Comma-separated list of covariates to include in the analysis |
 
@@ -102,12 +102,12 @@ If `--covariate_names all` is specified, MPH will use as covariates all columns 
 | `--minque` | FLAG | Required | Flag to run REML or iterative MINQUE |
 | `--save_memory` | FLAG | Optional | Flag to enable the memory-saving mode |
 | `--num_threads` | INT | Optional | Number of computational threads to use [default=1] |
-| `--heritability` | FLOAT | Optional | Initial heritability value in REML iterations [default=0.5] |
-| `--exact_init` | FLAG | Optional | Flag to set initial VC values to the exact values of the GRM list file's second column rather than their ratios |
+| `--heritability` | FLOAT | Optional | Initial heritability value(s) in REML iterations [default=0.5] |
 | `--num_grms` | INT | Optional | Number of the list's first matrices to be used as genomic relationships [default=all] |
 | `--num_iterations` | INT | Optional | Max number of REML iterations [default=20] |
 | `--tol` | FLOAT | Optional | Absolute convergence tolerance for REML log-likelihood [default=0.01] |
 | `--num_random_vectors` | INT | Optional | Number of random probing vectors for stochastic trace estimation [default=100] |
+| `--distribution` | STRING | Optional | Specify whether the stochastic trace estimation uses a Gaussian or Rademacher distribution [default=`Rademacher`] |
 | `--seed` | INT | Optional | Random seed in stochastic trace estimation [default=0] |
 
 To force MINQUE(0) or MINQUE(1), set `--num_iterations 1`. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
@@ -119,7 +119,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, particularly
 |-------|-------|-------|--------------|
 | `--output_file` | FILE PREFIX | Required | Output filename prefix |
 
-Four files are generated, as shown below.
+`mph --minque` produces four or five output files, as shown below.
 
 | Filename suffix | Description |
 |----------|----------|
@@ -127,6 +127,7 @@ Four files are generated, as shown below.
 | .mq.iter.csv | Summary of REML iterations |
 | .mq.vc.csv | Variance component estimates |
 | .mq.py.csv | Residuals of the linear mixed model |
+| .mq.cor.csv | Estimates and standard errors of correlations between traits. **Exclusively available for multi-trait analyses.** |
 
 **.mq.vc.csv** has the following columns.
 
@@ -143,6 +144,14 @@ Four files are generated, as shown below.
 
 Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.
 
+For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (1-3):
+- Variance of trait 1
+- Covariance between traits 1 and 2
+- Variance of trait 2
+- Covariance between traits 1 and 3
+- Covariance between traits 2 and 3
+- Variance of trait 3
+
 !!! note  
     Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](util.md#from-vcs-to-enrichments). 
 
@@ -153,12 +162,16 @@ mph --simulate --num_phenotypes 100 --grm_list chr.grms.txt --heritability 0.5 -
 ```
 In the *i*th row of the GRM list file are GRM(*i*) and VC(*i*). MPH simulates total genetic values (**g**) by sampling **g** from N(**0**,**V**) in which **V** is equal to the sum of all GRM(*i*)\*VC(*i*). MPH further simulates phenotypes by adding an error term (**e**) to **g** based on heritability.
 
+**The simulation of correlated traits is not currently supported.**
+
 ## Prediction
 Empirical best linear unbiased predictions (EBLUPs)
 ```sh
 mph --pred --mq_file milk --output milk
 ```
 MPH computes EBLUPs using the output of `--minque` and outputs them to a file with a suffix of .mq.blup.csv. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
+
+**Multi-trait BLUP is not currently supported.**
 
 ## General relationship matrix
 The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
