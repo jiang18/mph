@@ -17,4 +17,4 @@ TBA
 ## Author and contact
 [Jicai Jiang](https://cals.ncsu.edu/animal-science/people/jicai-jiang)
 
-If you want to submit a issue concerning the software please do so using the **MPH** [Github repository](https://github.com/jiang18/mph/issues).
+If you want to submit an issue concerning the software, please do so using the **MPH** [GitHub repository](https://github.com/jiang18/mph/issues).
