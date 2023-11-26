@@ -1,5 +1,9 @@
 # Change Log
 
+## Nov 26, 2023 (v0.51.0)
+- Implemented multi-trait REML.
+- Fine-tuned the threshold for rank determination.
+
 ## Sep 18, 2023 (v0.49.1)
 - Added a flag (--exact_init) to initialize exact values for variance components.
 
