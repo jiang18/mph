@@ -157,24 +157,24 @@
 <h2 id="grm-inputoutput">GRM input/output</h2>
 <p>MPH computes only <strong>genomic</strong> relationship matrices. <strong>External general</strong> relationship matrices can be converted to MPH format for use in MPH. </p>
 <ul>
-<li><code>mph_functs.R</code> contains two R functions for GRM input/output.<ul>
+<li><a href="https://github.com/jiang18/mph/blob/main/util/mph_functs.R"><code>mph_functs.R</code></a> contains two R functions for GRM input/output.<ul>
 <li><code>write_grm()</code> writes an R GRM into MPH format files (.iid and .bin).</li>
 <li><code>read_grm()</code> reads an MPH GRM into R.</li>
 <li>The R matrix to be written can be any <strong>general</strong> relationship matrix.</li>
 <li>This script is sourced in other R scripts for GRM input/output.</li>
 </ul>
 </li>
-<li><code>grm_txt2bin.R</code> converts a relationship matrix from txt to MPH binary format.<ul>
+<li><a href="https://github.com/jiang18/mph/blob/main/util/grm_txt2bin.R"><code>grm_txt2bin.R</code></a> converts a relationship matrix from txt to MPH binary format.<ul>
 <li><code>Rscript --no-save grm_txt2bin.R example.grm.txt example</code></li>
 <li>This input file should be structured like <a href="https://github.com/jiang18/mph/blob/main/examples/example.grm.txt"><strong>example.grm.txt</strong></a>.</li>
 </ul>
 </li>
-<li><code>AGHmatrix2mph.R</code> constructs a <strong>numerator</strong> relationship matrix with <a href="https://cran.r-project.org/web/packages/AGHmatrix/">AGHmatrix</a> and writes it into MPH format files.</li>
-<li><code>make_gci_grm.R</code> generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.</li>
+<li><a href="https://github.com/jiang18/mph/blob/main/util/AGHmatrix2mph.R"><code>AGHmatrix2mph.R</code></a> constructs a <strong>numerator</strong> relationship matrix with <a href="https://cran.r-project.org/web/packages/AGHmatrix/">AGHmatrix</a> and writes it into MPH format files.</li>
+<li><a href="https://github.com/jiang18/mph/blob/main/util/make_gci_grm.R"><code>make_gci_grm.R</code></a> generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.</li>
 </ul>
 <h2 id="heritability-enrichment">Heritability enrichment</h2>
 <h3 id="making-a-snp-info-file">Making a SNP info file</h3>
-<p>A Perl script, <code>make_snp_info.pl</code>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a> for partitioning heritability across functional annotations.</p>
+<p>A Perl script, <a href="https://github.com/jiang18/mph/blob/main/util/make_snp_info.pl"><code>make_snp_info.pl</code></a>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a> for partitioning heritability across functional annotations.</p>
 <p>Usage:</p>
 <ul>
 <li><code>perl make_snp_info.pl PLINK-bim-file functional-annotation-file output-filename-prefix</code></li>
