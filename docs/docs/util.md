@@ -17,7 +17,7 @@ MPH computes only **genomic** relationship matrices. **External general** relati
 
 ## Heritability enrichment
 ### Making a SNP info file
-A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](options.md#snp-info-file).
+A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](options.md#snp-info-file) for partitioning heritability across functional annotations.
 
 Usage:
 

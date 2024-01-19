@@ -22,7 +22,7 @@ If a SNP does not belong to a GRM, leave the corresponding cell **empty**. If a 
 
 In the example of [partitioning heritability by chromosomes](examples.md#by-chromosomes), [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1) has five columns for five chromosomes.
 
-[A Perl script](util.md#making-a-snp-info-file) is provided to create the SNP info file.
+[A Perl script](util.md#making-a-snp-info-file) is provided to create the SNP info file for partitioning heritability across functional annotations.
 
 ### Options
 | Option | Argument | Type | Description |
