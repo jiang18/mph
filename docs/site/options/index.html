@@ -227,7 +227,7 @@
 <p>The SNP info file is a CSV file with a header line. The first column must list SNP IDs. Each of the other columns corresponds to one GRM, and each row corresponds to a SNP.</p>
 <p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a functional annotation category. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
 <p>In the example of <a href="../examples/#by-chromosomes">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
-<p><a href="../util/#making-a-snp-info-file">A Perl script</a> is provided to create the SNP info file.</p>
+<p><a href="../util/#making-a-snp-info-file">A Perl script</a> is provided to create the SNP info file for partitioning heritability across functional annotations.</p>
 <h3 id="options">Options</h3>
 <table>
 <thead>
