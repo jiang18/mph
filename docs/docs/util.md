@@ -4,7 +4,7 @@
 ## GRM input/output
 MPH computes only **genomic** relationship matrices. **External general** relationship matrices can be converted to MPH format for use in MPH. 
 
-- `mph_functs.R` contains two R functions for GRM input/output.
+- [`mph_functs.R`](https://github.com/jiang18/mph/blob/main/util/mph_functs.R) contains two R functions for GRM input/output.
     - `write_grm()` writes an R GRM into MPH format files (.iid and .bin).
     - `read_grm()` reads an MPH GRM into R.
     - The R matrix to be written can be any **general** relationship matrix.
