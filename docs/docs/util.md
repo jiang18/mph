@@ -9,15 +9,15 @@ MPH computes only **genomic** relationship matrices. **External general** relati
     - `read_grm()` reads an MPH GRM into R.
     - The R matrix to be written can be any **general** relationship matrix.
     - This script is sourced in other R scripts for GRM input/output.
-- `grm_txt2bin.R` converts a relationship matrix from txt to MPH binary format.
+- [`grm_txt2bin.R`](https://github.com/jiang18/mph/blob/main/util/grm_txt2bin.R) converts a relationship matrix from txt to MPH binary format.
     - `Rscript --no-save grm_txt2bin.R example.grm.txt example`
     - This input file should be structured like [**example.grm.txt**](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
-- `AGHmatrix2mph.R` constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/) and writes it into MPH format files.
-- `make_gci_grm.R` generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.
+- [`AGHmatrix2mph.R`](https://github.com/jiang18/mph/blob/main/util/AGHmatrix2mph.R) constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/) and writes it into MPH format files.
+- [`make_gci_grm.R`](https://github.com/jiang18/mph/blob/main/util/make_gci_grm.R) generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.
 
 ## Heritability enrichment
 ### Making a SNP info file
-A Perl script, `make_snp_info.pl`, is provided to create [the SNP info file](options.md#snp-info-file) for partitioning heritability across functional annotations.
+A Perl script, [`make_snp_info.pl`](https://github.com/jiang18/mph/blob/main/util/make_snp_info.pl), is provided to create [the SNP info file](options.md#snp-info-file) for partitioning heritability across functional annotations.
 
 Usage:
 
