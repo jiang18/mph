@@ -440,10 +440,10 @@
 </thead>
 <tbody>
 <tr>
-<td><code>--minque</code></td>
+<td><code>--minque</code><br><code>--reml</code></td>
 <td>FLAG</td>
 <td>Required</td>
-<td>Flag to run REML or iterative MINQUE</td>
+<td>Flag to run REML or iterative MINQUE. This option can be specified as <code>--minque</code> or <code>--reml</code>, and they are interchangeable.</td>
 </tr>
 <tr>
 <td><code>--save_memory</code></td>
@@ -501,8 +501,9 @@
 </tr>
 </tbody>
 </table>
+<p>MPH incorporates Fisher's scoring for REML, equivalent to iterative MINQUE, alongside a trust-region dogleg algorithm. <code>--minque</code> mirrors <code>--reml</code>.</p>
 <p>To force MINQUE(0) or MINQUE(1), set <code>--num_iterations 1</code>. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).</p>
-<p>The memory-saving mode (<code>--save_memory</code>) is not necessarily slower, particularly on a solid-state drive. </p>
+<p>The memory-saving mode (<code>--save_memory</code>) is not necessarily slower, especially when file caching is effectively utilized. </p>
 <h3 id="output_2">Output</h3>
 <table>
 <thead>
@@ -563,8 +564,16 @@
 </thead>
 <tbody>
 <tr>
-<td>name</td>
-<td>Name of the variance component or GRM</td>
+<td>trait_x</td>
+<td>Trait name</td>
+</tr>
+<tr>
+<td>trait_y</td>
+<td>Trait name. If the same as trait_x, components correspond to the trait variance; otherwise, the covariance between trait_x and trait_y.</td>
+</tr>
+<tr>
+<td>vc_name</td>
+<td>Name of the (co)variance component or GRM</td>
 </tr>
 <tr>
 <td>m</td>
@@ -572,19 +581,19 @@
 </tr>
 <tr>
 <td>var</td>
-<td>Estimate of the variance component</td>
+<td>Estimate of the (co)variance component</td>
 </tr>
 <tr>
 <td>seV</td>
-<td>Standard error of the variance component estimate</td>
+<td>Standard error of the (co)variance component estimate</td>
 </tr>
 <tr>
 <td>pve</td>
-<td>Estimate of the proportion of variance explained</td>
+<td>Estimate of the proportion of (co)variance explained</td>
 </tr>
 <tr>
 <td>seP</td>
-<td>Standard error of the estimate of the proportion of variance explained</td>
+<td>Standard error of the estimate of the proportion of (co)variance explained</td>
 </tr>
 <tr>
 <td>enrichment</td>
@@ -596,16 +605,7 @@
 </tr>
 </tbody>
 </table>
-<p>Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.</p>
-<p>For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (<code>--trait 1,2,3</code>):</p>
-<ul>
-<li>Variance of trait 1</li>
-<li>Covariance between traits 1 and 2</li>
-<li>Variance of trait 2</li>
-<li>Covariance between traits 1 and 3</li>
-<li>Covariance between traits 2 and 3</li>
-<li>Variance of trait 3</li>
-</ul>
+<p>Additional columns display sampling covariance matrices of estimates for enrichments and for all (co)variance components.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to <a href="../util/#from-vcs-to-enrichments">recompute PVEs and enrichments</a>. </p>
