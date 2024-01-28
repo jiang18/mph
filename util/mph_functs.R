@@ -1,4 +1,5 @@
 # Oct 27, 2023: initial release along with MPH v0.49.2
+# Jan 27, 2024: revised recompute_enrichments() along with MPH v0.52.0
 
 # Recompute the estimates and SEs of PVEs and enrichments from MPH VC estimates
 # vcfile: the .mq.vc.csv file produced by `mph --minque`.
@@ -28,7 +29,7 @@ recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA, tr
     mq = mq[mq$trait_x == trait.x & mq$trait_y == trait.y, -c(1,2)]
     mq = mq[-nrow(mq),]
     if(ncol(crossprod) > nrow(mq)) {
-        stop(paste("ncol(crossprod) should equal the number of genetic VCs in", vcfile))
+        stop(paste("ncol(crossprod) should equal the number of genomic VCs in", vcfile))
     }
     mq = mq[1:ncol(crossprod),]
 
