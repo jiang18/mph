@@ -1,5 +1,9 @@
 # Change Log
 
+## Jan 27, 2024 (v0.52.0)
+- Updated the structure of the .mq.vc.csv file format to improve readability.
+- Eliminated subroutines related to eigen-decomposition-based single-GRM REML.
+
 ## Nov 26, 2023 (v0.51.0)
 - Implemented multi-trait REML.
 - Fine-tuned the threshold for rank determination.

@@ -99,7 +99,8 @@ If `--covariate_names all` is specified, MPH will use as covariates all columns 
 ### Options
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--minque` | FLAG | Required | Flag to run REML or iterative MINQUE |
+| `--minque`\
+`--reml` | FLAG | Required | Flag to run REML or iterative MINQUE. This option can be specified as `--minque` or `--reml`, and they are interchangeable. |
 | `--save_memory` | FLAG | Optional | Flag to enable the memory-saving mode |
 | `--num_threads` | INT | Optional | Number of computational threads to use [default=1] |
 | `--heritability` | FLOAT | Optional | Initial heritability value(s) in REML iterations [default=0.5] |
@@ -110,9 +111,11 @@ If `--covariate_names all` is specified, MPH will use as covariates all columns 
 | `--distribution` | STRING | Optional | Specify whether the stochastic trace estimation uses a **Gaussian** or **Rademacher** distribution [default=Rademacher] |
 | `--seed` | INT | Optional | Random seed in stochastic trace estimation [default=0] |
 
+MPH incorporates Fisher's scoring for REML, equivalent to iterative MINQUE, alongside a trust-region dogleg algorithm. `--reml` mirrors `--minque`.
+
 To force MINQUE(0) or MINQUE(1), set `--num_iterations 1`. The second column of the GRM list file should be set to 0 for MINQUE(0) and 1 for MINQUE(1).
 
-The memory-saving mode (`--save_memory`) is not necessarily slower, particularly on a solid-state drive. 
+The memory-saving mode (`--save_memory`) is not necessarily slower, especially when file caching is effectively utilized. 
 
 ### Output
 | Option | Argument | Type | Description |
