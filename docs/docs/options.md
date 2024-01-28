@@ -135,25 +135,18 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, especially w
 
 | Column | Description |
 |----------|----------|
-| name | Name of the variance component or GRM |
+| trait_x | Trait name |
+| trait_y | Trait name. If the same as trait_x, components correspond to the trait variance; otherwise, the covariance between trait_x and trait_y. |
+| vc_name | Name of the (co)variance component or GRM |
 | m | Weighted number of SNPs in the GRM |
-| var | Estimate of the variance component |
-| seV | Standard error of the variance component estimate |
-| pve | Estimate of the proportion of variance explained |
-| seP | Standard error of the estimate of the proportion of variance explained |
+| var | Estimate of the (co)variance component |
+| seV | Standard error of the (co)variance component estimate |
+| pve | Estimate of the proportion of (co)variance explained |
+| seP | Standard error of the estimate of the proportion of (co)variance explained |
 | enrichment | Estimate of the per-SNP heritability enrichment |
 | seE | Standard error of the estimate of the per-SNP heritability enrichment |
 
-Additional columns display two sampling covariance matrices of estimates: one for enrichments and the other for variance components.
-
-For a multi-trait analysis, VCs are listed for all variances and covariances between traits; for example, the order of VCs is as follows for three traits (`--trait 1,2,3`):
-
-- Variance of trait 1
-- Covariance between traits 1 and 2
-- Variance of trait 2
-- Covariance between traits 1 and 3
-- Covariance between traits 2 and 3
-- Variance of trait 3
+Additional columns display sampling covariance matrices of estimates for enrichments and for all (co)variance components.
 
 !!! note  
     Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](util.md#from-vcs-to-enrichments). 
