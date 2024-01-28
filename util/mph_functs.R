@@ -5,7 +5,8 @@
 # crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 # nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
 # annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
-recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA) {
+# trait.x and trait.y: trait names matching the first two columns of vcfile. If both are `NA`, they are set to the trait names in the first line of vcfile. Otherwise, if only one is `NA`, it is set to the value of the other.
+recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA) {
     if(is.na(vcfile)) {
         stop("vcfile must be specifiled.")
     }
@@ -14,6 +15,17 @@ recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA) {
     }
 
     mq = read.csv(vcfile)
+
+    if(is.na(trait.x) && is.na(trait.y)) {
+      trait.x = mq$trait_x[1]
+      trait.y = mq$trait_y[1]
+    } else if (is.na(trait.x)) {
+       trait.x = trait.y
+    } else if (is.na(trait.y)) {
+       trait.y = trait.x
+    }
+
+    mq = mq[mq$trait_x == trait.x & mq$trait_y == trait.y, -c(1,2)]
     mq = mq[-nrow(mq),]
     if(ncol(crossprod) > nrow(mq)) {
         stop(paste("ncol(crossprod) should equal the number of genetic VCs in", vcfile))
