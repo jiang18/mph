@@ -1,4 +1,4 @@
-!!! note
+!!! note  
     Option names may be abbreviated if the abbreviation is unique or is an exact match for some defined option; e.g., `--phenotype` works the same as `--phenotype_file`.
 
 ## Making a GRM from SNPs
