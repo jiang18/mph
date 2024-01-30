@@ -1,5 +1,8 @@
 # Change Log
 
+## Jan 29, 2024 (v0.52.1)
+- Fixed a bug in --pred. 
+
 ## Jan 27, 2024 (v0.52.0)
 - Updated the structure of the .mq.vc.csv file format to improve readability.
 - Eliminated subroutines related to eigen-decomposition-based single-GRM REML.
