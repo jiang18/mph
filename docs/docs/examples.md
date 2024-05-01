@@ -10,7 +10,7 @@
 
 ### Sequence genotypes
 - The dataset is available for download [here](https://doi.org/10.6084/m9.figshare.24432948).
-- Sequence genotypes were simulated by [genosim](https://aipl.arsusda.gov/software/genosim/).
+- Sequence genotypes were simulated by [genosim](https://www.ars.usda.gov/northeast-area/beltsville-md-barc/beltsville-agricultural-research-center/agil/aip/software/genosim/).
 - 10k unrelated individuals, 5M sequence variants, and 30 chromosomes
 - Functional annotations were quickly simulated by assigning [LDSC baseline annotations](https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz) to the simulated sequence variants in order.
 - Phenotypes were simulated using the [S-LDSC baseline model enrichment estimates for human traits](https://www.nature.com/articles/ng.3404/figures/4).
