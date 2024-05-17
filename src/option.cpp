@@ -20,9 +20,8 @@ int main(int argc, char **argv)
 	std::cout<<"***************************************************************************"<<std::endl;
 	std::cout<<"* MPH by Jicai Jiang"<<std::endl;
 	std::cout<<"* MINQUE for Partitioning Heritability"<<std::endl;
-	std::cout<<"* Version 0.52.1 (January 29, 2024)"<<std::endl;
+	std::cout<<"* Version 0.53.2 (May 16, 2024)"<<std::endl;
 	std::cout<<"* (C) 2021-present, Jicai Jiang, NC State University"<<std::endl;
-	std::cout<<"* MIT License"<<std::endl;
 	std::cout<<"***************************************************************************"<<std::endl;
     
 	time_t start=std::time(nullptr);
@@ -773,8 +772,10 @@ void option(int option_num, char **option_str) {
 			}
 		}
 		VectorXf pheno_sd(num_traits);
+		VectorXf pheno_mean(num_traits);
 		for(i=0; i<num_traits; ++i) {
-			yvec.segment(i*keep_num, keep_num).array() -= yvec.segment(i*keep_num, keep_num).mean();
+			pheno_mean(i) = yvec.segment(i*keep_num, keep_num).mean();
+			yvec.segment(i*keep_num, keep_num).array() -= pheno_mean(i);
 			pheno_sd(i) = yvec.segment(i*keep_num, keep_num).norm()/std::sqrt(keep_num);
 			yvec.segment(i*keep_num, keep_num) /= pheno_sd(i);
 		}
@@ -1136,7 +1137,8 @@ void option(int option_num, char **option_str) {
 			if(S.llt().info() == NumericalIssue) {
 				throw("\nFisher information matrix is not positive definite. Change initial VCs to rerun.");
 			}
-			grad = 0.5 * (q - S*param);
+			if(iter == 1) grad = 0.5 * (q - S*param);
+			else grad = grad_new;
 			FI = 0.5 * S;
 			if(iter == 2) grad_fst = grad;
 			
@@ -1518,16 +1520,33 @@ void option(int option_num, char **option_str) {
 		}
 		ofs.close();
 		
+		// calculate shift adjustment
+		xmat.conservativeResize(keep_num, covar_names.size());
+		VectorXf adj_mean = (xmat.transpose() * xmat).llt().solve(xmat.transpose() * VectorXf::Ones(keep_num));
+		VectorXf adj_pred = xmat * adj_mean;
+		bool shifting = false;
+		if(fabs(adj_pred.maxCoeff()-1.0) < 0.0001 && fabs(adj_pred.minCoeff()-1.0) < 0.0001) shifting = true;
+
 		// scale BLUE and SE by pheno_sd
 		// write BLUE into a file
 		VectorXf blue = lltXtHinvX.solve(HinvX.transpose() * yvec);
 		MatrixXf blue_var = lltXtHinvX.solve( MatrixXf::Identity(covar_names.size()*num_traits,covar_names.size()*num_traits) );
 		ofs.open(output_file + ".mq.blue.csv", std::ofstream::out);
-		ofs<<"trait,covar,blue,se,pval\n";
+		ofs<<"trait,covar,blue,se,pval";
+		for(i=0; i<num_traits; ++i) 
+			for(j=0; j<covar_names.size(); ++j)  ofs<<","<<trait_names[i]<<"."<<covar_names[j];
+		ofs<<"\n";
+		IOFormat CommaInitFmt(FullPrecision, 0, ",");
+		RowVectorXf row_scale(blue.size());
+		for(i=0; i<num_traits; ++i) row_scale.segment(i*covar_names.size(), covar_names.size()).setConstant(pheno_sd(i));
 		for(i=0; i<num_traits; ++i) {
+			if(shifting) blue.segment(i*covar_names.size(), covar_names.size()) += adj_mean * pheno_mean(i) / pheno_sd(i);
 			for(j=0; j<covar_names.size(); ++j) {
 				int l = i*covar_names.size()+j;
-				ofs<<trait_names[i]<<","<<covar_names[j]<<","<<blue(l)*pheno_sd(i)<<","<<std::sqrt(blue_var(l,l))*pheno_sd(i)<<","<<getOneDfChisqPval(blue(l)*blue(l)/blue_var(l,l))<<"\n";
+				ofs<<trait_names[i]<<","<<covar_names[j]<<","<<blue(l)*pheno_sd(i)<<","<<std::sqrt(blue_var(l,l))*pheno_sd(i)<<","<<getOneDfChisqPval(blue(l)*blue(l)/blue_var(l,l))<<",";
+
+				RowVectorXf row = blue_var.row(l).array() * row_scale.array() * pheno_sd(i);
+				ofs<<row.format(CommaInitFmt)<<"\n";
 			}
 		}
 		ofs.close();
