@@ -1,5 +1,9 @@
 # Change Log
 
+## May 16, 2024 (v0.53.2)
+- Added the sampling variance-covariance matrix for all fixed-effect estimates to the BLUE output file.
+- Corrected the fixed-effect estimate of the intercept.
+
 ## Jan 29, 2024 (v0.52.1)
 - Fixed a bug in --pred. 
 
@@ -40,7 +44,7 @@
 
 ## Jan 20, 2022
 - Scaled logLL relative to null model.
-- Added the sampling variance-covariance matrix of all VC estimates in the VC output file.
+- Added the sampling variance-covariance matrix of all VC estimates to the VC output file.
 
 ## Sep 06, 2021
 - Fixed a bug in reading CSV files.
