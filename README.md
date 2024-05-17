@@ -9,7 +9,7 @@ The method has the following properties:
 - It can perform complex genome-partitioning of quantitative genetic variation and covariation.
 
 ## Citation
-Jiang J. MPH: fast REML for large-scale genome partitioning of quantitative genetic variation. Bioinformatics. 2024 May 2;40(5):btae298. doi: 10.1093/bioinformatics/btae298. PMID: 38688661; PMCID: PMC11093526.
+Jiang J. MPH: fast REML for large-scale genome partitioning of quantitative genetic variation. Bioinformatics. 2024 May 2;40(5):btae298. doi: [10.1093/bioinformatics/btae298](https://doi.org/10.1093/bioinformatics/btae298). PMID: [38688661](https://pubmed.ncbi.nlm.nih.gov/38688661/); PMCID: [PMC11093526](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11093526/).
 
 ## License 
 **MPH** is distributed under the [GPL-3.0 license](https://github.com/jiang18/mph/blob/main/LICENSE).
