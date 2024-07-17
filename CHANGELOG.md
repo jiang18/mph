@@ -1,5 +1,8 @@
 # Change Log
 
+## July 16, 2024 (v0.54.0)
+- Implemented custom genotype coding for GRM computation (--snp_genotype_coding).
+
 ## May 16, 2024 (v0.53.2)
 - Added the sampling variance-covariance matrix for all fixed-effect estimates to the BLUE output file.
 - Corrected the fixed-effect estimate of the intercept.
