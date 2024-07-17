@@ -48,7 +48,6 @@ For dominance GRMs, the suffixes are modified as follows:
 MPH includes a feature for computing GRM with custom genotype coding.
 
 To use custom genotype coding:
-
 1. Add 3 columns to the [SNP info file](#snp-info-file) specifying the numeric codes for A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub> genotypes for each genomic variant.
 2. Assign any desired header names to these columns (e.g., header1, header2, header3).
 3. When running `mph --make_grm`, include the option `--snp_genotype_coding header1,header2,header3` to enable GRM computation using the custom genotype coding specified in the SNP info file.
