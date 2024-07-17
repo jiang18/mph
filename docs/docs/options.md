@@ -36,7 +36,13 @@ In the example of [partitioning heritability by chromosomes](examples.md#by-chro
 |-------|-------|-------|--------------|
 | `--output_file` | FILE PREFIX | Required | Output filename prefix |
 
-Two files will be generated for a GRM: one with the suffix **.grm.iid** and the other with **.grm.bin**.
+The GRM calculation generates two files:
+1. A file with the suffix `.grm.iid`
+2. A file with the suffix `.grm.bin`
+
+For dominance GRMs, the suffixes are modified as follows:
+1. `.d.grm.iid`
+2. `.d.grm.bin`
 
 ## Making a GRM from GRMs
 
