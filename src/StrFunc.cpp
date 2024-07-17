@@ -15,7 +15,7 @@ int StrFunc::find_token_in_header(std::string token_name, const std::vector<std:
 			}
 		}
 		if(token_col == na_col) {
-			std::cout<<token_name<<" not found in the header of "<<file<<std::endl;
+			std::cout<<"\nError: ["<<token_name<<"] not found in the header of ["<<file<<"].\n";
 			exit(1);
 		}
 	}

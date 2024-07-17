@@ -49,6 +49,31 @@ void calc_grm_by_subset(const char grm_type, const float min_maf, const float mi
 	}
 }
 
+void calc_custom_grm_by_subset(const float min_maf, const float min_hwep, 
+	Ref<MatrixXd> SS, const Ref<MatrixXc>& kmat, const Ref<VectorXd>& hwep, Ref<VectorXd> swt, const Ref<Matrix3Xd>& code_sm, 
+	Ref<MatrixXd> grm, double &sumwt, int &post_qc_marker_num)
+{
+	#pragma omp parallel for
+	for(int s=0; s<kmat.cols(); ++s) {
+		double pfreq = kmat.col(s).cast<double>().mean()/2.;
+		if(hwep(s)<min_hwep || (float)pfreq>=1-min_maf || (float)pfreq<=min_maf || swt(s)<=0) {
+			swt(s) = 0;
+			SS.col(s).setZero();
+		} else {
+			for(int l=0; l<kmat.rows(); ++l) {
+				if(kmat(l,s) == 0) SS(l,s) = code_sm(0,s);
+				else if(kmat(l,s) == 1) SS(l,s) = code_sm(1,s);
+				else SS(l,s) = code_sm(2,s);
+			}
+			if(swt(s)>1.000001 || swt(s)<0.999999) SS.col(s) *= std::sqrt(swt(s));
+		}
+	}
+	// std::cout<<"GRM += ZWZ', where Z=subset(custom genotype codes)."<<std::endl;
+	grm.selfadjointView<Lower>().rankUpdate(SS);
+	post_qc_marker_num += (swt.array()!=0).count();
+	sumwt += swt.sum();
+}
+
 void write_grm_into_file(const std::string bin_file_prefix, const std::vector<std::string>& indi_keep, const float sum2pq, const Ref<MatrixXf> grm)
 {
 	int num = indi_keep.size();

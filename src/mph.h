@@ -49,26 +49,36 @@ extern int num_threads;
 // input data
 std::map<std::string, std::pair<float, float> > read_phenotype_file(std::string phenotype_file, std::string trait_name, std::string error_variance_weight_name);
 std::map<std::string, VectorXf> read_covariate_file(std::string covariate_file, std::vector<std::string>& covariate_names);
-void read_marker_info_file(
+void get_marker_weight(
 	std::string marker_info_file, 
-	std::string group_header, 
 	std::string weight_name, 
-	std::map<std::string, std::pair<std::string, float> >& marker2group_weight);
+	std::map<std::string, float >& marker2weight);
+std::map<std::string, Vector3d> get_geno_coding(std::string marker_info_file, std::vector<std::string>& coding_names);
 void get_subject_set(
 	const std::string subject_set_file,
 	const std::string plink_fam_file,
 	std::vector<bool>& bindi,
 	std::vector<std::string>& indi_keep );
-void get_marker_set(
-	const std::map<std::string, std::pair<std::string, float> >& marker2group_weight, 
+void get_marker_set_by_weight(
+	const std::map<std::string, float >& marker2weight, 
 	const std::string plink_bim_file,
 	std::vector<bool>& bmarker,
 	std::vector<double>& gvec );
+void get_marker_set_by_codes(
+	const std::map<std::string, float >& marker2weight,
+	const std::map<std::string, Vector3d >& marker2codes,
+	const std::string plink_bim_file,
+	std::vector<bool>& bmarker,
+	std::vector<double>& gvec,
+	std::vector<Vector3d>& code_vec );
 void calc_hwep_geno012(const Ref<MatrixXc>& geno, const int midp, Ref<VectorXd> hwep);
 
 // GRM
 void calc_grm_by_subset(const char grm_type, const float min_maf, const float min_hwep, 
 	Ref<MatrixXd> SS, const Ref<MatrixXc>& kmat, const Ref<VectorXd>& hwep, Ref<VectorXd> swt, 
+	Ref<MatrixXd> grm, double &sumwt, int &post_qc_marker_num);
+void calc_custom_grm_by_subset(const float min_maf, const float min_hwep, 
+	Ref<MatrixXd> SS, const Ref<MatrixXc>& kmat, const Ref<VectorXd>& hwep, Ref<VectorXd> swt, const Ref<Matrix3Xd>& code_sm, 
 	Ref<MatrixXd> grm, double &sumwt, int &post_qc_marker_num);
 void write_grm_into_file(const std::string bin_file_prefix, const std::vector<std::string>& indi_keep, const float sum2pq, const Ref<MatrixXf> grm);
 void write_dGRM_into_file(const std::string bin_file_prefix, const std::vector<std::string>& indi_keep, const float sum2pq, const Ref<MatrixXd> grm);

@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	std::cout<<"***************************************************************************"<<std::endl;
 	std::cout<<"* MPH by Jicai Jiang"<<std::endl;
 	std::cout<<"* MINQUE for Partitioning Heritability"<<std::endl;
-	std::cout<<"* Version 0.53.2 (May 16, 2024)"<<std::endl;
+	std::cout<<"* Version 0.54.0 (July 16, 2024)"<<std::endl;
 	std::cout<<"* (C) 2021-present, Jicai Jiang, NC State University"<<std::endl;
 	std::cout<<"***************************************************************************"<<std::endl;
     
@@ -70,7 +70,7 @@ void option(int option_num, char **option_str) {
 	std::vector<std::string> trait_names;
 	std::vector<std::string> error_variance_weight_names;
 	std::vector<std::string> covar_names;
-	std::string marker_info_file="", marker_group="", marker_effvar_weight_name="";
+	std::string marker_info_file="", marker_effvar_weight_name="", str_geno_coding="";
 	std::string binary_genotype_file="";
 	float min_maf=0;
 	std::string output_file="";
@@ -122,7 +122,7 @@ void option(int option_num, char **option_str) {
 		{"covariate_file",  required_argument, 0, 'c'},
 		{"covariate_names",  required_argument, 0, 'v'},
 		{"snp_info_file",  required_argument, 0, 'm'},
-		{"snp_set_name",  required_argument, 0, 'r'},
+		{"snp_genotype_coding",  required_argument, 0, 'r'},
 		{"snp_weight_name",  required_argument, 0, 'w'},
 		{"binary_genotype_file",  required_argument, 0, 'b'},
 		{"num_threads",    required_argument, 0, 'n'},
@@ -271,7 +271,7 @@ void option(int option_num, char **option_str) {
 				break;
 			case 'r':
 				printf("OPTION %s with ARG %s\n", long_options[option_index].name,optarg);
-				marker_group = optarg;
+				str_geno_coding = optarg;
 				break;
 			case 'w':
 				printf("OPTION %s with ARG %s\n", long_options[option_index].name,optarg);
@@ -1558,12 +1558,17 @@ void option(int option_num, char **option_str) {
 	
 	// make GRM
 	if(make_grm) {
-		if(grm_type=='A') {
-			std::cout<<"\nStarted to make additive GRM.\n";
-			std::cout<<"GRM = ZWZ', where Z = standardized genotypes and W = weights.\n"<<std::endl;
+		if(str_geno_coding.empty()) {
+			if(grm_type=='A') {
+				std::cout<<"\nStarted to make additive GRM.\n";
+				std::cout<<"GRM = ZWZ', where Z = standardized genotypes and W = weights.\n"<<std::endl;
+			} else {
+				std::cout<<"\nStarted to make dominance GRM.\n";
+				std::cout<<"GRM = ZWZ', where Z = standardized genotypes for dominance deviation.\n"<<std::endl;
+			}
 		} else {
-			std::cout<<"\nStarted to make dominance GRM.\n";
-			std::cout<<"GRM = ZWZ', where Z = standardized genotypes for dominance deviation.\n"<<std::endl;
+			std::cout<<"\nStarted to make GRM with custom genotype coding.\n";
+			std::cout<<"GRM = ZWZ', where Z = custom genotype codes and W = weights.\n"<<std::endl;
 		}
 		
 		if( !(file_check(binary_genotype_file + ".fam") && file_check(binary_genotype_file + ".bim") && file_check(binary_genotype_file + ".bed")) )
@@ -1572,7 +1577,7 @@ void option(int option_num, char **option_str) {
 		if(subject_set_file != "") 
 			std::cout<<"Set the subject set file ["<<subject_set_file<<"]\n";
 		
-		// get subjects from --subject_set (if any) and plink fam
+		// get subjects from --subject_set (if any) and PLINK fam
 		std::vector<bool> bindi;
 		std::vector<std::string> indi_keep;
 		get_subject_set(subject_set_file, binary_genotype_file+".fam", bindi, indi_keep);
@@ -1581,18 +1586,32 @@ void option(int option_num, char **option_str) {
 		std::cout<<keep_num<<" individuals are retained for making GRM."<<std::endl;
 		if(keep_num == 0) throw("\nError: subject set retained for analysis is empty.\n");
 		
-		// get SNPs from --snp_info_file and plink bim
-		// read marker prior file
-		std::map<std::string, std::pair<std::string, float> > marker2group_weight;
-		read_marker_info_file(marker_info_file, marker_group, marker_effvar_weight_name, marker2group_weight);
+		// get SNPs from --snp_info_file and PLINK bim
+		// read SNP info file
 		std::vector<bool> bmarker;
 		std::vector<double> gvec;
-		get_marker_set(marker2group_weight, binary_genotype_file+".bim", bmarker, gvec);
+		std::vector<Vector3d> code_vec;
+		std::map<std::string, float> marker2weight;
+		get_marker_weight(marker_info_file, marker_effvar_weight_name, marker2weight);
+		if(str_geno_coding.empty()) {
+			get_marker_set_by_weight(marker2weight, binary_genotype_file+".bim", bmarker, gvec);
+		} else {
+			std::vector<std::string> coding_names = StrFunc::split(str_geno_coding,',');
+			std::map<std::string, Vector3d > marker2codes = get_geno_coding(marker_info_file, coding_names);
+			get_marker_set_by_codes(marker2weight, marker2codes, binary_genotype_file+".bim", bmarker, gvec, code_vec);
+		}
 		Eigen::Map<VectorXd> gwt(gvec.data(), gvec.size());
 		int pre_qc_marker_num = gwt.size();
 		std::cout<<bmarker.size()<<" variants are found in ["<<binary_genotype_file<<".bim].\n";
 		std::cout<<pre_qc_marker_num<<" variants are retained before quality control."<<std::endl;
 		if(pre_qc_marker_num == 0) throw("\nError: marker set retained for analysis is empty.\n");
+		// Map is not used for the safety of memory continuity.
+		Matrix3Xd code_mat(3, code_vec.size());
+		for (unsigned i = 0; i < code_vec.size(); ++i) {
+			code_mat.col(i) = code_vec[i];
+		}
+		std::vector<Vector3d>().swap(code_vec);
+		std::map<std::string, float>().swap(marker2weight);
 		
 		// variables for making GRM
 		int subset_size = 50e6/keep_num;
@@ -1606,6 +1625,7 @@ void option(int option_num, char **option_str) {
 		int post_qc_marker_num = 0;
 		VectorXd swt(subset_size);
 		VectorXd hwep(subset_size);
+		Matrix3Xd code_sm;
 		
 		//read binary genotype file
 		std::string plink_bed_file = binary_genotype_file + ".bed";
@@ -1646,7 +1666,12 @@ void option(int option_num, char **option_str) {
 			if(km_idx == subset_size) {
 				calc_hwep_geno012(kmat, hwe_midp, hwep);
 				swt = gwt.segment(snp_indx-subset_size,subset_size);
-				calc_grm_by_subset(grm_type, min_maf, min_hwep, SS, kmat, hwep, swt, grm, sumwt, post_qc_marker_num);
+				if(str_geno_coding.empty()) {
+					calc_grm_by_subset(grm_type, min_maf, min_hwep, SS, kmat, hwep, swt, grm, sumwt, post_qc_marker_num);
+				} else {
+					code_sm = code_mat.middleCols(snp_indx-subset_size,subset_size);
+					calc_custom_grm_by_subset(min_maf, min_hwep, SS, kmat, hwep, swt, code_sm, grm, sumwt, post_qc_marker_num);
+				}
 				
 				km_idx = 0;
 				
@@ -1664,18 +1689,27 @@ void option(int option_num, char **option_str) {
 			
 			calc_hwep_geno012(kmat, hwe_midp, hwep);
 			swt = gwt.tail(rest_size);
-			calc_grm_by_subset(grm_type, min_maf, min_hwep, SS, kmat, hwep, swt, grm, sumwt, post_qc_marker_num);
+			if(str_geno_coding.empty()) {
+				calc_grm_by_subset(grm_type, min_maf, min_hwep, SS, kmat, hwep, swt, grm, sumwt, post_qc_marker_num);
+			} else {
+				code_sm = code_mat.rightCols(rest_size);
+				calc_custom_grm_by_subset(min_maf, min_hwep, SS, kmat, hwep, swt, code_sm, grm, sumwt, post_qc_marker_num);
+			}
 			
 			std::cout<<"Completed subset "<<num_sets+1<<std::endl; 
 		}
 		SS.resize(0,0);
 		kmat.resize(0,0);
 		
-		std::cout<<"\nCompleted making "<<(grm_type=='A' ? "additive" : "dominance")<<" GRM.\n";
+		if(str_geno_coding.empty()) {
+			std::cout<<"\nCompleted making "<<(grm_type=='A' ? "additive" : "dominance")<<" GRM.\n";
+		} else {
+			std::cout<<"\nCompleted making GRM with custom genotype coding.\n";
+		}
 		std::cout<<post_qc_marker_num<<" post-QC variants are used for making GRM.\n";
 		
 		std::cout<<"\nWriting GRM to file..."<<std::endl;
-		write_dGRM_into_file((grm_type=='A' ? output_file : output_file+".d"), indi_keep, (float)sumwt, grm);
+		write_dGRM_into_file(output_file + (str_geno_coding.empty() ? (grm_type == 'A' ? "" : ".d") : ".custom"), indi_keep, (float)sumwt, grm);
 		std::cout<<"Written GRM to file."<<std::endl;
 		
 		return;

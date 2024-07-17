@@ -2,7 +2,6 @@
 #include "mph.h"
 #include "snphwe.h"
 
-const std::string default_group ("NULL");
 const float default_marker_effvar_weight = 1.0;
 const float default_error_variance_weight = 1.0;
 const char delimiter = ',';
@@ -28,7 +27,7 @@ std::map<std::string, std::pair<float, float> > read_phenotype_file(std::string 
 	
 	ifs.open(phenotype_file);
 	if(!ifs.is_open()) {
-		std::cout<<"Cannot open "<<phenotype_file<<std::endl;
+		std::cout<<"Error: cannot open "<<phenotype_file<<std::endl;
 		exit(1);
 	}
 	
@@ -65,7 +64,7 @@ std::map<std::string, VectorXf> read_covariate_file(std::string covariate_file, 
 	
 	ifs.open(covariate_file);
 	if(!ifs.is_open()) {
-		std::cout<<"Cannot open "<<covariate_file<<std::endl;
+		std::cout<<"Error: cannot open "<<covariate_file<<std::endl;
 		exit(1);
 	}
 	
@@ -84,7 +83,7 @@ std::map<std::string, VectorXf> read_covariate_file(std::string covariate_file, 
 	for (i=0; i<covariate_names.size(); ++i) {
 		std::cout<<" "<<covariate_names[i];
 		if(name2col.find(covariate_names[i]) == name2col.end()) {
-			std::cout<<"\n"<<covariate_names[i]<<" not in covariate file"<<std::endl;
+			std::cout<<"\nError: ["<<covariate_names[i]<<"] not found in the header of covariate file."<<std::endl;
 			exit(1);
 		} else covariate_cols.push_back(name2col[covariate_names[i]]);
 	}
@@ -113,20 +112,19 @@ std::map<std::string, VectorXf> read_covariate_file(std::string covariate_file, 
 	return indi2covar;
 }
 
-void read_marker_info_file(
+void get_marker_weight(
 	std::string marker_info_file, 
-	std::string group_header, 
 	std::string weight_name, 
-	std::map<std::string, std::pair<std::string, float> >& marker2group_weight)
+	std::map<std::string, float >& marker2weight)
 {
-	marker2group_weight.clear();
+	marker2weight.clear();
 	
 	std::ifstream ifs;
 	std::string line;
 	
 	ifs.open(marker_info_file);
 	if(!ifs.is_open()) {
-		std::cout<<"Cannot open "<<marker_info_file<<std::endl;
+		std::cout<<"Error: cannot open "<<marker_info_file<<std::endl;
 		exit(1);
 	}
 	
@@ -134,16 +132,7 @@ void read_marker_info_file(
 	if(line[line.size()-1] == '\r') line.erase(line.size()-1);
 	std::vector<std::string> header = StrFunc::split(line, delimiter);
 	
-	int group_col = StrFunc::find_token_in_header(group_header, header, marker_info_file);
-	if(!group_header.empty() && group_col == na_col) {
-		std::cout<<"Marker group column "<<group_header<<" not found"<<std::endl;
-		exit(1);
-	}
 	int weight_col = StrFunc::find_token_in_header(weight_name, header, marker_info_file);
-	if(!weight_name.empty() && weight_col == na_col) {
-		std::cout<<"Marker weight column "<<weight_name<<" not found"<<std::endl;
-		exit(1);
-	}
 	
 	while (std::getline(ifs, line)) {
 		if(line[line.size()-1] == '\r') line.erase(line.size()-1);
@@ -153,12 +142,66 @@ void read_marker_info_file(
 			exit(1);
 		}
 		if(weight_col == na_col) {
-				marker2group_weight[cols[0]] = std::make_pair(default_group, default_marker_effvar_weight);
+				marker2weight[cols[0]] = default_marker_effvar_weight;
 		} else if(cols.size() > weight_col && !cols[weight_col].empty()) {
-			marker2group_weight[cols[0]] = std::make_pair(default_group, std::stof(cols[weight_col]));
+			marker2weight[cols[0]] = std::stof(cols[weight_col]);
 		}
 	}
 	ifs.close();
+}
+
+std::map<std::string, Vector3d> get_geno_coding(std::string marker_info_file, std::vector<std::string>& coding_names)
+{
+	if(coding_names.size() != 3) throw("\nError: there should be 3 tokens for genotype coding.\n");
+
+	std::map<std::string, Vector3d > marker2codes;
+	int i;
+	std::ifstream ifs;
+	std::string line;
+	
+	ifs.open(marker_info_file);
+	if(!ifs.is_open()) {
+		std::cout<<"Error: cannot open "<<marker_info_file<<std::endl;
+		exit(1);
+	}
+	
+	std::map<std::string, int> name2col; 
+	std::getline(ifs, line);
+	if(line[line.size()-1] == '\r') line.erase(line.size()-1);
+	std::vector<std::string> header = StrFunc::split(line, delimiter);
+	for (i=1; i<header.size(); ++i) {
+		name2col[header[i]] = i;
+	}
+	std::vector<int> coding_cols;
+	std::cout<<"\nCustom genotype coding specified:\n";
+	std::cout<<" A1A1 <=> ["<<coding_names[0]<<"]\n";
+	std::cout<<" A1A2 <=> ["<<coding_names[1]<<"]\n";
+	std::cout<<" A2A2 <=> ["<<coding_names[2]<<"]\n\n";
+	for (i=0; i<coding_names.size(); ++i) {
+		if(name2col.find(coding_names[i]) == name2col.end()) {
+			std::cout<<"\nError: ["<<coding_names[i]<<"] not found in the header of SNP info file."<<std::endl;
+			exit(1);
+		} else coding_cols.push_back(name2col[coding_names[i]]);
+	}
+
+	Vector3d codes;
+	// Beware of the situation where the last column is missing.
+	while (std::getline(ifs, line)) {
+		if(line[line.size()-1] == '\r') line.erase(line.size()-1);
+		std::vector<std::string> cols = StrFunc::split(line, delimiter);
+		if(!(header.size() == cols.size() || (line.back() == delimiter && header.size() == cols.size()+1))) {
+			std::cout<<"\nError: "<<line<<" in "<<marker_info_file<<std::endl;
+			exit(1);
+		}
+		for (i=0; i<coding_cols.size(); ++i) {
+			if(cols.size() > coding_cols[i] && !cols[coding_cols[i]].empty()) codes(i) = std::stod(cols[coding_cols[i]]);
+			else goto nextline;
+		}
+		marker2codes[cols[0]] = codes;
+		nextline:;
+	}
+	ifs.close();
+	return marker2codes;
 }
 
 void get_subject_set(
@@ -177,7 +220,7 @@ void get_subject_set(
 	if(subject_set_file != "") {
 		ifs.open(subject_set_file);
 		if(!ifs.is_open()) {
-			std::cout<<"Cannot open "<<subject_set_file<<std::endl;
+			std::cout<<"Error: cannot open "<<subject_set_file<<std::endl;
 			exit(1);
 		}
 		while( std::getline(ifs, line) ){
@@ -191,7 +234,7 @@ void get_subject_set(
 	
 	ifs.open(plink_fam_file);
 	if(!ifs.is_open()) {
-		std::cout<<"Cannot open "<<plink_fam_file<<std::endl;
+		std::cout<<"Error: cannot open "<<plink_fam_file<<std::endl;
 		exit(1);
 	}
 	std::stringstream ss;
@@ -212,8 +255,8 @@ void get_subject_set(
 	ifs.close();
 }
 
-void get_marker_set(
-	const std::map<std::string, std::pair<std::string, float> >& marker2group_weight, 
+void get_marker_set_by_weight(
+	const std::map<std::string, float >& marker2weight, 
 	const std::string plink_bim_file,
 	std::vector<bool>& bmarker,
 	std::vector<double>& gvec )
@@ -224,7 +267,7 @@ void get_marker_set(
 	std::ifstream ifs;
 	ifs.open(plink_bim_file);
 	if(!ifs.is_open()) {
-		std::cout<<"Cannot open "<<plink_bim_file<<std::endl;
+		std::cout<<"Error: cannot open "<<plink_bim_file<<std::endl;
 		exit(1);
 	}
 	std::string line;
@@ -237,12 +280,48 @@ void get_marker_set(
 		ss.str(line);
 		ss >> snp >> snp;
 		
-		if(marker2group_weight.find(snp) != marker2group_weight.end()) {
+		if(marker2weight.find(snp) != marker2weight.end()) {
 			bmarker.push_back(true);
-			gvec.push_back(marker2group_weight.at(snp).second);
+			gvec.push_back(marker2weight.at(snp));
 		} else bmarker.push_back(false);
 	}
 	ifs.clear();
 	ifs.close();
 }
 
+void get_marker_set_by_codes(
+	const std::map<std::string, float >& marker2weight,
+	const std::map<std::string, Vector3d >& marker2codes,
+	const std::string plink_bim_file,
+	std::vector<bool>& bmarker,
+	std::vector<double>& gvec,
+	std::vector<Vector3d>& code_vec )
+{
+	bmarker.clear();
+	gvec.clear();
+	
+	std::ifstream ifs;
+	ifs.open(plink_bim_file);
+	if(!ifs.is_open()) {
+		std::cout<<"Error: cannot open "<<plink_bim_file<<std::endl;
+		exit(1);
+	}
+	std::string line;
+	std::stringstream ss;
+	std::string snp;
+	while( std::getline(ifs, line) ){
+	// line content in plink bim: Chr SNP CM BP A1 A2
+		if(line[line.size()-1] == '\r') line.erase(line.size()-1);
+		if(line.size() < 1) continue;
+		ss.str(line);
+		ss >> snp >> snp;
+		
+		if(marker2weight.find(snp) != marker2weight.end() && marker2codes.find(snp) != marker2codes.end()) {
+			bmarker.push_back(true);
+			gvec.push_back(marker2weight.at(snp));
+			code_vec.push_back(marker2codes.at(snp));
+		} else bmarker.push_back(false);
+	}
+	ifs.clear();
+	ifs.close();
+}
