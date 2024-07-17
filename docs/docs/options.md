@@ -36,23 +36,27 @@ In the example of [partitioning heritability by chromosomes](examples.md#by-chro
 |-------|-------|-------|--------------|
 | `--output_file` | FILE PREFIX | Required | Output filename prefix |
 
-The GRM calculation generates two files:  
+The GRM calculation generates two files:
+
 1. A file with the suffix `.grm.iid`
 2. A file with the suffix `.grm.bin`
 
-For dominance GRMs, the suffixes are modified as follows:  
+For dominance GRMs, the suffixes are modified as follows:
+
 1. `.d.grm.iid`
 2. `.d.grm.bin`
 
 ### Custom genotype coding
 MPH includes a feature for computing GRM with custom genotype coding.
 
-To use custom genotype coding:  
+To use custom genotype coding:
+
 1. Add 3 columns to the [SNP info file](#snp-info-file) specifying the numeric codes for A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub> genotypes for each genomic variant.
 2. Assign any desired header names to these columns (e.g., header1, header2, header3).
 3. When running `mph --make_grm`, include the option `--snp_genotype_coding header1,header2,header3` to enable GRM computation using the custom genotype coding specified in the SNP info file.
 
-Important notes:  
+Important notes:
+
 - The `--snp_genotype_coding` option requires exactly 3 tokens. Ensure that the first, second, and third token match A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub>, respectively.
 - A<sub>1</sub> and A<sub>2</sub> refer to the alleles in columns 5 and 6 of the [PLINK .bim file](https://www.cog-genomics.org/plink/1.9/formats#bim), respectively.
 - To provide users with complete control over GRM computation, custom genotype codes are used as provided, without any centering applied.
