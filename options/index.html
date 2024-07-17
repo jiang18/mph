@@ -280,19 +280,19 @@
 </tr>
 </tbody>
 </table>
-<p>The GRM calculation generates two files:
+<p>The GRM calculation generates two files:<br />
 1. A file with the suffix <code>.grm.iid</code>
 2. A file with the suffix <code>.grm.bin</code></p>
-<p>For dominance GRMs, the suffixes are modified as follows:
+<p>For dominance GRMs, the suffixes are modified as follows:<br />
 1. <code>.d.grm.iid</code>
 2. <code>.d.grm.bin</code></p>
 <h3 id="custom-genotype-coding">Custom genotype coding</h3>
 <p>MPH includes a feature for computing GRM with custom genotype coding.</p>
-<p>To use custom genotype coding:
+<p>To use custom genotype coding:<br />
 1. Add 3 columns to the <a href="#snp-info-file">SNP info file</a> specifying the numeric codes for A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub> genotypes for each genomic variant.
 2. Assign any desired header names to these columns (e.g., header1, header2, header3).
 3. When running <code>mph --make_grm</code>, include the option <code>--snp_genotype_coding header1,header2,header3</code> to enable GRM computation using the custom genotype coding specified in the SNP info file.</p>
-<p>Important notes:
+<p>Important notes:<br />
 - The <code>--snp_genotype_coding</code> option requires exactly 3 tokens. Ensure that the first, second, and third token match A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub>, respectively.
 - A<sub>1</sub> and A<sub>2</sub> refer to the alleles in columns 5 and 6 of the <a href="https://www.cog-genomics.org/plink/1.9/formats#bim">PLINK .bim file</a>, respectively.
 - To provide users with complete control over GRM computation, custom genotype codes are used as provided, without any centering applied.
