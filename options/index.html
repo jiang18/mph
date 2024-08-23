@@ -108,7 +108,7 @@
                 
                 
                     <li >
-                        <a href="../util/">Utilities</a>
+                        <a href="../scripts/">Scripts</a>
                     </li>
                 
                 
@@ -229,7 +229,7 @@
 <p>The SNP info file is a CSV file with a header line. The first column must list SNP IDs. Each of the other columns corresponds to one GRM, and each row corresponds to a SNP.</p>
 <p>If a SNP does not belong to a GRM, leave the corresponding cell <strong>empty</strong>. If a SNP belongs to <strong><em>n</em></strong> GRMs, put <strong>1</strong> in each of the <strong><em>n</em></strong> cells. To partition SNP heritability by <strong>functional annotations</strong>, create a SNP info file in which each column (or GRM) represents a functional annotation category. Functional annotations may overlap; for example, if a SNP belongs to <strong>6</strong> functional annotation categories, put <strong>1</strong> in each of those <strong>6</strong> cells.</p>
 <p>In the example of <a href="../examples/#by-chromosomes">partitioning heritability by chromosomes</a>, <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1"><strong>chr.snp_info.csv</strong></a> has five columns for five chromosomes.</p>
-<p><a href="../util/#making-a-snp-info-file">A Perl script</a> is provided to create the SNP info file for partitioning heritability across functional annotations.</p>
+<p><a href="../scripts/#making-a-snp-info-file">A Perl script</a> is provided to create the SNP info file for partitioning heritability across functional annotations.</p>
 <h3 id="options">Options</h3>
 <table>
 <thead>
@@ -634,7 +634,7 @@
 <p>Additional columns display sampling covariance matrices of estimates for enrichments and for all (co)variance components.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to <a href="../util/#from-vcs-to-enrichments">recompute PVEs and enrichments</a>. </p>
+<p>Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to <a href="../scripts/#from-vcs-to-enrichments">recompute PVEs and enrichments</a>. </p>
 </div>
 <h2 id="simulation">Simulation</h2>
 <p>Simulating phenotypes based on a list of GRMs</p>
@@ -649,7 +649,7 @@
 <p><strong>Multi-trait BLUP is not currently supported.</strong></p>
 <h2 id="general-relationship-matrix">General relationship matrix</h2>
 <p>The <code>--grm_list</code> file can list any <strong>general</strong> relationship matrix, not necessarily a <strong>genomic</strong> relationship matrix.</p>
-<p><a href="../util/#grm-inputoutput">Utility scripts</a> are provided to convert a general relationship matrix to the MPH format.</p></div>
+<p><a href="../scripts/#grm-inputoutput">Auxiliary scripts</a> are provided to convert a general relationship matrix to the MPH format.</p></div>
         
         
     </div>
