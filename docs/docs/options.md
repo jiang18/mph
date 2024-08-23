@@ -145,7 +145,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, especially w
 |-------|-------|-------|--------------|
 | `--output_file` | FILE PREFIX | Required | Output filename prefix |
 
-`mph --minque` produces four or five output files, as shown below.
+`mph --reml` produces four or five output files, as shown below.
 
 | Filename suffix | Description |
 |----------|----------|
@@ -187,7 +187,7 @@ Empirical best linear unbiased predictions (EBLUPs)
 ```sh
 mph --pred --mq_file milk --output milk
 ```
-MPH computes EBLUPs using the output of `--minque` and outputs them to a file with a suffix of **.mq.blup.csv**. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
+MPH computes EBLUPs using the output of `--reml` and outputs them to a file with a suffix of **.mq.blup.csv**. For genomic partitioning, EBLUPs are the estimates of direct genomic values. 
 
 **Multi-trait BLUP is not currently supported.**
 

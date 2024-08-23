@@ -32,13 +32,13 @@ Example:
 - An output file named **test.snp_info.csv** will be generated. 
 
 ### From VCs to enrichments
-The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
+The **.mq.vc.csv** file produced by `mph --reml` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
 If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by `recompute_enrichments()` in [**mph_functs.R**](https://github.com/jiang18/mph/tree/main/scripts/mph_functs.R).
 
 `recompute_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA)`
 
-- vcfile: the .mq.vc.csv file produced by `mph --minque`.
+- vcfile: the .mq.vc.csv file produced by `mph --reml`.
 - crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 - nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
 - annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.

@@ -4,7 +4,7 @@
 ## Simulated datasets
 
 ### QTL-MAS 2012
-- The dataset is available for download [here](https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip).
+- The dataset is available for download [here](https://github.com/jiang18/mph/tree/main/examples/QTL-MAS-2012).
 - [This article](https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1) describes how the dataset was simulated.
 - 3k related animals, 10k SNPs, 5 chromosomes, and 3 traits
 
@@ -39,7 +39,7 @@ done
 
 # Running REML
 # Input: chr.grms.txt, phen.csv, and covar.csv
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./chromosomes/milk
+mph --reml --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./chromosomes/milk
 ```
 
 ### By functional annotations
@@ -79,7 +79,7 @@ done
 
 # Run REML.
 mkdir reml
-mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
+mph --reml --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 ```
 
 Below is an R script for recomputing the proportions of genetic variance explained and enrichments.
@@ -140,7 +140,7 @@ Decomposing genetic variance into additive, dominance, and epistatic components 
 1. [Make GRMs from SNPs](options.md#making-a-grm-from-snps): one for additive and one for dominance.
 2. Create a [GRM list](options.md#input_1) for `--make_fore`: [**AD.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt).
 3. [Make first-order interaction GRMs](options.md#options_1).
-4. Create a [GRM list](options.md#grm-list-file) for `--minque`, listing A, D, AxA, AxD, and DxD: [**ADE.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt).
+4. Create a [GRM list](options.md#grm-list-file) for `--reml`, listing A, D, AxA, AxD, and DxD: [**ADE.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt).
 5. Run [REML/MINQUE](options.md#remlminque).
 
 ```shell
@@ -158,7 +158,7 @@ mph --make_fore --grm_list AD.grms.txt --num_threads 10 --out ./nonadditive/geno
 
 # Running REML
 # Input: ADE.grms.txt, phen.csv, and covar.csv
-mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./nonadditive/milk
+mph --reml --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./nonadditive/milk
 ```
 
 ## Genetic correlation
@@ -171,7 +171,7 @@ mkdir multi-trait
 
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./multi-trait/genome
 
-mph --minque --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
+mph --reml --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
 ```
 
 ### Chromosome-wise
@@ -186,7 +186,7 @@ done
 
 # The directory may have been created.
 mkdir multi-trait
-mph --minque --save_mem --grm_list chr.grms.txt --phenotype phen.csv --trait milk,fat,fat_percent --num_threads 10 --out ./multi-trait/chromosomes
+mph --reml --save_mem --grm_list chr.grms.txt --phenotype phen.csv --trait milk,fat,fat_percent --num_threads 10 --out ./multi-trait/chromosomes
 ```
 
 ## Genotype–covariate interaction
@@ -205,6 +205,6 @@ mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info
 
 Rscript --no-save make_gci_grm.R ./GCI/genome covar.csv ./GCI/genome
 
-mph --minque --save_mem --grm_list GCI.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./GCI/milk
+mph --reml --save_mem --grm_list GCI.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./GCI/milk
 
 ```
