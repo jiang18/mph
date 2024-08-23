@@ -22,7 +22,7 @@ If a SNP does not belong to a GRM, leave the corresponding cell **empty**. If a 
 
 In the example of [partitioning heritability by chromosomes](examples.md#by-chromosomes), [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1) has five columns for five chromosomes.
 
-[A Perl script](util.md#making-a-snp-info-file) is provided to create the SNP info file for partitioning heritability across functional annotations.
+[A Perl script](scripts.md#making-a-snp-info-file) is provided to create the SNP info file for partitioning heritability across functional annotations.
 
 ### Options
 | Option | Argument | Type | Description |
@@ -173,7 +173,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, especially w
 Additional columns display sampling covariance matrices of estimates for enrichments and for all (co)variance components.
 
 !!! note  
-    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](util.md#from-vcs-to-enrichments). 
+    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](scripts.md#from-vcs-to-enrichments). 
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
@@ -194,4 +194,4 @@ MPH computes EBLUPs using the output of `--minque` and outputs them to a file wi
 ## General relationship matrix
 The `--grm_list` file can list any **general** relationship matrix, not necessarily a **genomic** relationship matrix.
 
-[Utility scripts](util.md#grm-inputoutput) are provided to convert a general relationship matrix to the MPH format.
+[Auxiliary scripts](scripts.md#grm-inputoutput) are provided to convert a general relationship matrix to the MPH format.

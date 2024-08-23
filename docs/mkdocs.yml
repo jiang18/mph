@@ -17,7 +17,7 @@ nav:
   - Documentation: options.md
   - Examples: examples.md
   - Performance: performance.md
-  - Utilities: util.md
+  - Scripts: scripts.md
 
 markdown_extensions:
   - admonition

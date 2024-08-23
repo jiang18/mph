@@ -1,23 +1,23 @@
 !!! note  
-    Utility scripts are hosted in [the MPH repository](https://github.com/jiang18/mph/tree/main/util).
+    Auxiliary scripts are hosted in [the MPH repository](https://github.com/jiang18/mph/tree/main/scripts).
 
 ## GRM input/output
 MPH computes only **genomic** relationship matrices. **External general** relationship matrices can be converted to MPH format for use in MPH. 
 
-- [**mph_functs.R**](https://github.com/jiang18/mph/blob/main/util/mph_functs.R) contains two R functions for GRM input/output.
+- [**mph_functs.R**](https://github.com/jiang18/mph/blob/main/scripts/mph_functs.R) contains two R functions for GRM input/output.
     - `write_grm()` writes an R GRM into MPH format files (.iid and .bin).
     - `read_grm()` reads an MPH GRM into R.
     - The R matrix to be written can be any **general** relationship matrix.
     - This script is sourced in other R scripts for GRM input/output.
-- [**grm_txt2bin.R**](https://github.com/jiang18/mph/blob/main/util/grm_txt2bin.R) converts a relationship matrix from txt to MPH binary format.
+- [**grm_txt2bin.R**](https://github.com/jiang18/mph/blob/main/scripts/grm_txt2bin.R) converts a relationship matrix from txt to MPH binary format.
     - `Rscript --no-save grm_txt2bin.R example.grm.txt example`
     - This input file should be structured like [**example.grm.txt**](https://github.com/jiang18/mph/blob/main/examples/example.grm.txt).
-- [**AGHmatrix2mph.R**](https://github.com/jiang18/mph/blob/main/util/AGHmatrix2mph.R) constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/) and writes it into MPH format files.
-- [**make_gci_grm.R**](https://github.com/jiang18/mph/blob/main/util/make_gci_grm.R) generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.
+- [**AGHmatrix2mph.R**](https://github.com/jiang18/mph/blob/main/scripts/AGHmatrix2mph.R) constructs a **numerator** relationship matrix with [AGHmatrix](https://cran.r-project.org/web/packages/AGHmatrix/) and writes it into MPH format files.
+- [**make_gci_grm.R**](https://github.com/jiang18/mph/blob/main/scripts/make_gci_grm.R) generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.
 
 ## Heritability enrichment
 ### Making a SNP info file
-A Perl script, [**make_snp_info.pl**](https://github.com/jiang18/mph/blob/main/util/make_snp_info.pl), is provided to create [the SNP info file](options.md#snp-info-file) for partitioning heritability across functional annotations.
+A Perl script, [**make_snp_info.pl**](https://github.com/jiang18/mph/blob/main/scripts/make_snp_info.pl), is provided to create [the SNP info file](options.md#snp-info-file) for partitioning heritability across functional annotations.
 
 Usage:
 
@@ -34,7 +34,7 @@ Example:
 ### From VCs to enrichments
 The **.mq.vc.csv** file produced by `mph --minque` contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.
 
-If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by `recompute_enrichments()` in [**mph_functs.R**](https://github.com/jiang18/mph/tree/main/util/mph_functs.R).
+If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from **.mq.vc.csv** and [the SNP info file](options.md#snp-info-file). This can be quickly done by `recompute_enrichments()` in [**mph_functs.R**](https://github.com/jiang18/mph/tree/main/scripts/mph_functs.R).
 
 `recompute_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA)`
 

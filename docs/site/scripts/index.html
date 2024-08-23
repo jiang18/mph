@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>Utilities - MPH</title>
+    <title>Scripts - MPH</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -108,7 +108,7 @@
                 
                 
                     <li class="active">
-                        <a href="./">Utilities</a>
+                        <a href="./">Scripts</a>
                     </li>
                 
                 
@@ -152,29 +152,29 @@
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Utility scripts are hosted in <a href="https://github.com/jiang18/mph/tree/main/util">the MPH repository</a>.</p>
+<p>Auxiliary scripts are hosted in <a href="https://github.com/jiang18/mph/tree/main/scripts">the MPH repository</a>.</p>
 </div>
 <h2 id="grm-inputoutput">GRM input/output</h2>
 <p>MPH computes only <strong>genomic</strong> relationship matrices. <strong>External general</strong> relationship matrices can be converted to MPH format for use in MPH. </p>
 <ul>
-<li><a href="https://github.com/jiang18/mph/blob/main/util/mph_functs.R"><strong>mph_functs.R</strong></a> contains two R functions for GRM input/output.<ul>
+<li><a href="https://github.com/jiang18/mph/blob/main/scripts/mph_functs.R"><strong>mph_functs.R</strong></a> contains two R functions for GRM input/output.<ul>
 <li><code>write_grm()</code> writes an R GRM into MPH format files (.iid and .bin).</li>
 <li><code>read_grm()</code> reads an MPH GRM into R.</li>
 <li>The R matrix to be written can be any <strong>general</strong> relationship matrix.</li>
 <li>This script is sourced in other R scripts for GRM input/output.</li>
 </ul>
 </li>
-<li><a href="https://github.com/jiang18/mph/blob/main/util/grm_txt2bin.R"><strong>grm_txt2bin.R</strong></a> converts a relationship matrix from txt to MPH binary format.<ul>
+<li><a href="https://github.com/jiang18/mph/blob/main/scripts/grm_txt2bin.R"><strong>grm_txt2bin.R</strong></a> converts a relationship matrix from txt to MPH binary format.<ul>
 <li><code>Rscript --no-save grm_txt2bin.R example.grm.txt example</code></li>
 <li>This input file should be structured like <a href="https://github.com/jiang18/mph/blob/main/examples/example.grm.txt"><strong>example.grm.txt</strong></a>.</li>
 </ul>
 </li>
-<li><a href="https://github.com/jiang18/mph/blob/main/util/AGHmatrix2mph.R"><strong>AGHmatrix2mph.R</strong></a> constructs a <strong>numerator</strong> relationship matrix with <a href="https://cran.r-project.org/web/packages/AGHmatrix/">AGHmatrix</a> and writes it into MPH format files.</li>
-<li><a href="https://github.com/jiang18/mph/blob/main/util/make_gci_grm.R"><strong>make_gci_grm.R</strong></a> generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.</li>
+<li><a href="https://github.com/jiang18/mph/blob/main/scripts/AGHmatrix2mph.R"><strong>AGHmatrix2mph.R</strong></a> constructs a <strong>numerator</strong> relationship matrix with <a href="https://cran.r-project.org/web/packages/AGHmatrix/">AGHmatrix</a> and writes it into MPH format files.</li>
+<li><a href="https://github.com/jiang18/mph/blob/main/scripts/make_gci_grm.R"><strong>make_gci_grm.R</strong></a> generates a genotype–covariate interaction GRM from a routine GRM and an indicator matrix.</li>
 </ul>
 <h2 id="heritability-enrichment">Heritability enrichment</h2>
 <h3 id="making-a-snp-info-file">Making a SNP info file</h3>
-<p>A Perl script, <a href="https://github.com/jiang18/mph/blob/main/util/make_snp_info.pl"><strong>make_snp_info.pl</strong></a>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a> for partitioning heritability across functional annotations.</p>
+<p>A Perl script, <a href="https://github.com/jiang18/mph/blob/main/scripts/make_snp_info.pl"><strong>make_snp_info.pl</strong></a>, is provided to create <a href="../options/#snp-info-file">the SNP info file</a> for partitioning heritability across functional annotations.</p>
 <p>Usage:</p>
 <ul>
 <li><code>perl make_snp_info.pl PLINK-bim-file functional-annotation-file output-filename-prefix</code></li>
@@ -189,7 +189,7 @@
 </ul>
 <h3 id="from-vcs-to-enrichments">From VCs to enrichments</h3>
 <p>The <strong>.mq.vc.csv</strong> file produced by <code>mph --minque</code> contains the estimates and SEs of VCs, PVEs, and enrichments, where PVEs and enrichments are valid only when functional annotation categories do not overlap with one another.</p>
-<p>If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from <strong>.mq.vc.csv</strong> and <a href="../options/#snp-info-file">the SNP info file</a>. This can be quickly done by <code>recompute_enrichments()</code> in <a href="https://github.com/jiang18/mph/tree/main/util/mph_functs.R"><strong>mph_functs.R</strong></a>.</p>
+<p>If functional categories actually overlap, one more quick computation is needed to recompute PVEs and enrichments from <strong>.mq.vc.csv</strong> and <a href="../options/#snp-info-file">the SNP info file</a>. This can be quickly done by <code>recompute_enrichments()</code> in <a href="https://github.com/jiang18/mph/tree/main/scripts/mph_functs.R"><strong>mph_functs.R</strong></a>.</p>
 <p><code>recompute_enrichments(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA)</code></p>
 <ul>
 <li>vcfile: the .mq.vc.csv file produced by <code>mph --minque</code>.</li>

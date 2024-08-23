@@ -1,5 +1,5 @@
 !!! note  
-    All utility scripts used in the examples are documented in [Utilities](util.md).
+    All auxiliary scripts used in the examples are documented in [Scripts](scripts.md).
 
 ## Simulated datasets
 
@@ -84,7 +84,7 @@ mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv 
 
 Below is an R script for recomputing the proportions of genetic variance explained and enrichments.
 ```r
-# mph_functs.R is documented at https://jiang18.github.io/mph/util/.
+# mph_functs.R is documented at https://jiang18.github.io/mph/scripts/.
 source("mph_functs.R")
 library(data.table)
 
@@ -198,7 +198,7 @@ Estimating the proportion of phenotypic variance contributed by genotype–covar
 2. Run REML using a GRM list file like [**this**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/gci.grms.txt).
 
 ```shell
-# The R scripts are documented at https://jiang18.github.io/mph/util/.
+# The R scripts are documented at https://jiang18.github.io/mph/scripts/.
 mkdir GCI
 
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./GCI/genome
