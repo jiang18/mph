@@ -168,7 +168,7 @@
 <h2 id="simulated-datasets">Simulated datasets</h2>
 <h3 id="qtl-mas-2012">QTL-MAS 2012</h3>
 <ul>
-<li>The dataset is available for download <a href="https://github.com/jiang18/mph/raw/main/examples/QTL-MAS-2012.zip">here</a>.</li>
+<li>The dataset is available for download <a href="https://github.com/jiang18/mph/tree/main/examples/QTL-MAS-2012">here</a>.</li>
 <li><a href="https://bmcproc.biomedcentral.com/articles/10.1186/1753-6561-8-S5-S1">This article</a> describes how the dataset was simulated.</li>
 <li>3k related animals, 10k SNPs, 5 chromosomes, and 3 traits</li>
 </ul>
@@ -204,7 +204,7 @@ done
 
 # Running REML
 # Input: chr.grms.txt, phen.csv, and covar.csv
-mph --minque --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./chromosomes/milk
+mph --reml --grm_list chr.grms.txt --phenotype phen.csv --trait milk --error_weight milk_wt --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./chromosomes/milk
 </code></pre>
 <h3 id="by-functional-annotations">By functional annotations</h3>
 <p>Partitioning heritability by functional annotations for the <a href="#sequence-genotypes">sequence genotypes</a> dataset</p>
@@ -241,7 +241,7 @@ done
 
 # Run REML.
 mkdir reml
-mph --minque --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
+mph --reml --save_memory --grm_list $grmlist --phenotype pheno/hsq0.9.sim.csv --trait 1 --num_threads 14 --out reml/1
 </code></pre>
 <p>Below is an R script for recomputing the proportions of genetic variance explained and enrichments.</p>
 <pre><code class="language-r"># mph_functs.R is documented at https://jiang18.github.io/mph/scripts/.
@@ -299,7 +299,7 @@ p
 <li><a href="../options/#making-a-grm-from-snps">Make GRMs from SNPs</a>: one for additive and one for dominance.</li>
 <li>Create a <a href="../options/#input_1">GRM list</a> for <code>--make_fore</code>: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>.</li>
 <li><a href="../options/#options_1">Make first-order interaction GRMs</a>.</li>
-<li>Create a <a href="../options/#grm-list-file">GRM list</a> for <code>--minque</code>, listing A, D, AxA, AxD, and DxD: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt"><strong>ADE.grms.txt</strong></a>.</li>
+<li>Create a <a href="../options/#grm-list-file">GRM list</a> for <code>--reml</code>, listing A, D, AxA, AxD, and DxD: <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt"><strong>ADE.grms.txt</strong></a>.</li>
 <li>Run <a href="../options/#remlminque">REML/MINQUE</a>.</li>
 </ol>
 <pre><code class="language-shell"># Making one additive GRM and one dominance GRM
@@ -316,7 +316,7 @@ mph --make_fore --grm_list AD.grms.txt --num_threads 10 --out ./nonadditive/geno
 
 # Running REML
 # Input: ADE.grms.txt, phen.csv, and covar.csv
-mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./nonadditive/milk
+mph --reml --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./nonadditive/milk
 </code></pre>
 <h2 id="genetic-correlation">Genetic correlation</h2>
 <p>Estimating genetic and environmental correlations for the <a href="#qtl-mas-2012">QTL-MAS 2012</a> dataset</p>
@@ -325,7 +325,7 @@ mph --minque --grm_list ADE.grms.txt --phenotype phen.csv --trait milk --covaria
 
 mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info chr.snp_info.csv --num_threads 10 --out ./multi-trait/genome
 
-mph --minque --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
+mph --reml --save_mem --grm_list A.grm.txt --phenotype phen.csv --trait milk,fat,fat_percent --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./multi-trait/genome
 </code></pre>
 <h3 id="chromosome-wise">Chromosome-wise</h3>
 <pre><code class="language-shell"># This step may have been run. 
@@ -337,7 +337,7 @@ done
 
 # The directory may have been created.
 mkdir multi-trait
-mph --minque --save_mem --grm_list chr.grms.txt --phenotype phen.csv --trait milk,fat,fat_percent --num_threads 10 --out ./multi-trait/chromosomes
+mph --reml --save_mem --grm_list chr.grms.txt --phenotype phen.csv --trait milk,fat,fat_percent --num_threads 10 --out ./multi-trait/chromosomes
 </code></pre>
 <h2 id="genotypecovariate-interaction">Genotype–covariate interaction</h2>
 <p>MPH can <strong>effectively</strong> do <a href="https://www.nature.com/articles/ng.3912">GCI-GREML</a>.</p>
@@ -353,7 +353,7 @@ mph --make_grm --binary_genotype geno --min_maf 0 --min_hwe_pval 1e-8 --snp_info
 
 Rscript --no-save make_gci_grm.R ./GCI/genome covar.csv ./GCI/genome
 
-mph --minque --save_mem --grm_list GCI.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./GCI/milk
+mph --reml --save_mem --grm_list GCI.grms.txt --phenotype phen.csv --trait milk --covariate_file covar.csv --covariate_names all --num_threads 10 --out ./GCI/milk
 
 </code></pre></div>
         
