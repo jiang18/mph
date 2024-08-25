@@ -1,7 +1,7 @@
 ## MPH
 **MPH** (**M**INQUE for **P**artitioning **H**eritability) is a C++ program for fast REML estimation of genetic (co)variance components.
 
-The method features:
+The method features:  
 - Effective implementation of Fisher-scoring REML (equivalent to iterative MINQUE)
 - Fast and memory-efficient performance
 - Robust convergence
