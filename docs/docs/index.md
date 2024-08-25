@@ -3,6 +3,7 @@
 
 The method has the following properties:
 
+- It implements Fisher-scoring REML (equivalent to iterative MINQUE) alongside a trust-region dogleg algorithm.
 - It is fast and memory-efficient.
 - It has robust convergence.
 - It supports the analyses of dominance, epistasis, and genetic correlation.
