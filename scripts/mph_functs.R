@@ -1,5 +1,6 @@
 # Oct 27, 2023: initial release along with MPH v0.49.2
 # Jan 27, 2024: revised recompute_enrichments() along with MPH v0.52.0
+# Oct 09, 2024: added the covariance matrix of PVE estimates in the output of recompute_enrichments()
 
 # Recompute the estimates and SEs of PVEs and enrichments from MPH VC estimates
 # vcfile: the .mq.vc.csv file produced by `mph --minque`.
@@ -101,4 +102,38 @@ read_grm=function(prefix){
   rownames(grm) = iid
 
   return(grm)
+}
+
+# Calculate ratio estimates and their standard errors
+#
+# Inputs:
+#   estimates: Numeric vector [y, x1, x2, ..., xn]
+#   cov_matrix: Square covariance matrix for estimates
+#
+# Returns: List with
+#   - estimates: Ratio estimates [x1/y, x2/y, ..., xn/y]
+#   - se: Standard errors of ratio estimates
+#   - cov: Covariance matrix of ratio estimates
+#
+# Note: Uses multivariate Delta method. Assumes y not near zero.
+ratio_estimates <- function(estimates, cov_matrix) {
+  y <- estimates[1]
+  x <- estimates[-1]
+  n <- length(x)
+  
+  # Point estimates
+  ratios <- x / y
+  
+  # Jacobian matrix
+  J <- matrix(0, nrow = n, ncol = n + 1)
+  J[, 1] <- -x / y^2
+  diag(J[, -1]) <- 1 / y
+  
+  # Covariance matrix of ratios
+  cov_ratios <- J %*% cov_matrix %*% t(J)
+  
+  # Standard errors
+  se_ratios <- sqrt(diag(cov_ratios))
+  
+  return(list(estimates = ratios, se = se_ratios, cov = cov_ratios))
 }
