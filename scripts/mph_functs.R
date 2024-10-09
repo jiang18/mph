@@ -51,9 +51,9 @@ recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA, tr
     e.est = pve.est / (annot.size/nsnps)
     e.se = pve.se / (annot.size/nsnps)
 
-    out = cbind(annot.size/nsnps, pve.est, pve.se, e.est, e.se)
+    out = cbind(annot.size/nsnps, pve.est, pve.se, e.est, e.se, var/(sum(mq$m)^2))
     rownames(out) = rownames(crossprod)
-    colnames(out) = c("prop", "pve", "pve.se", "enrichment", "enrichment.se")
+    colnames(out) = c("prop", "pve", "pve.se", "enrichment", "enrichment.se", rownames(crossprod))
     return(out)
 }
 
