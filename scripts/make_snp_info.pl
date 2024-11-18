@@ -1,8 +1,41 @@
-# Oct 27, 2023: initial release along with MPH v0.49.2
+#!/usr/bin/env perl
 
-# Make a SNP info file for MPH from a file of genomic functional annotations.
-# All postions are 1-based.
-# start and end are included in invervals.
+#==============================================================================
+# Script Name: make_snp_info.pl
+# Description: Creates SNP information file for MPH (https://jiang18.github.io/mph/)
+#              by mapping SNPs to genomic functional annotations
+# 
+# Author: Jicai Jiang
+# Email: jjiang26@ncsu.edu
+# Institution: NC State University
+#
+# Date Created: Jun 24, 2021
+# Last Modified: Nov 17, 2024
+#
+# Usage: perl make_snp_info.pl PLINK-bim-file functional-annotation-file output-filename-prefix
+#
+# Input:
+#   - PLINK-bim-file: PLINK bim file
+#   - functional-annotation-file: Plain text format without header
+#     Required columns: chrom start end category (first 4 columns)
+#   - output-filename-prefix: Prefix for output filename
+#
+# Output:
+#   - [prefix].snp_info.csv: CSV file containing SNP functional annotations
+#     Format: SNP,intercept,[category columns]
+#
+# Notes:
+#   - All positions are 1-based
+#   - Start and end positions are included in intervals
+#   - Chromosome format: Accepts both "chr1" and "1" formats
+#
+# Dependencies:
+#   - Perl core modules only (strict, warnings)
+#
+# Change Log:
+#   2023-10-27 - Initial release with MPH v0.49.2
+#   2024-11-17 - Added comprehensive header documentation
+#==============================================================================
 
 use strict;
 use warnings;
