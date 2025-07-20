@@ -6,7 +6,7 @@
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--binary_genotype_file` | FILE PREFIX | Required | PLINK bed/bim/fam filename prefix |
+| `--binary_genotype_file` | FILE&nbsp;PREFIX | Required | PLINK bed/bim/fam filename prefix |
 | `--snp_info_file` | FILE | Required | SNP info file in CSV format |
 | `--snp_weight_name` |  STRING | Optional | Specify a column name in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1. |
 | `--min_maf` | FLOAT | Optional | Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0] |
@@ -109,7 +109,7 @@ The program stops with an error message if any individual IDs listed in the `--k
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE_PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
+| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE&nbsp;PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
 | `--phenotype_file` | FILE | Required | Phenotype file in CSV format |
 | `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column names in the phenotype file |
 | `--error_weight_names` | STRING | Optional | Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait |
