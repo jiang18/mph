@@ -343,7 +343,7 @@ void option(int option_num, char **option_str) {
 		if(marker_info_file.empty())
 			throw("\nError: --snp_info_file must be set for --make_grm.\n");
 		if(binary_genotype_file.empty())
-			throw("\nError: --binary_genotype_file must be set for --make_grm.\n");
+			throw("\nError: --bfile must be set for --make_grm.\n");
 	}
 	if(grm_list_file.empty()) {
 		if(merge) throw("\nError: --grm_list is required for --merge_grms.\n");
