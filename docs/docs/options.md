@@ -6,7 +6,7 @@
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--binary_genotype_file` | FILE&nbsp;PREFIX | Required | PLINK bed/bim/fam filename prefix |
+| `--bfile`<br>`--binary_genotype_file` | FILE&nbsp;PREFIX | Required | PLINK bed/bim/fam filename prefix |
 | `--snp_info_file` | FILE | Required | SNP info file in CSV format |
 | `--snp_weight_name` |  STRING | Optional | Specify a column name in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1. |
 | `--min_maf` | FLOAT | Optional | Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0] |
