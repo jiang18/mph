@@ -158,10 +158,11 @@
                 
             <li class="second-level"><a href="#output_1">Output</a></li>
                 
+        <li class="first-level "><a href="#subsetting-a-grm">Subsetting a GRM</a></li>
         <li class="first-level "><a href="#remlminque">REML/MINQUE</a></li>
             <li class="second-level"><a href="#input_2">Input</a></li>
                 
-                <li class="third-level"><a href="#grm-list-file">GRM list file</a></li>
+                <li class="third-level"><a href="#grm-input">GRM input</a></li>
                 <li class="third-level"><a href="#phenotype-file">Phenotype file</a></li>
                 <li class="third-level"><a href="#covariate-file">Covariate file</a></li>
             <li class="second-level"><a href="#options_2">Options</a></li>
@@ -321,11 +322,12 @@
 <td><code>--grm_list</code></td>
 <td>FILE</td>
 <td>Required</td>
-<td>Space-delimited text file listing GRMs that have been made</td>
+<td>Space-delimited text file listing GRMs (include paths if needed)</td>
 </tr>
 </tbody>
 </table>
-<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for <code>--make_fore</code> and <code>--make_core</code>. </p>
+<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt"><strong>AD.grms.txt</strong></a>. It has no header and one or two columns. 
+The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for <code>--make_fore</code> and <code>--make_core</code>. </p>
 <h3 id="options_1">Options</h3>
 <table>
 <thead>
@@ -394,6 +396,45 @@
 <li><code>--make_fore</code> generates <em>n</em>(<em>n</em>+1)/2 GRMs for <em>n</em> GRMs in a GRM list.</li>
 <li><code>--make_core</code> generates <em>n</em>(<em>n</em>-1)/2 GRMs for <em>n</em> GRMs in a GRM list.</li>
 </ul>
+<h2 id="subsetting-a-grm">Subsetting a GRM</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--subset_grm</code></td>
+<td>FLAG</td>
+<td>Required</td>
+<td>Flag to initialize the subsetting routine</td>
+</tr>
+<tr>
+<td><code>--binary_grm_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>Filename prefix of input GRM to be subsetted</td>
+</tr>
+<tr>
+<td><code>--keep</code></td>
+<td>FILE</td>
+<td>Required</td>
+<td>Text file listing individual IDs to keep in the subset</td>
+</tr>
+<tr>
+<td><code>--output_file</code></td>
+<td>FILE PREFIX</td>
+<td>Required</td>
+<td>Output filename prefix</td>
+</tr>
+</tbody>
+</table>
+<p>The file specified by <code>--keep</code> is a text file with one individual ID per line and no header. It determines both which individuals to keep and their order in the output GRM.</p>
+<p>The program stops with an error message if any individual IDs listed in the <code>--keep</code> file are not found in the input GRM. The output GRM will have individuals in the exact order specified in the <code>--keep</code> file.</p>
 <h2 id="remlminque">REML/MINQUE</h2>
 <h3 id="input_2">Input</h3>
 <table>
@@ -407,10 +448,10 @@
 </thead>
 <tbody>
 <tr>
-<td><code>--grm_list</code></td>
-<td>FILE</td>
+<td><code>--grm_list</code><br><code>--binary_grm_file</code></td>
+<td>FILE<br>FILE PREFIX</td>
 <td>Required</td>
-<td>Space-delimited text file listing GRMs that have been made</td>
+<td>Space-delimited text file listing GRMs <strong>and/or</strong> filename prefix of a single GRM (at least one must be specified; include paths if needed)</td>
 </tr>
 <tr>
 <td><code>--phenotype_file</code></td>
@@ -428,7 +469,7 @@
 <td><code>--error_weight_names</code></td>
 <td>STRING</td>
 <td>Optional</td>
-<td>Single column header or comma-separated list of column headers in the phenotype file, specifying individual error variance weights for each corresponding trait</td>
+<td>Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait</td>
 </tr>
 <tr>
 <td><code>--covariate_file</code></td>
@@ -444,12 +485,18 @@
 </tr>
 </tbody>
 </table>
-<h4 id="grm-list-file">GRM list file</h4>
-<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can list an initial variance component (VC) value for each GRM. </p>
+<h4 id="grm-input">GRM input</h4>
+<p>Specify GRMs using one or both of the following options:
+- <code>--grm_list</code> with a list file containing one or more GRMs
+- <code>--binary_grm_file</code> to directly specify a single GRM
+If both options are provided, the GRM specified by <code>--binary_grm_file</code> will be appended to the list from <code>--grm_list</code>.</p>
+<p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. 
+The first column must be the file path for each GRM. The second column is optional (defaults to 1) and can list an initial variance component (VC) value for each GRM. 
+When <code>--binary_grm_file</code> is used with <code>--grm_list</code>, its initial VC value is set to the average of the VC values from the list file.</p>
 <h4 id="phenotype-file">Phenotype file</h4>
 <p>The phenotype file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain trait names.</p>
 <p>Missing values of phenotypes need to be left empty. <strong>Do not use space, -9, NA, or NaN.</strong></p>
-<p>MPH has <code>--error_weight_name</code> to accommodate individual reliabilies (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file.</p>
+<p>MPH has <code>--error_weight_names</code> to accommodate individual reliabilities (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file.</p>
 <h4 id="covariate-file">Covariate file</h4>
 <p>The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. </p>
 <p>Missing values of covariates need to be left empty. <strong>Do not use space, -9, NA, or NaN.</strong></p>
