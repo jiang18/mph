@@ -25,7 +25,7 @@ Partitioning heritability by chromosomes for the [QTL-MAS 2012](#qtl-mas-2012) d
 
 1. Create a [SNP info file](options.md#snp-info-file): [**chr.snp_info.csv**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.snp_info.csv?plain=1).
 2. [Make a GRM](options.md#making-a-grm-from-snps) for each chromosome.
-3. Create a [GRM list](options.md#grm-list-file): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
+3. Create a [GRM list](options.md#grm-input): [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt).
 4. Run [REML/MINQUE](options.md#remlminque).
 
 ```shell
@@ -140,7 +140,7 @@ Decomposing genetic variance into additive, dominance, and epistatic components 
 1. [Make GRMs from SNPs](options.md#making-a-grm-from-snps): one for additive and one for dominance.
 2. Create a [GRM list](options.md#input_1) for `--make_fore`: [**AD.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt).
 3. [Make first-order interaction GRMs](options.md#options_1).
-4. Create a [GRM list](options.md#grm-list-file) for `--reml`, listing A, D, AxA, AxD, and DxD: [**ADE.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt).
+4. Create a [GRM list](options.md#grm-input) for `--reml`, listing A, D, AxA, AxD, and DxD: [**ADE.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/ADE.grms.txt).
 5. Run [REML/MINQUE](options.md#remlminque).
 
 ```shell
