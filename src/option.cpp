@@ -94,7 +94,7 @@ void option(int option_num, char **option_str) {
 		{"make_core",  no_argument, 0, 'C'},
 		{"make_fore",  no_argument, 0, 'F'},
 		{"dominance",  no_argument, 0, 'D'},
-		{"subset_grm",  required_argument, 0, 'U'},
+		{"subset_grm",  no_argument, 0, 'U'},
 		{"num_phenotypes",  required_argument, 0, 'x'},
 		{"num_iterations",  required_argument, 0, 'p'},
 		{"tolerance",  required_argument, 0, 'q'},
