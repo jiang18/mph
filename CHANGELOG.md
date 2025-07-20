@@ -1,5 +1,10 @@
 # Change Log
 
+## July 20, 2025 (v0.55.0)
+- Added GRM subsetting functionality (--subset_grm with --keep).
+- Enhanced REML/MINQUE GRM input: now supports the use of --grm_list and/or --binary_grm_file.
+- Refactored code: moved REML functions to separate module and general cleanup.
+
 ## July 16, 2024 (v0.54.0)
 - Implemented custom genotype coding for GRM computation (--snp_genotype_coding).
 

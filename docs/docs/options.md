@@ -67,9 +67,10 @@ Important notes:
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--grm_list` | FILE | Required | Space-delimited text file listing GRMs that have been made |
+| `--grm_list` | FILE | Required | Space-delimited text file listing GRMs (include paths if needed) |
 
-The GRM list file is a space-delimited text file, such as [**AD.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for `--make_fore` and `--make_core`. 
+The GRM list file is a space-delimited text file, such as [**AD.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/AD.grms.txt). It has no header and one or two columns. 
+The first column must be the file path for each GRM. The second column is optional and can be a short GRM identifier for `--make_fore` and `--make_core`. 
 
 ### Options
 | Option | Argument | Type | Description |
@@ -91,27 +92,46 @@ If a SNP is used in multiple GRMs, the SNP will be treated to be multiple identi
 - `--make_fore` generates *n*(*n*+1)/2 GRMs for *n* GRMs in a GRM list.
 - `--make_core` generates *n*(*n*-1)/2 GRMs for *n* GRMs in a GRM list.
 
+## Subsetting a GRM
+| Option | Argument | Type | Description |
+|-------|-------|-------|--------------|
+| `--subset_grm` | FLAG | Required | Flag to initialize the subsetting routine |
+| `--binary_grm_file` | FILE PREFIX | Required | Filename prefix of input GRM to be subsetted |
+| `--keep` | FILE | Required | Text file listing individual IDs to keep in the subset |
+| `--output_file` | FILE PREFIX | Required | Output filename prefix |
+
+The file specified by `--keep` is a text file with one individual ID per line and no header. It determines both which individuals to keep and their order in the output GRM.
+
+The program stops with an error message if any individual IDs listed in the `--keep` file are not found in the input GRM. The output GRM will have individuals in the exact order specified in the `--keep` file.
+
 ## REML/MINQUE
 
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--grm_list` | FILE | Required | Space-delimited text file listing GRMs that have been made |
+| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
 | `--phenotype_file` | FILE | Required | Phenotype file in CSV format |
 | `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column headers in the phenotype file |
-| `--error_weight_names` | STRING | Optional | Single column header or comma-separated list of column headers in the phenotype file, specifying individual error variance weights for each corresponding trait |
+| `--error_weight_names` | STRING | Optional | Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait |
 | `--covariate_file` | FILE | Optional | Covariate file in CSV format |
 | `--covariate_names` | STRING | Optional | Comma-separated list of covariates to include in the analysis |
 
-#### GRM list file
-The GRM list file is a space-delimited text file, such as [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. The first column must be the file path for each GRM. The second column is optional and can list an initial variance component (VC) value for each GRM. 
+#### GRM input
+Specify GRMs using one or both of the following options:
+- `--grm_list` with a list file containing one or more GRMs
+- `--binary_grm_file` to directly specify a single GRM
+If both options are provided, the GRM specified by `--binary_grm_file` will be appended to the list from `--grm_list`.
+
+The GRM list file is a space-delimited text file, such as [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. 
+The first column must be the file path for each GRM. The second column is optional (defaults to 1) and can list an initial variance component (VC) value for each GRM. 
+When `--binary_grm_file` is used with `--grm_list`, its initial VC value is set to the average of the VC values from the list file.
 
 #### Phenotype file
 The phenotype file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain trait names.
 
 Missing values of phenotypes need to be left empty. **Do not use space, -9, NA, or NaN.**
 
-MPH has `--error_weight_name` to accommodate individual reliabilies (*r*<sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/*r*<sup>2</sup>-1 and kept as a column of the phenotype file.
+MPH has `--error_weight_names` to accommodate individual reliabilities (*r*<sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/*r*<sup>2</sup>-1 and kept as a column of the phenotype file.
 
 #### Covariate file
 The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. 
