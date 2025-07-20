@@ -8,7 +8,7 @@
 |-------|-------|-------|--------------|
 | `--binary_genotype_file` | FILE PREFIX | Required | PLINK bed/bim/fam filename prefix |
 | `--snp_info_file` | FILE | Required | SNP info file in CSV format |
-| `--snp_weight_name` |  STRING | Optional | Specify a column header in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1. |
+| `--snp_weight_name` |  STRING | Optional | Specify a column name in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1. |
 | `--min_maf` | FLOAT | Optional | Filter out all variants with minor allele frequency (MAF) less than or equal to the provided threshold [default=0] |
 | `--min_hwe_pval` | FLOAT | Optional | Filter out all variants which have Hardy-Weinberg equilibrium exact test p-value below the provided threshold [default=0] |
 
@@ -52,7 +52,7 @@ MPH includes a feature for computing GRM with custom genotype coding.
 To use custom genotype coding:
 
 1. Add 3 columns to the [SNP info file](#snp-info-file) specifying the numeric codes for A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub> genotypes for each genomic variant.
-2. Assign any desired header names to these columns (e.g., header1, header2, header3).
+2. Name these columns (e.g., header1, header2, header3) in the header line.
 3. When running `mph --make_grm`, include the option `--snp_genotype_coding header1,header2,header3` to enable GRM computation using the custom genotype coding specified in the SNP info file.
 
 Important notes:
@@ -109,17 +109,19 @@ The program stops with an error message if any individual IDs listed in the `--k
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
+| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE-PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
 | `--phenotype_file` | FILE | Required | Phenotype file in CSV format |
-| `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column headers in the phenotype file |
+| `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column names in the phenotype file |
 | `--error_weight_names` | STRING | Optional | Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait |
 | `--covariate_file` | FILE | Optional | Covariate file in CSV format |
 | `--covariate_names` | STRING | Optional | Comma-separated list of covariates to include in the analysis |
 
 #### GRM input
 Specify GRMs using one or both of the following options:
+
 - `--grm_list` with a list file containing one or more GRMs
 - `--binary_grm_file` to directly specify a single GRM
+
 If both options are provided, the GRM specified by `--binary_grm_file` will be appended to the list from `--grm_list`.
 
 The GRM list file is a space-delimited text file, such as [**chr.grms.txt**](https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt). It has no header and one or two columns. 
