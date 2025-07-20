@@ -208,7 +208,7 @@
 <td><code>--snp_weight_name</code></td>
 <td>STRING</td>
 <td>Optional</td>
-<td>Specify a column header in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1.</td>
+<td>Specify a column name in the SNP info file for weighting SNPs in a GRM. If not set, all variants in the SNP info file will be used with a default weight of 1.</td>
 </tr>
 <tr>
 <td><code>--min_maf</code></td>
@@ -296,7 +296,7 @@
 <p>To use custom genotype coding:</p>
 <ol>
 <li>Add 3 columns to the <a href="#snp-info-file">SNP info file</a> specifying the numeric codes for A<sub>1</sub>A<sub>1</sub>, A<sub>1</sub>A<sub>2</sub>, and A<sub>2</sub>A<sub>2</sub> genotypes for each genomic variant.</li>
-<li>Assign any desired header names to these columns (e.g., header1, header2, header3).</li>
+<li>Name these columns (e.g., header1, header2, header3) in the header line.</li>
 <li>When running <code>mph --make_grm</code>, include the option <code>--snp_genotype_coding header1,header2,header3</code> to enable GRM computation using the custom genotype coding specified in the SNP info file.</li>
 </ol>
 <p>Important notes:</p>
@@ -463,7 +463,7 @@ The first column must be the file path for each GRM. The second column is option
 <td><code>--trait</code></td>
 <td>STRING</td>
 <td>Required</td>
-<td>Single trait name or comma-separated list of trait names that should match the column headers in the phenotype file</td>
+<td>Single trait name or comma-separated list of trait names that should match the column names in the phenotype file</td>
 </tr>
 <tr>
 <td><code>--error_weight_names</code></td>
@@ -486,10 +486,12 @@ The first column must be the file path for each GRM. The second column is option
 </tbody>
 </table>
 <h4 id="grm-input">GRM input</h4>
-<p>Specify GRMs using one or both of the following options:
-- <code>--grm_list</code> with a list file containing one or more GRMs
-- <code>--binary_grm_file</code> to directly specify a single GRM
-If both options are provided, the GRM specified by <code>--binary_grm_file</code> will be appended to the list from <code>--grm_list</code>.</p>
+<p>Specify GRMs using one or both of the following options:</p>
+<ul>
+<li><code>--grm_list</code> with a list file containing one or more GRMs</li>
+<li><code>--binary_grm_file</code> to directly specify a single GRM</li>
+</ul>
+<p>If both options are provided, the GRM specified by <code>--binary_grm_file</code> will be appended to the list from <code>--grm_list</code>.</p>
 <p>The GRM list file is a space-delimited text file, such as <a href="https://github.com/jiang18/mph/blob/main/examples/QTL-MAS-2012/chr.grms.txt"><strong>chr.grms.txt</strong></a>. It has no header and one or two columns. 
 The first column must be the file path for each GRM. The second column is optional (defaults to 1) and can list an initial variance component (VC) value for each GRM. 
 When <code>--binary_grm_file</code> is used with <code>--grm_list</code>, its initial VC value is set to the average of the VC values from the list file.</p>
