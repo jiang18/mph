@@ -109,7 +109,7 @@ The program stops with an error message if any individual IDs listed in the `--k
 ### Input
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE&nbsp;PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (at least one must be specified; include paths if needed) |
+| `--grm_list`<br>`--binary_grm_file` | FILE<br>FILE&nbsp;PREFIX | Required | Space-delimited text file listing GRMs **and/or** filename prefix of a single GRM (**at least one must be specified**; include paths if needed) |
 | `--phenotype_file` | FILE | Required | Phenotype file in CSV format |
 | `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column names in the phenotype file |
 | `--error_weight_names` | STRING | Optional | Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait |
