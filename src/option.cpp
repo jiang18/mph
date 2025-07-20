@@ -117,14 +117,15 @@ void option(int option_num, char **option_str) {
 		{"snp_info_file",  required_argument, 0, 'm'},
 		{"snp_genotype_coding",  required_argument, 0, 'r'},
 		{"snp_weight_name",  required_argument, 0, 'w'},
-		{"binary_genotype_file",  required_argument, 0, 'b'},
+		{"binary_genotype_file",  required_argument, 0, 'g'},
+		{"bfile",  required_argument, 0, 'b'},
 		{"num_threads",    required_argument, 0, 'n'},
 		{"output_file",    required_argument, 0, 'o'},
 		{0, 0, 0, 0}
 	};
 	int option_index = 0;
 	int opt;
-	while ((opt = getopt_long(option_num, option_str, "VMARSPGHICFDUx:p:q:a:k:s:d:h:i:2:4:6:8:j:f:t:e:c:v:m:r:w:b:n:o:",long_options, &option_index)) != -1)
+	while ((opt = getopt_long(option_num, option_str, "VMARSPGHICFDUx:p:q:a:k:s:d:h:i:2:4:6:8:j:f:t:e:c:v:m:r:w:g:b:n:o:",long_options, &option_index)) != -1)
 	{
 		switch (opt) {
 			case 'V':
@@ -267,6 +268,10 @@ void option(int option_num, char **option_str) {
 				printf("OPTION %s with ARG %s\n", long_options[option_index].name,optarg);
 				marker_effvar_weight_name = optarg;
 				break;
+			case 'g':
+				printf("OPTION %s with ARG %s\n", long_options[option_index].name,optarg);
+				binary_genotype_file = optarg;
+				break;
 			case 'b':
 				printf("OPTION %s with ARG %s\n", long_options[option_index].name,optarg);
 				binary_genotype_file = optarg;
@@ -334,8 +339,12 @@ void option(int option_num, char **option_str) {
 			throw("\nError: the number of values in --error_weight_names must correspond to --trait if specified.\n");
 	} else error_variance_weight_names.resize(num_traits, "");
 
-	if(make_grm && marker_info_file.empty())
-		throw("\nError: --snp_info_file must be set for --make_grm.\n");
+	if(make_grm) {
+		if(marker_info_file.empty())
+			throw("\nError: --snp_info_file must be set for --make_grm.\n");
+		if(binary_genotype_file.empty())
+			throw("\nError: --binary_genotype_file must be set for --make_grm.\n");
+	}
 	if(grm_list_file.empty()) {
 		if(merge) throw("\nError: --grm_list is required for --merge_grms.\n");
 		if(deduct) throw("\nError: --grm_list is required for --deduct_grms.\n");
