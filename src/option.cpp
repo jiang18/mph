@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	std::cout<<"***************************************************************************"<<std::endl;
 	std::cout<<"* MPH by Jicai Jiang"<<std::endl;
 	std::cout<<"* MINQUE for Partitioning Heritability"<<std::endl;
-	std::cout<<"* Version 0.55.0 (July 20, 2025)"<<std::endl;
+	std::cout<<"* Version 0.55.0 (July 21, 2025)"<<std::endl;
 	std::cout<<"* (C) 2021-present, Jicai Jiang, NC State University"<<std::endl;
 	std::cout<<"***************************************************************************"<<std::endl;
     
