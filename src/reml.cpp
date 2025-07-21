@@ -1,5 +1,6 @@
 #include "reml.h"
 #include <random>
+#include <sys/stat.h>
 
 void run_reml_minque(
 	const std::vector<std::map<std::string, std::pair<float, float>>>& indi2pheno_weight,
@@ -67,13 +68,28 @@ void run_reml_minque(
 		vc_name.push_back(binary_grm_file);
 	}
 	
-	for (i=0; i<vc_name.size()-1; ++i) 
-		for (j=i+1; j<vc_name.size(); ++j)
-			if (vc_name[i] == vc_name[j]) 
-				throw("\nError: [" + vc_name[i] + "] appears more than once in the GRM list.\n");
-	
+	// Check if all GRM files exist
+	for(const auto& grm_name : vc_name) {
+		if(!file_check(grm_name + ".grm.bin") || !file_check(grm_name + ".grm.iid")) {
+			throw("\nError: GRM files [" + grm_name + " (.grm.bin/.grm.iid)] not found.\n");
+		}
+	}
+	// Check for duplicates using file comparison
+	for (i=0; i<vc_name.size()-1; ++i) {
+		for (j=i+1; j<vc_name.size(); ++j) {
+			struct stat stat1, stat2;
+			stat((vc_name[i] + ".grm.bin").c_str(), &stat1);  // No need to check == 0
+			stat((vc_name[j] + ".grm.bin").c_str(), &stat2);  // Files guaranteed to exist
+			
+			if(stat1.st_dev == stat2.st_dev && stat1.st_ino == stat2.st_ino) {
+				throw("\nError: [" + vc_name[i] + "] and [" + vc_name[j] + "] refer to the same GRM.\n");
+			}
+		}
+	}
 	if(n_grms == 0) n_grms = vc_name.size();
-	if(n_grms > vc_name.size()) throw("\nError: --num_grms you specified is > the total number in --grm_list\n");
+	if(n_grms > vc_name.size()) {
+		throw("\nError: --num_grms exceeds the number of available GRMs (" + std::to_string(vc_name.size()) + ").\n");
+	}
 	
 	std::string indi_file;
 	if(keep_file.empty()) {
