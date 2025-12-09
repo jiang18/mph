@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	std::cout<<"***************************************************************************"<<std::endl;
 	std::cout<<"* MPH by Jicai Jiang"<<std::endl;
 	std::cout<<"* MINQUE for Partitioning Heritability"<<std::endl;
-	std::cout<<"* Version 0.55.0 (July 21, 2025)"<<std::endl;
+	std::cout<<"* Version 0.55.1 (December 9, 2025)"<<std::endl;
 	std::cout<<"* (C) 2021-present, Jicai Jiang, NC State University"<<std::endl;
 	std::cout<<"***************************************************************************"<<std::endl;
     
@@ -331,7 +331,7 @@ void option(int option_num, char **option_str) {
 	for(int i=0; i<h2.size(); ++i)  h2[i] = std::stof(str_vec[i]);
 	for(int i=h2.size(); i<num_traits; ++i)  h2[i] = h2[0];
 	for(int i=0; i<num_traits; ++i)
-		if(h2[i] <= 0 || h2[i] > 1) throw("\nError: --heritability is out of (0, 1].\n");
+		if(h2[i] < 0 || h2[i] > 1) throw("\nError: --heritability must be in [0, 1].\n");
 
 	if(!str_error_variance_weights.empty()) {
 		error_variance_weight_names = StrFunc::split(str_error_variance_weights,',');

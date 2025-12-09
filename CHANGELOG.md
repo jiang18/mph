@@ -1,11 +1,15 @@
 # Change Log
 
-## July 21, 2025 (v0.55.0)
+## Dec 09, 2025 (v0.55.1) 
+- Fixed: variance component initial values in --grm_list can now be set to 0 (regression from v0.55.0). 
+- Changed: --heritability now accepts 0 as a valid value.
+
+## Jul 21, 2025 (v0.55.0)
 - Added GRM subsetting functionality (--subset_grm with --keep).
 - Enhanced REML/MINQUE GRM input: now supports the use of --grm_list and/or --binary_grm_file.
 - Refactored code: moved REML functions to separate module and general cleanup.
 
-## July 16, 2024 (v0.54.0)
+## Jul 16, 2024 (v0.54.0)
 - Implemented custom genotype coding for GRM computation (--snp_genotype_coding).
 
 ## May 16, 2024 (v0.53.2)

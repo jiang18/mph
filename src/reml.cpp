@@ -54,7 +54,7 @@ void run_reml_minque(
 		ifs.close();
 		
 		std::cout<<vc_name.size()<< (vc_name.size() > 1 ? " matrices are" : " matrix is") <<" in the list."<<std::endl;
-		if(std::accumulate(vc_init.begin(), vc_init.end(), 0) <= 0) throw("\nError: the sum of initial VCs in --grm_list must be positive.\n");
+		if(std::accumulate(vc_init.begin(), vc_init.end(), 0) < 0) throw("\nError: sum of initial VCs in --grm_list must be non-negative.\n");
 	}
 	if(!binary_grm_file.empty()) {
 		if(!vc_name.empty()) {
