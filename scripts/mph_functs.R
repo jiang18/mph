@@ -127,6 +127,8 @@ calculate_h2 <- function(vc_estimates, cov_matrix, n_genetic = NULL) {
     n_genetic <- n_total - 1
   }
   
+  cov_matrix = as.matrix(cov_matrix)
+  
   # Step 1: Calculate sums
   Vg <- sum(vc_estimates[1:n_genetic])
   Vp <- sum(vc_estimates)
