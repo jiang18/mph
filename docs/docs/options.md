@@ -114,7 +114,7 @@ The program stops with an error message if any individual IDs listed in the `--k
 | `--trait` | STRING | Required | Single trait name or comma-separated list of trait names that should match the column names in the phenotype file |
 | `--error_weight_names` | STRING | Optional | Single column name or comma-separated list of column names in the phenotype file, specifying individual error variance weights for each corresponding trait |
 | `--covariate_file` | FILE | Optional | Covariate file in CSV format |
-| `--covariate_names` | STRING | Optional | Comma-separated list of covariates to include in the analysis |
+| `--covariate_names` | STRING | Optional | Comma-separated list of covariates to include in the analysis (e.g., `--covariate_names cov1,cov2,cov3`) |
 
 #### GRM input
 Specify GRMs using one or both of the following options:
