@@ -481,7 +481,7 @@ The first column must be the file path for each GRM. The second column is option
 <td><code>--covariate_names</code></td>
 <td>STRING</td>
 <td>Optional</td>
-<td>Comma-separated list of covariates to include in the analysis</td>
+<td>Comma-separated list of covariates to include in the analysis (e.g., <code>--covariate_names cov1,cov2,cov3</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -500,9 +500,12 @@ When <code>--binary_grm_file</code> is used with <code>--grm_list</code>, its in
 <p>Missing values of phenotypes need to be left empty. <strong>Do not use space, -9, NA, or NaN.</strong></p>
 <p>MPH has <code>--error_weight_names</code> to accommodate individual reliabilities (<em>r</em><sup>2</sup>) for pseudo-phenotypes (e.g., de-regressed estimated breeding values). The error weights can be set to 1/<em>r</em><sup>2</sup>-1 and kept as a column of the phenotype file.</p>
 <h4 id="covariate-file">Covariate file</h4>
-<p>The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. </p>
+<p>The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. All covariate values must be numeric.</p>
 <p>Missing values of covariates need to be left empty. <strong>Do not use space, -9, NA, or NaN.</strong></p>
-<p>If <code>--covariate_names all</code> is specified, MPH will use as covariates all columns from the 2nd to the last in the covariate file.</p>
+<p>If <code>--covariate_names all</code> is specified, MPH will use all columns (except the first) as covariates.</p>
+<p><em>Intercept handling:</em>
+- If <code>--covariate_names</code> is not specified, MPH automatically includes an intercept term.
+- If <code>--covariate_names</code> is specified, MPH does not automatically add an intercept. In this case, users must include a column of 1's in the covariate file and specify it in <code>--covariate_names</code> if an intercept is needed.</p>
 <h3 id="options_2">Options</h3>
 <table>
 <thead>
