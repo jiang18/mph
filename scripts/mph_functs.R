@@ -1,14 +1,15 @@
 # Oct 27, 2023: initial release along with MPH v0.49.2
-# Jan 27, 2024: revised recompute_enrichments() along with MPH v0.52.0
-# Oct 09, 2024: added the covariance matrix of PVE estimates in the output of recompute_enrichments()
+# Jan 27, 2024: revised recalculate_enrichments() along with MPH v0.52.0
+# Oct 09, 2024: added the covariance matrix of PVE estimates in the output of recalculate_enrichments()
+# Dec 10, 2025: added calculate_h2() function to calculate heritability and standard error from partitioned variance components using delta method
 
-# Recompute the estimates and SEs of PVEs and enrichments from MPH VC estimates
-# vcfile: the .mq.vc.csv file produced by `mph --minque`.
+# Recalculate the estimates and SEs of PVEs and enrichments from MPH VC estimates
+# vcfile: the .mq.vc.csv file produced by `mph --minque` or `mph --reml`.
 # crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 # nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
-# annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be computed from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
+# annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be calculated from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
 # trait.x and trait.y: trait names matching the first two columns of vcfile. If both are `NA`, they are set to the trait names in the first line of vcfile. Otherwise, if only one is `NA`, it is set to the value of the other.
-recompute_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA) {
+recalculate_enrichments <- function(vcfile, crossprod, nsnps=NA, annot.size=NA, trait.x=NA, trait.y=NA) {
     if(is.na(vcfile)) {
         stop("vcfile must be specifiled.")
     }
@@ -102,6 +103,62 @@ read_grm=function(prefix){
   rownames(grm) = iid
 
   return(grm)
+}
+
+# Calculate heritability from partitioned variance components
+#
+# Inputs:
+#   vc_estimates: Numeric vector [σ²_1, ..., σ²_N]
+#   cov_matrix: Covariance matrix for vc_estimates (N × N)
+#   n_genetic: Number of genetic VCs (default: N-1, assumes last component is error)
+#
+# Returns: List with
+#   - Vg: Sum of genetic VCs
+#   - Vg_se: SE of Vg
+#   - Vp: Total variance (Vg + non-genetic components)
+#   - Vp_se: SE of Vp
+#   - h2: Heritability (Vg / Vp)
+#   - h2_se: SE of heritability
+calculate_h2 <- function(vc_estimates, cov_matrix, n_genetic = NULL) {
+  n_total <- length(vc_estimates)
+  
+  # Default: first n-1 components are genetic
+  if (is.null(n_genetic)) {
+    n_genetic <- n_total - 1
+  }
+  
+  # Step 1: Calculate sums
+  Vg <- sum(vc_estimates[1:n_genetic])
+  Vp <- sum(vc_estimates)
+  
+  # Gradient vectors for sums
+  grad_Vg <- c(rep(1, n_genetic), rep(0, n_total - n_genetic))
+  grad_Vp <- rep(1, n_total)
+  
+  # Variances of sums
+  var_Vg <- t(grad_Vg) %*% cov_matrix %*% grad_Vg
+  var_Vp <- t(grad_Vp) %*% cov_matrix %*% grad_Vp
+  
+  # Covariance between Vg and Vp
+  cov_Vg_Vp <- t(grad_Vg) %*% cov_matrix %*% grad_Vp
+  
+  # Step 2: Calculate heritability and its SE using delta method
+  h2 <- Vg / Vp
+  
+  # Gradient for ratio: ∂(Vg/Vp)/∂Vg = 1/Vp, ∂(Vg/Vp)/∂Vp = -Vg/Vp²
+  grad_h2 <- c(1/Vp, -Vg/Vp^2)
+  cov_sums <- matrix(c(var_Vg, cov_Vg_Vp, 
+                       cov_Vg_Vp, var_Vp), nrow = 2)
+  var_h2 <- t(grad_h2) %*% cov_sums %*% grad_h2
+  
+  return(list(
+    Vg = Vg,
+    Vg_se = sqrt(var_Vg),
+    Vp = Vp,
+    Vp_se = sqrt(var_Vp),
+    h2 = h2,
+    h2_se = sqrt(var_h2)
+  ))
 }
 
 # Calculate ratio estimates and their standard errors
