@@ -200,7 +200,7 @@ The memory-saving mode (`--save_memory`) is not necessarily slower, especially w
 Additional columns display sampling covariance matrices of estimates for enrichments and for all (co)variance components.
 
 !!! note  
-    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recompute PVEs and enrichments](scripts.md#from-vcs-to-enrichments). 
+    Estimates of PVEs and enrichments are valid only when functional annotation categories do not overlap with one another. If functional categories actually overlap, one more quick computation is needed to [recalculate PVEs and enrichments](scripts.md#from-vcs-to-enrichments). 
 
 ## Simulation
 Simulating phenotypes based on a list of GRMs
