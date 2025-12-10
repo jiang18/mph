@@ -140,6 +140,8 @@ The covariate file is a CSV file with a header line. The first column must be th
 
 Missing values of covariates need to be left empty. **Do not use space, -9, NA, or NaN.**
 
+Categorical variables: Use dummy variable encoding (one column per level with 0/1 values).
+
 If `--covariate_names all` is specified, MPH will use all columns (except the first) as covariates.
 
 *Intercept handling:*
