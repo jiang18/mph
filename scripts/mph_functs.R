@@ -4,7 +4,7 @@
 # Dec 10, 2025: added calculate_h2() function to calculate heritability and standard error from partitioned variance components using delta method
 
 # Recalculate the estimates and SEs of PVEs and enrichments from MPH VC estimates
-# vcfile: the .mq.vc.csv file produced by `mph --minque` or `mph --reml`.
+# vcfile: the .mq.vc.csv file produced by `mph --reml` or `mph --minque`.
 # crossprod: the crossproduct of SNP incidence matrix and SNP weighting matrix. Its row names and columns should match the annotation categories of interest and the rows of vcfile, respectively.
 # nsnps: the total number of SNPs. If `NA`, it is set to the first GRM's number of SNPs in vcfile.
 # annot.size: a list of the number of SNPs in each annotation category listed in the row names of crossprod. It can be calculated from the column-wise sum of the corresponding SNP incidence matrix. If `NA`, it is set to the `m` column of vcfile.
