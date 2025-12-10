@@ -143,6 +143,7 @@ Missing values of covariates need to be left empty. **Do not use space, -9, NA, 
 If `--covariate_names all` is specified, MPH will use all columns (except the first) as covariates.
 
 *Intercept handling:*
+
 - If `--covariate_names` is not specified, MPH automatically includes an intercept term.
 - If `--covariate_names` is specified, MPH does not automatically add an intercept. In this case, users must include a column of 1's in the covariate file and specify it in `--covariate_names` if an intercept is needed.
 
