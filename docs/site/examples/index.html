@@ -179,7 +179,7 @@
 <li>10k unrelated individuals, 5M sequence variants, and 30 chromosomes</li>
 <li>Functional annotations were quickly simulated by assigning <a href="https://console.cloud.google.com/storage/browser/_details/broad-alkesgroup-public-requester-pays/LDSCORE/1000G_Phase3_baseline_ldscores.tgz">LDSC baseline annotations</a> to the simulated sequence variants in order.</li>
 <li>Phenotypes were simulated using the <a href="https://www.nature.com/articles/ng.3404/figures/4">S-LDSC baseline model enrichment estimates for human traits</a>.<ul>
-<li>The enrichment estimates were used to compute variance component (VC) estimates for intercept and 24 main functional annotations.</li>
+<li>The enrichment estimates were used to calculate variance component (VC) estimates for intercept and 24 main functional annotations.</li>
 <li>The VC estimates were set as true values in <a href="../options/#simulation">phenotype simulation</a>.</li>
 <li>A small value was added to the intercept's VC to enhance the all-in-one GRM's positive definiteness. </li>
 </ul>
@@ -272,7 +272,7 @@ annot_size = colSums(si)
 nsnps = nrow(si)
 
 vcfile = &quot;reml/1.mq.vc.csv&quot;
-result = recompute_enrichments(vcfile, cp, nsnps=nsnps, annot.size=annot_size) 
+result = recalculate_enrichments(vcfile, cp, nsnps=nsnps, annot.size=annot_size) 
 result
 
 # Visualization
