@@ -502,6 +502,7 @@ When <code>--binary_grm_file</code> is used with <code>--grm_list</code>, its in
 <h4 id="covariate-file">Covariate file</h4>
 <p>The covariate file is a CSV file with a header line. The first column must be the individual ID. The header line needs to contain covariate names. All covariate values must be numeric.</p>
 <p>Missing values of covariates need to be left empty. <strong>Do not use space, -9, NA, or NaN.</strong></p>
+<p>Categorical variables: Use dummy variable encoding (one column per level with 0/1 values).</p>
 <p>If <code>--covariate_names all</code> is specified, MPH will use all columns (except the first) as covariates.</p>
 <p><em>Intercept handling:</em></p>
 <ul>
