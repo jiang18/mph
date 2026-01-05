@@ -152,7 +152,7 @@ If `--covariate_names all` is specified, MPH will use all columns (except the fi
 ### Options
 | Option | Argument | Type | Description |
 |-------|-------|-------|--------------|
-| `--minque`<br>`--reml` | FLAG | Required | Flag to run REML or iterative MINQUE. This option can be specified as `--minque` or `--reml`, and they are interchangeable. |
+| `--reml`<br>`--minque` | FLAG | Required | Flag to run REML or iterative MINQUE (interchangeable; use either) |
 | `--save_memory` | FLAG | Optional | Flag to enable the memory-saving mode |
 | `--num_threads` | INT | Optional | Number of computational threads to use [default=1] |
 | `--heritability` | FLOAT | Optional | Initial heritability value(s) in REML iterations [default=0.5] |
