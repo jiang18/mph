@@ -8,7 +8,7 @@ Testing platform
     - SSD SAS Mix Use 12Gbps 512e 2.5in Hot-plug
 - Red Hat Enterprise Linux 8.7 (Ootpa)
 
-All the following tests used 14 threads (`--num_threads 14` in MPH). 
+All the following tests in MPH used 14 threads (`--num_threads 14`) and the memory-saving mode (`--save_memory`). 
 
 The following figure illustrates the computational performance of MPH **REML** for a fixed sample size of 50,000 with varying numbers of genomic relationship matrices (GRMs).
 ![50kTiming](img/50kTiming.jpg)
@@ -17,4 +17,3 @@ The following figure illustrates the computational performance of MPH **REML** f
 
 The following figure illustrates the computational performance of MPH **REML** for a fixed set of 30 GRMs across a range of sample sizes.
 ![30GRMsTiming](img/30GRMsTiming.jpg)
-
